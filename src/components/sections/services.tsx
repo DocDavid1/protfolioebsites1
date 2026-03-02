@@ -1,0 +1,180 @@
+import type { ComponentType } from "react";
+import {
+  Globe,
+  MessageCircle,
+  BarChart2,
+  Users,
+  Zap,
+  TrendingUp,
+} from "lucide-react";
+import { AnimateIn } from "@/components/ui/animate-in";
+
+interface Service {
+  icon: ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  highlight: string;
+  accent: "blue" | "amber" | "emerald" | "purple" | "orange" | "cyan";
+}
+
+const SERVICES: Service[] = [
+  {
+    icon: Globe,
+    title: "Combat-Ready Websites",
+    description:
+      "High-performance websites built to convert visitors into clients. No templates — every site is engineered for speed, SEO, and results.",
+    highlight: "Lighthouse 95+ performance",
+    accent: "blue",
+  },
+  {
+    icon: MessageCircle,
+    title: "WhatsApp Systems",
+    description:
+      "Automated WhatsApp funnels that engage, qualify, and convert leads 24/7. Your best salesperson never sleeps.",
+    highlight: "500+ conversations automated daily",
+    accent: "emerald",
+  },
+  {
+    icon: BarChart2,
+    title: "Lead Tracking",
+    description:
+      "Never lose a prospect again. Full-funnel tracking from first click to signed contract, with real-time dashboards.",
+    highlight: "Zero lead left behind",
+    accent: "amber",
+  },
+  {
+    icon: Users,
+    title: "CRM Integration",
+    description:
+      "Command your entire customer relationship from one operations center. Synced, organized, and battle-ready.",
+    highlight: "Full pipeline visibility",
+    accent: "purple",
+  },
+  {
+    icon: Zap,
+    title: "Automation Systems",
+    description:
+      "Deploy systems, not effort. We automate your repetitive processes so your team focuses on what matters most.",
+    highlight: "80% of repetitive tasks automated",
+    accent: "orange",
+  },
+  {
+    icon: TrendingUp,
+    title: "Digital Presence",
+    description:
+      "Dominate your market online. SEO, social presence, brand identity, and ad campaigns built with military precision.",
+    highlight: "Market-leading positioning",
+    accent: "cyan",
+  },
+];
+
+const ACCENT_STYLES: Record<
+  Service["accent"],
+  { icon: string; badge: string; border: string }
+> = {
+  blue: {
+    icon: "text-blue-400 bg-blue-500/10",
+    badge: "text-blue-400 bg-blue-500/[0.07] border-blue-500/15",
+    border: "group-hover:border-blue-500/30",
+  },
+  amber: {
+    icon: "text-amber-400 bg-amber-500/10",
+    badge: "text-amber-400 bg-amber-500/[0.07] border-amber-500/15",
+    border: "group-hover:border-amber-500/30",
+  },
+  emerald: {
+    icon: "text-emerald-400 bg-emerald-500/10",
+    badge: "text-emerald-400 bg-emerald-500/[0.07] border-emerald-500/15",
+    border: "group-hover:border-emerald-500/30",
+  },
+  purple: {
+    icon: "text-purple-400 bg-purple-500/10",
+    badge: "text-purple-400 bg-purple-500/[0.07] border-purple-500/15",
+    border: "group-hover:border-purple-500/30",
+  },
+  orange: {
+    icon: "text-orange-400 bg-orange-500/10",
+    badge: "text-orange-400 bg-orange-500/[0.07] border-orange-500/15",
+    border: "group-hover:border-orange-500/30",
+  },
+  cyan: {
+    icon: "text-cyan-400 bg-cyan-500/10",
+    badge: "text-cyan-400 bg-cyan-500/[0.07] border-cyan-500/15",
+    border: "group-hover:border-cyan-500/30",
+  },
+};
+
+export function ServicesSection() {
+  return (
+    <section
+      className="py-24 md:py-32 relative overflow-hidden"
+      id="services"
+      aria-label="Our Services"
+    >
+      {/* Subtle top divider */}
+      <div className="divider-brand mb-0 absolute top-0 left-0 right-0" />
+
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Section header */}
+        <AnimateIn className="text-center mb-16">
+          <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
+            What We Deploy
+          </span>
+          <h2
+            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            DIGITAL WEAPONS
+            <span className="gradient-text-amber"> ARSENAL</span>
+          </h2>
+          <p className="text-white/40 max-w-2xl mx-auto text-lg">
+            Every tool in our stack is chosen for performance and ROI. No fluff,
+            no bloat — just systems that execute.
+          </p>
+        </AnimateIn>
+
+        {/* Services grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {SERVICES.map((service, i) => {
+            const styles = ACCENT_STYLES[service.accent];
+            const Icon = service.icon;
+            return (
+              <AnimateIn key={service.title} delay={i * 80} from="bottom">
+                <div
+                  className={`group relative surface-card rounded-xl p-6 border border-white/7 transition-all duration-300 h-full ${styles.border} hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]`}
+                >
+                  {/* Icon */}
+                  <div
+                    className={`inline-flex items-center justify-center w-11 h-11 rounded-lg mb-5 ${styles.icon}`}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold text-white/90 mb-2">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-white/45 leading-relaxed mb-5">
+                    {service.description}
+                  </p>
+
+                  {/* Highlight badge */}
+                  <div className="mt-auto">
+                    <span
+                      className={`inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${styles.badge}`}
+                    >
+                      <span className="w-1 h-1 rounded-full bg-current opacity-70" />
+                      {service.highlight}
+                    </span>
+                  </div>
+                </div>
+              </AnimateIn>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

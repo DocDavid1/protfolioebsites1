@@ -1,250 +1,277 @@
-# Agentic Coding Boilerplate - AI Assistant Guidelines
+# Fighters Builders — AI Assistant Guidelines
 
-## Project Overview
+## Project Identity
 
-This is a Next.js 16 boilerplate for building AI-powered applications with authentication, database, and modern UI components.
+**Fighters Builders** is a premium digital agency website and platform built by three Israeli combat veterans. The codebase is the foundation of a future multi-agent business platform integrating AI, CRM, WhatsApp automation, and lead management.
 
 ### Tech Stack
 
 - **Framework**: Next.js 16 with App Router, React 19, TypeScript
-- **AI Integration**: Vercel AI SDK 5 + OpenRouter (access to 100+ AI models)
-- **Authentication**: BetterAuth with Email/Password
+- **Styling**: Tailwind CSS v4 — dark-first, no light mode
+- **UI Components**: shadcn/ui (Radix primitives)
+- **Auth**: BetterAuth with Email/Password
 - **Database**: PostgreSQL with Drizzle ORM
-- **UI**: shadcn/ui components with Tailwind CSS 4
-- **Styling**: Tailwind CSS with dark mode support (next-themes)
+- **AI**: Vercel AI SDK 5 + OpenRouter (`@openrouter/ai-sdk-provider`)
+- **Package Manager**: pnpm (`pnpm` must be in PATH; if not, run `npm install -g pnpm` first)
 
-## AI Integration with OpenRouter
+---
 
-### Key Points
+## Brand Design System
 
-- This project uses **OpenRouter** as the AI provider, NOT direct OpenAI
-- OpenRouter provides access to 100+ AI models through a single unified API
-- Default model: `openai/gpt-5-mini` (configurable via `OPENROUTER_MODEL` env var)
-- Users browse models at: https://openrouter.ai/models
-- Users get API keys from: https://openrouter.ai/settings/keys
+The brand is **always dark**. Never add a light mode toggle.
 
-### AI Implementation Files
+| Token | Value | Use |
+|---|---|---|
+| Background | `#05050b` | Page background |
+| Surface | `#0d0d18` | Cards, panels |
+| Electric Blue | `#3b82f6` / `#60a5fa` | Primary accent, CTAs |
+| Amber | `#f59e0b` / `#fbbf24` | Warmth, highlights |
+| Border | `rgba(255,255,255,0.07)` | Subtle separators |
+| Display font | `var(--font-display)` (Rajdhani) | Headlines only |
+| Body font | `var(--font-geist-sans)` (Geist) | All body text |
 
-- `src/app/api/chat/route.ts` - Chat API endpoint using OpenRouter
-- Package: `@openrouter/ai-sdk-provider` (not `@ai-sdk/openai`)
-- Import: `import { openrouter } from "@openrouter/ai-sdk-provider"`
+**CSS utility classes defined in `globals.css`:**
+- `bg-tactical-grid` — subtle grid background
+- `gradient-text-blue` / `gradient-text-amber` / `gradient-text-brand` — gradient text
+- `glow-blue` / `glow-amber` — box-shadow glow effects
+- `divider-brand` — horizontal gradient divider line
+- `surface-card` — standard card background + border
+- `animate-fade-up`, `animate-fade-in`, `animate-scale-in` — CSS keyframe animations
+- `delay-{100-800}` — animation delay utilities
+
+**Animation rule:** Use `<AnimateIn>` (`src/components/ui/animate-in.tsx`) for scroll-triggered reveals. No Framer Motion. CSS transforms only.
+
+---
 
 ## Project Structure
 
 ```
 src/
-├── app/                          # Next.js App Router
-│   ├── (auth)/                  # Auth route group
-│   │   ├── login/               # Login page
-│   │   ├── register/            # Registration page
-│   │   ├── forgot-password/     # Forgot password page
-│   │   └── reset-password/      # Reset password page
+├── app/
+│   ├── page.tsx                    # Landing page (assembles all sections)
+│   ├── portfolio/page.tsx          # Full portfolio grid
+│   ├── about/page.tsx              # Founders story + timeline
+│   ├── contact/page.tsx            # Contact form (client component)
+│   ├── admin/page.tsx              # Admin panel (placeholder — add auth guard)
+│   ├── (auth)/                     # BetterAuth login/register/reset
 │   ├── api/
-│   │   ├── auth/[...all]/       # Better Auth catch-all route
-│   │   ├── chat/route.ts        # AI chat endpoint (OpenRouter)
-│   │   └── diagnostics/         # System diagnostics
-│   ├── chat/page.tsx            # AI chat interface (protected)
-│   ├── dashboard/page.tsx       # User dashboard (protected)
-│   ├── profile/page.tsx         # User profile (protected)
-│   ├── page.tsx                 # Home/landing page
-│   └── layout.tsx               # Root layout
+│   │   ├── auth/[...all]/          # BetterAuth catch-all
+│   │   └── chat/route.ts           # OpenRouter AI chat endpoint
+│   ├── layout.tsx                  # Root layout (Rajdhani + Geist fonts, forced dark)
+│   └── globals.css                 # Brand design system + keyframes
 ├── components/
-│   ├── auth/                    # Authentication components
-│   │   ├── sign-in-button.tsx   # Sign in form
-│   │   ├── sign-up-form.tsx     # Sign up form
-│   │   ├── forgot-password-form.tsx
-│   │   ├── reset-password-form.tsx
-│   │   ├── sign-out-button.tsx
-│   │   └── user-profile.tsx
-│   ├── ui/                      # shadcn/ui components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── dialog.tsx
-│   │   ├── dropdown-menu.tsx
-│   │   ├── avatar.tsx
-│   │   ├── badge.tsx
-│   │   ├── separator.tsx
-│   │   ├── mode-toggle.tsx      # Dark/light mode toggle
-│   │   └── github-stars.tsx
-│   ├── site-header.tsx          # Main navigation header
-│   ├── site-footer.tsx          # Footer component
-│   ├── theme-provider.tsx       # Dark mode provider
-│   ├── setup-checklist.tsx      # Setup guide component
-│   └── starter-prompt-modal.tsx # Starter prompts modal
-└── lib/
-    ├── auth.ts                  # Better Auth server config
-    ├── auth-client.ts           # Better Auth client hooks
-    ├── db.ts                    # Database connection
-    ├── schema.ts                # Drizzle schema (users, sessions, etc.)
-    ├── storage.ts               # File storage abstraction (Vercel Blob / local)
-    └── utils.ts                 # Utility functions (cn, etc.)
+│   ├── sections/                   # Landing page sections (ALL server components)
+│   │   ├── hero.tsx
+│   │   ├── services.tsx
+│   │   ├── story.tsx
+│   │   ├── portfolio-preview.tsx
+│   │   └── final-cta.tsx
+│   ├── portfolio/                  # Portfolio UI
+│   │   ├── browser-window.tsx      # Browser chrome with screenshot preview
+│   │   ├── project-card.tsx        # Hover card + modal trigger (client)
+│   │   └── project-modal.tsx       # Project detail dialog (client)
+│   ├── ui/
+│   │   └── animate-in.tsx          # Scroll animation wrapper (client)
+│   ├── site-header.tsx             # Sticky nav with mobile menu (client)
+│   └── site-footer.tsx             # Footer (server)
+├── hooks/
+│   └── use-intersection.ts         # IntersectionObserver hook
+├── lib/
+│   ├── portfolio.ts                # Project data types + mock data
+│   ├── ai/index.ts                 # AI model config (OpenRouter)
+│   ├── integrations/index.ts       # Integration registry (WhatsApp, CRM, etc.)
+│   ├── auth.ts                     # BetterAuth server config
+│   ├── auth-client.ts              # BetterAuth client hooks
+│   ├── db.ts                       # Database connection
+│   ├── schema.ts                   # Drizzle schema
+│   └── utils.ts                    # cn() utility
+├── agents/index.ts                 # Future AI agent registry
+└── automations/index.ts            # Future automation workflow registry
 ```
+
+---
 
 ## Environment Variables
 
-Required environment variables (see `env.example`):
-
 ```env
 # Database
-POSTGRES_URL=postgresql://user:password@localhost:5432/db_name
+POSTGRES_URL=postgresql://user:password@localhost:5432/fighters_builders
 
 # Better Auth
 BETTER_AUTH_SECRET=32-char-random-string
 
 # AI via OpenRouter
 OPENROUTER_API_KEY=sk-or-v1-your-key
-OPENROUTER_MODEL=openai/gpt-5-mini  # or any model from openrouter.ai/models
+OPENROUTER_MODEL=openai/gpt-4o-mini
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# File Storage (optional)
-BLOB_READ_WRITE_TOKEN=  # Leave empty for local dev, set for Vercel Blob in production
+# File Storage (optional — local in dev, Vercel Blob in prod)
+BLOB_READ_WRITE_TOKEN=
 ```
+
+---
 
 ## Available Scripts
 
 ```bash
-npm run dev          # Start dev server (DON'T run this yourself - ask user)
-npm run build        # Build for production (runs db:migrate first)
-npm run build:ci     # Build without database (for CI/CD pipelines)
-npm run start        # Start production server
-npm run lint         # Run ESLint (ALWAYS run after changes)
-npm run typecheck    # TypeScript type checking (ALWAYS run after changes)
-npm run db:generate  # Generate database migrations
-npm run db:migrate   # Run database migrations
-npm run db:push      # Push schema changes to database
-npm run db:studio    # Open Drizzle Studio (database GUI)
-npm run db:dev       # Push schema for development
-npm run db:reset     # Reset database (drop all tables)
+pnpm run dev          # Start dev server (DON'T run this yourself — ask user)
+pnpm run build        # Build for production (runs db:migrate first)
+pnpm run build:ci     # Build without database (CI/CD)
+pnpm run lint         # ESLint (ALWAYS run after changes)
+pnpm run typecheck    # TypeScript check (ALWAYS run after changes)
+pnpm run db:generate  # Generate Drizzle migrations
+pnpm run db:migrate   # Apply migrations
+pnpm run db:push      # Push schema directly (dev only)
+pnpm run db:studio    # Open Drizzle Studio GUI
 ```
 
-## Documentation Files
+---
 
-The project includes technical documentation in `docs/`:
+## Slash Commands
 
-- `docs/technical/ai/streaming.md` - AI streaming implementation guide
-- `docs/technical/ai/structured-data.md` - Structured data extraction
-- `docs/technical/react-markdown.md` - Markdown rendering guide
-- `docs/technical/betterauth/polar.md` - Polar payment integration
-- `docs/business/starter-prompt.md` - Business context for AI prompts
+| Command | Purpose |
+|---|---|
+| `/create-spec` | Create a feature spec with requirements + implementation plan in `/specs/` |
+| `/publish-to-github` | Publish a spec to GitHub Issues and Projects |
+| `/continue-feature` | Implement the next task from a published GitHub feature |
+| `/checkpoint` | Commit current changes with a detailed message |
+| `/review-pr` | Review an open pull request |
 
-## Guidelines for AI Assistants
+---
 
-### CRITICAL RULES
+## AI Assistant Rules
 
-1. **ALWAYS run lint and typecheck** after completing changes:
+### CRITICAL
 
+1. **ALWAYS run lint and typecheck** after completing any code changes:
    ```bash
-   npm run lint && npm run typecheck
+   pnpm run lint && pnpm run typecheck
    ```
 
-2. **NEVER start the dev server yourself**
+2. **NEVER start the dev server** — ask the user to run it and share output.
 
-   - If you need dev server output, ask the user to provide it
-   - Don't run `npm run dev` or `pnpm dev`
+3. **Server components by default** — only add `"use client"` when required (state, effects, event handlers).
 
-3. **Use OpenRouter, NOT OpenAI directly**
+4. **No dynamic Tailwind class interpolation** — use full class name strings in data structures or inline styles for dynamic values.
 
-   - Import from `@openrouter/ai-sdk-provider`
-   - Use `openrouter()` function, not `openai()`
-   - Model names follow OpenRouter format: `provider/model-name`
+5. **Always dark** — never add light mode, don't use `next-themes` toggle.
 
-4. **Styling Guidelines**
+6. **OpenRouter, not OpenAI directly:**
+   ```ts
+   import { openrouter } from "@openrouter/ai-sdk-provider"
+   // NOT: import { openai } from "@ai-sdk/openai"
+   ```
 
-   - Stick to standard Tailwind CSS utility classes
-   - Use shadcn/ui color tokens (e.g., `bg-background`, `text-foreground`)
-   - Avoid custom colors unless explicitly requested
-   - Support dark mode with appropriate Tailwind classes
+### TypeScript Strictness
 
-5. **Authentication**
+This project uses strict TypeScript. Key constraints:
+- `noUnusedLocals` / `noUnusedParameters` — no unused imports or variables
+- `noUncheckedIndexedAccess` — array/record access may return `T | undefined`; use optional chaining
+- `exactOptionalPropertyTypes` — optional props must be explicitly `| undefined`
+- React types are globally available via tsconfig — no need to `import React`
 
-   - Server-side: Import from `@/lib/auth` (Better Auth instance)
-   - Client-side: Import hooks from `@/lib/auth-client`
-   - Protected routes should check session in Server Components
-   - Use existing auth components from `src/components/auth/`
+### Styling Conventions
 
-6. **Database Operations**
+- Use `cn()` from `@/lib/utils` for conditional class merging
+- Use CSS utility classes from `globals.css` for brand effects
+- Use inline styles for values that can't be expressed as static Tailwind classes
+- Use `style={{ fontFamily: "var(--font-display)" }}` on headline elements
 
-   - Use Drizzle ORM (imported from `@/lib/db`)
-   - Schema is defined in `@/lib/schema`
-   - Always run migrations after schema changes
-   - PostgreSQL is the database (not SQLite, MySQL, etc.)
+---
 
-7. **File Storage**
+## Common Tasks
 
-   - Use the storage abstraction from `@/lib/storage`
-   - Automatically uses local storage (dev) or Vercel Blob (production)
-   - Import: `import { upload, deleteFile } from "@/lib/storage"`
-   - Example: `const result = await upload(buffer, "avatar.png", "avatars")`
-   - Storage switches based on `BLOB_READ_WRITE_TOKEN` environment variable
+### Add a portfolio project
 
-8. **Component Creation**
+Edit `src/lib/portfolio.ts` — add an entry to the `projects` array:
+```ts
+{
+  id: "7",
+  title: "...",
+  client: "...",
+  website_url: "https://...",
+  category: "website", // website | automation | crm | whatsapp | digital-presence | full-system
+  description: "Short description",
+  full_description: "Full case study text",
+  tags: ["Next.js", "CRM"],
+  preview_image: "/previews/project-name.jpg",
+  results: ["Result 1", "Result 2"],
+  created_at: "2025-01-01",
+  featured: true,
+}
+```
+Drop the screenshot at `public/previews/project-name.jpg`.
 
-   - Use existing shadcn/ui components when possible
-   - Follow the established patterns in `src/components/ui/`
-   - Support both light and dark modes
-   - Use TypeScript with proper types
+### Add a new page
 
-9. **API Routes**
-   - Follow Next.js 16 App Router conventions
-   - Use Route Handlers (route.ts files)
-   - Return Response objects
-   - Handle errors appropriately
+1. Create `src/app/[route]/page.tsx` as a Server Component
+2. Add to nav links in `src/components/site-header.tsx` (`NAV_LINKS` array)
+3. Add to footer links in `src/components/site-footer.tsx` (`FOOTER_LINKS`)
 
-### Best Practices
+### Add a landing page section
 
-- Read existing code patterns before creating new features
-- Maintain consistency with established file structure
-- Use the documentation files when implementing related features
-- Test changes with lint and typecheck before considering complete
-- When modifying AI functionality, refer to `docs/technical/ai/` guides
+1. Create `src/components/sections/[name].tsx` (Server Component)
+2. Use `<AnimateIn>` for scroll animations
+3. Import and add to `src/app/page.tsx`
 
-### Common Tasks
+### Protect a route (auth guard)
 
-**Adding a new page:**
+```ts
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
 
-1. Create in `src/app/[route]/page.tsx`
-2. Use Server Components by default
-3. Add to navigation if needed
+const session = await auth.api.getSession({ headers: await headers() })
+if (!session?.user) redirect("/login")
+```
 
-**Adding a new API route:**
+### Add an API route
 
-1. Create in `src/app/api/[route]/route.ts`
-2. Export HTTP method handlers (GET, POST, etc.)
-3. Use proper TypeScript types
+1. Create `src/app/api/[route]/route.ts`
+2. Export named HTTP handlers: `GET`, `POST`, etc.
+3. Return `Response` objects
 
-**Adding authentication to a page:**
+### Work with the database
 
-1. Import auth instance: `import { auth } from "@/lib/auth"`
-2. Get session: `const session = await auth.api.getSession({ headers: await headers() })`
-3. Check session and redirect if needed
+1. Update schema: `src/lib/schema.ts`
+2. Generate migration: `pnpm run db:generate`
+3. Apply: `pnpm run db:migrate`
+4. Query: `import { db } from "@/lib/db"`
 
-**Working with the database:**
+### Add an AI agent (future)
 
-1. Update schema in `src/lib/schema.ts`
-2. Generate migration: `npm run db:generate`
-3. Apply migration: `npm run db:migrate`
-4. Import `db` from `@/lib/db` to query
+1. Create `src/agents/[name].ts`
+2. Register in `src/agents/index.ts` `AGENT_REGISTRY`
+3. Use OpenRouter via `@openrouter/ai-sdk-provider`
 
-**Modifying AI chat:**
+### Add an integration
 
-1. Backend: `src/app/api/chat/route.ts`
-2. Frontend: `src/app/chat/page.tsx`
-3. Reference streaming docs: `docs/technical/ai/streaming.md`
-4. Remember to use OpenRouter, not direct OpenAI
+1. Create `src/lib/integrations/[name].ts`
+2. Register in `src/lib/integrations/index.ts`
+3. Add required env vars to `env.example`
 
-**Working with file storage:**
+---
 
-1. Import storage functions: `import { upload, deleteFile } from "@/lib/storage"`
-2. Upload files: `const result = await upload(fileBuffer, "filename.png", "folder")`
-3. Delete files: `await deleteFile(result.url)`
-4. Storage automatically uses local filesystem in dev, Vercel Blob in production
-5. Local files are saved to `public/uploads/` and served at `/uploads/`
+## WhatsApp Contact
 
-## Package Manager
+All WhatsApp links use the same pattern. The number is `972501234567` (replace with real number before launch):
 
-This project uses **pnpm** (see `pnpm-lock.yaml`). When running commands:
+```ts
+const WHATSAPP_URL = `https://wa.me/972501234567?text=${encodeURIComponent("Hello!")}`
+```
 
-- Use `pnpm` instead of `npm` when possible
-- Scripts defined in package.json work with `pnpm run [script]`
+Search the codebase for `972501234567` to update all instances at once.
+
+---
+
+## Future Platform Roadmap
+
+The codebase is scaffolded for:
+
+- `src/agents/` — AI agents (onboarding, audit, lead capture, CRM sync, reporting)
+- `src/automations/` — Automation workflows (lead nurture, appointment reminders, weekly reports)
+- `src/lib/ai/` — AI model configuration (OpenRouter models)
+- `src/lib/integrations/` — External integrations (WhatsApp Business API, HubSpot, Stripe, etc.)
+- `src/app/admin/` — Protected operations center (add BetterAuth guard before going live)

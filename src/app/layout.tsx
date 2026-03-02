@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Rajdhani } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -16,38 +16,44 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const rajdhani = Rajdhani({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Agentic Coding Boilerplate",
-    template: "%s | Agentic Coding Boilerplate",
+    default: "Fighters Builders — Digital Agency",
+    template: "%s | Fighters Builders",
   },
   description:
-    "Complete agentic coding boilerplate with authentication, database, AI integration, and modern tooling - perfect for building AI-powered applications and autonomous agents by Leon van Zyl",
+    "Fighters Builders is a premium digital agency built by Israeli combat veterans. We build websites, WhatsApp systems, CRM solutions, and automation tools that help businesses grow with military precision.",
   keywords: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "AI",
-    "OpenRouter",
-    "Boilerplate",
-    "Authentication",
-    "PostgreSQL",
+    "digital agency",
+    "web development",
+    "WhatsApp automation",
+    "CRM integration",
+    "lead tracking",
+    "business automation",
+    "Fighters Builders",
+    "Israel",
   ],
-  authors: [{ name: "Leon van Zyl" }],
-  creator: "Leon van Zyl",
+  authors: [{ name: "Fighters Builders" }],
+  creator: "Fighters Builders",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Agentic Coding Boilerplate",
-    title: "Agentic Coding Boilerplate",
+    siteName: "Fighters Builders",
+    title: "Fighters Builders — Digital Agency",
     description:
-      "Complete agentic coding boilerplate with authentication, database, AI integration, and modern tooling",
+      "Built by combat veterans. Engineered for growth. Premium digital systems for businesses that mean business.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agentic Coding Boilerplate",
+    title: "Fighters Builders — Digital Agency",
     description:
-      "Complete agentic coding boilerplate with authentication, database, AI integration, and modern tooling",
+      "Built by combat veterans. Engineered for growth. Premium digital systems for businesses that mean business.",
   },
   robots: {
     index: true,
@@ -55,24 +61,20 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD structured data for SEO
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "Agentic Coding Boilerplate",
+  "@type": "Organization",
+  name: "Fighters Builders",
   description:
-    "Complete agentic coding boilerplate with authentication, database, AI integration, and modern tooling",
-  applicationCategory: "DeveloperApplication",
-  operatingSystem: "Any",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
+    "Premium digital agency specializing in websites, automation, CRM, and WhatsApp systems",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://fightersbuilders.com",
+  logo: `${process.env.NEXT_PUBLIC_APP_URL || "https://fightersbuilders.com"}/logo.png`,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    availableLanguage: ["English", "Hebrew"],
   },
-  author: {
-    "@type": "Person",
-    name: "Leon van Zyl",
-  },
+  sameAs: [],
 };
 
 export default function RootLayout({
@@ -81,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <script
           type="application/ld+json"
@@ -89,12 +91,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <SiteHeader />
