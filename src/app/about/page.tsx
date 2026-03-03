@@ -3,70 +3,86 @@ import { AnimateIn } from "@/components/ui/animate-in";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "אודות",
   description:
-    "Three Israeli combat veterans turned digital builders. Learn the story behind Fighters Builders.",
+    "שלושה לוחמי קרב ישראלים שהפכו לבוני דיגיטל. למד את הסיפור מאחורי פייטרס בילדרס.",
 };
 
 const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello! I'd like to learn more about Fighters Builders.")}`;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום! אני רוצה ללמוד עוד על פייטרס בילדרס.")}`;
 
-const VALUES = [
+interface Value {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  iconBg: string;
+  iconColor: string;
+  borderHover: string;
+}
+
+const VALUES: Value[] = [
   {
     icon: Shield,
-    title: "Discipline",
-    description:
-      "Military precision in every deliverable. Deadlines aren't suggestions — they're orders.",
+    title: "משמעת",
+    description: "דיוק צבאי בכל תוצרת. דדליינים אינם הצעות — הם פקודות.",
+    iconBg: "bg-blue-500/10",
+    iconColor: "text-blue-400",
+    borderHover: "hover:border-blue-500/20",
   },
   {
     icon: Target,
-    title: "Accuracy",
-    description:
-      "We zero in on your business objective and don't stop until the target is hit.",
+    title: "דיוק",
+    description: "אנחנו מכוונים למטרה העסקית שלך ולא עוצרים עד שהמטרה תושג.",
+    iconBg: "bg-violet-500/10",
+    iconColor: "text-violet-400",
+    borderHover: "hover:border-violet-500/20",
   },
   {
     icon: Zap,
-    title: "Speed",
+    title: "מהירות",
     description:
-      "In combat and in business, speed is a competitive advantage. We move fast without breaking things.",
+      "בקרב ובעסקים, מהירות היא יתרון תחרותי. אנחנו נעים מהר מבלי לשבור דברים.",
+    iconBg: "bg-rose-500/10",
+    iconColor: "text-rose-400",
+    borderHover: "hover:border-rose-500/20",
   },
 ];
 
 const TIMELINE = [
   {
     year: "2019",
-    event: "Combined service",
-    detail: "Founders serve simultaneously in IDF combat units",
+    event: "שירות משותף",
+    detail: 'המייסדים משרתים בו-זמנית ביחידות קרביות של צה"ל',
     color: "blue",
   },
   {
     year: "2021",
-    event: "First project",
-    detail: "Built a system for a family business while on reserve duty",
+    event: "הפרויקט הראשון",
+    detail: "בנו מערכת לעסק משפחתי בזמן שירות מילואים",
     color: "amber",
   },
   {
     year: "2022",
-    event: "Fighters Builders founded",
-    detail: "Officially launched as a digital agency",
+    event: "פייטרס בילדרס נוסדה",
+    detail: "הושקה רשמית כסוכנות דיגיטלית",
     color: "emerald",
   },
   {
     year: "2023",
-    event: "Scale-up",
-    detail: "Grew to serving 15+ clients across 3 countries",
+    event: "צמיחה",
+    detail: "צמחנו לשרת 15+ לקוחות ב-3 מדינות",
     color: "blue",
   },
   {
     year: "2024",
-    event: "Full-stack agency",
-    detail: "Launched CRM, automation, and AI integration services",
+    event: "סוכנות מלאה",
+    detail: "השקנו שירותי CRM, אוטומציה ואינטגרציית AI",
     color: "amber",
   },
   {
     year: "2025",
-    event: "Platform launch",
-    detail: "Building the next generation of digital business tools",
+    event: "השקת פלטפורמה",
+    detail: "בונים את הדור הבא של כלי העסק הדיגיטלי",
     color: "emerald",
   },
 ];
@@ -88,19 +104,18 @@ export default function AboutPage() {
         <div className="relative container mx-auto px-4 sm:px-6">
           <AnimateIn>
             <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4 block">
-              About Us
+              אודות
             </span>
             <h1
               className="text-5xl md:text-7xl font-bold text-white/90 mb-6 leading-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              THREE FIGHTERS.
+              שלושה לוחמים.
               <br />
-              <span className="gradient-text-amber">ONE MISSION.</span>
+              <span className="gradient-text-amber">משימה אחת.</span>
             </h1>
             <p className="text-xl text-white/45 max-w-2xl leading-relaxed">
-              We traded our uniforms for keyboards — but kept the mindset that
-              got us through impossible situations.
+              החלפנו את המדים במקלדות — אבל שמרנו על החשיבה שהובילה אותנו דרך מצבים בלתי אפשריים.
             </p>
           </AnimateIn>
         </div>
@@ -115,9 +130,13 @@ export default function AboutPage() {
               const Icon = value.icon;
               return (
                 <AnimateIn key={value.title} delay={i * 100}>
-                  <div className="p-6 rounded-xl surface-card border border-white/7 hover:border-blue-500/20 transition-all">
-                    <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5 text-blue-400" />
+                  <div
+                    className={`p-6 rounded-xl surface-card border border-white/7 ${value.borderHover} transition-all`}
+                  >
+                    <div
+                      className={`w-10 h-10 rounded-lg ${value.iconBg} flex items-center justify-center mb-4`}
+                    >
+                      <Icon className={`w-5 h-5 ${value.iconColor}`} />
                     </div>
                     <h3 className="text-lg font-semibold text-white/90 mb-2">
                       {value.title}
@@ -141,21 +160,22 @@ export default function AboutPage() {
               className="text-3xl md:text-4xl font-bold text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              THE <span className="gradient-text-blue">MISSION LOG</span>
+              יומן{" "}
+              <span className="gradient-text-blue">המשימות</span>
             </h2>
           </AnimateIn>
 
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-3 top-0 bottom-0 w-px bg-white/[0.06]" />
+            {/* Vertical line — right side for RTL */}
+            <div className="absolute right-3 top-0 bottom-0 w-px bg-white/[0.06]" />
 
             <div className="space-y-8">
               {TIMELINE.map((item, i) => (
-                <AnimateIn key={item.year} delay={i * 80} from="left">
-                  <div className="flex gap-6 pl-10 relative">
+                <AnimateIn key={item.year} delay={i * 80} from="right">
+                  <div className="flex gap-6 pr-10 relative">
                     {/* Dot */}
                     <div
-                      className={`absolute left-0 top-1.5 w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                      className={`absolute right-0 top-1.5 w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ${
                         item.color === "blue"
                           ? "border-blue-500/50 bg-blue-500/10"
                           : item.color === "amber"
@@ -206,19 +226,17 @@ export default function AboutPage() {
         <div className="divider-brand absolute top-0 left-0 right-0" aria-hidden="true" />
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-            <AnimateIn from="left">
+            <AnimateIn from="right">
               <h2
                 className="text-3xl md:text-4xl font-bold text-white/90 mb-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                WHY WORK
+                למה לעבוד
                 <br />
-                <span className="gradient-text-amber">WITH US</span>
+                <span className="gradient-text-amber">איתנו</span>
               </h2>
               <p className="text-white/45 mb-6 leading-relaxed">
-                We don&apos;t just deliver projects — we deploy solutions. Every
-                engagement is treated as a mission with a clear objective,
-                measurable outcomes, and full accountability.
+                אנחנו לא רק מספקים פרויקטים — אנחנו פורסים פתרונות. כל התקשרות מטופלת כמשימה עם מטרה ברורה, תוצאות מדידות ואחריות מלאה.
               </p>
               <a
                 href={WHATSAPP_URL}
@@ -228,19 +246,19 @@ export default function AboutPage() {
                 style={{ background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)" }}
               >
                 <MessageCircle className="w-4 h-4" />
-                Let&apos;s Talk
+                בוא נדבר
               </a>
             </AnimateIn>
 
-            <AnimateIn delay={100} from="right">
+            <AnimateIn delay={100} from="left">
               <div className="space-y-3">
                 {[
-                  "Dedicated project manager on every engagement",
-                  "Weekly progress reports with real metrics",
-                  "Military-grade accountability — no excuses",
-                  "Full IP ownership transferred to you",
-                  "Post-launch support included in every project",
-                  "Direct WhatsApp access to the founding team",
+                  "מנהל פרויקט ייעודי בכל התקשרות",
+                  "דוחות התקדמות שבועיים עם מדדים אמיתיים",
+                  "אחריות ברמה צבאית — ללא תירוצים",
+                  "בעלות מלאה על IP מועברת אליך",
+                  "תמיכה לאחר השקה כלולה בכל פרויקט",
+                  "גישה ישירה בוואטסאפ לצוות המייסדים",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />

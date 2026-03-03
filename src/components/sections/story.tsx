@@ -4,8 +4,8 @@ import { AnimateIn } from "@/components/ui/animate-in";
 const FOUNDERS = [
   {
     codename: "ALPHA",
-    role: "Strategy & Systems",
-    bio: "10 years in special operations. Now architects business infrastructure with the same precision used to plan high-stakes missions.",
+    role: "אסטרטגיה ומערכות",
+    bio: "10 שנים במבצעים מיוחדים. כעת בונה תשתיות עסקיות עם אותה הדיוק שנדרשה לתכנון משימות בסיכון גבוה.",
     icon: Shield,
     borderColor: "rgba(59,130,246,0.2)",
     iconColor: "text-blue-400",
@@ -15,8 +15,8 @@ const FOUNDERS = [
   },
   {
     codename: "BRAVO",
-    role: "Tech & Automation",
-    bio: "Intelligence unit veteran. Builds automated systems that gather data, qualify leads, and execute without human intervention.",
+    role: "טכנולוגיה ואוטומציה",
+    bio: "ותיק יחידת מודיעין. בונה מערכות אוטומטיות שאוספות נתונים, מסיקות לידים ומבצעות ללא התערבות אנושית.",
     icon: Target,
     borderColor: "rgba(245,158,11,0.2)",
     iconColor: "text-amber-400",
@@ -26,8 +26,8 @@ const FOUNDERS = [
   },
   {
     codename: "CHARLIE",
-    role: "Growth & Execution",
-    bio: "Combat medic turned growth operator. Identifies the bleeding points in your business and stops them — fast.",
+    role: "צמיחה וביצוע",
+    bio: "פרמדיק קרב שהפך למומחה צמיחה. מזהה את נקודות הדימום בעסק שלך ועוצר אותן — מהר.",
     icon: Zap,
     borderColor: "rgba(16,185,129,0.2)",
     iconColor: "text-emerald-400",
@@ -42,7 +42,7 @@ export function StorySection() {
     <section
       className="py-24 md:py-32 relative overflow-hidden"
       id="story"
-      aria-label="Our Story"
+      aria-label="הסיפור שלנו"
     >
       {/* Background texture */}
       <div
@@ -57,39 +57,37 @@ export function StorySection() {
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left: Story text */}
+          {/* Right side in RTL: Story text */}
           <div>
             <AnimateIn from="left">
               <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4 block">
-                The Mission
+                המשימה
               </span>
               <h2
                 className="text-4xl md:text-5xl font-bold text-white/90 mb-6 leading-tight"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                BORN IN THE
+                נולדנו
                 <br />
-                <span className="gradient-text-amber">FIELD</span>
+                <span className="gradient-text-amber">בשדה</span>
               </h2>
             </AnimateIn>
 
             <AnimateIn delay={100}>
               <div className="space-y-4 text-white/50 leading-relaxed">
                 <p className="text-base">
-                  We are three Israeli combat veterans and active reservists.
-                  We&apos;ve served in some of the most demanding units in the
-                  IDF — and we&apos;ve brought that discipline into the
-                  boardroom.
+                  אנחנו שלושה לוחמי קרב ישראלים ומשרתי מילואים פעילים. שירתנו
+                  בכמה מהיחידות הדורשניות ביותר בצה&quot;ל — והבאנו את המשמעת הזו
+                  לעולם העסקי.
                 </p>
                 <p className="text-base">
-                  In the field, failure isn&apos;t an option. Every mission
-                  requires precise planning, flawless execution, and the ability
-                  to adapt under pressure. We apply that same standard to every
-                  digital system we build.
+                  בשדה, כישלון אינו אפשרות. כל משימה דורשת תכנון מדויק, ביצוע
+                  ללא דופי, ויכולת הסתגלות תחת לחץ. אנחנו מיישמים את אותו
+                  סטנדרט על כל מערכת דיגיטלית שאנחנו בונים.
                 </p>
                 <p className="text-base text-white/70 font-medium">
-                  Our clients don&apos;t get templated solutions. They get
-                  battle-tested infrastructure built to win.
+                  הלקוחות שלנו לא מקבלים פתרונות מתבניות. הם מקבלים תשתית מנוסה
+                  בקרב הבנויה לנצח.
                 </p>
               </div>
             </AnimateIn>
@@ -98,11 +96,11 @@ export function StorySection() {
               <div className="flex flex-wrap gap-6">
                 {[
                   [
-                    "Mission-First",
-                    "Every project starts with a clear objective",
+                    "משימה קודמת לכל",
+                    "כל פרויקט מתחיל עם מטרה ברורה",
                   ],
-                  ["Zero Tolerance", "For low performance and missed deadlines"],
-                  ["Always Adapting", "We iterate until it works"],
+                  ["אפס סובלנות", "לביצועים נמוכים ולוחות זמנים שחורגים"],
+                  ["תמיד מסתגלים", "אנחנו מחזורים עד שזה עובד"],
                 ].map(([title, desc]) => (
                   <div
                     key={title}
@@ -121,7 +119,7 @@ export function StorySection() {
             </AnimateIn>
           </div>
 
-          {/* Right: Founder cards */}
+          {/* Left side in RTL: Founder cards */}
           <div className="space-y-4">
             {FOUNDERS.map((founder, i) => {
               const Icon = founder.icon;
@@ -170,9 +168,9 @@ export function StorySection() {
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <p className="text-xs text-white/35">
                   <span className="text-white/60 font-medium">
-                    Active reservists.
+                    משרתי מילואים פעילים.
                   </span>{" "}
-                  We understand what it means to show up when it matters.
+                  אנחנו יודעים מה זה להגיע כשזה משנה.
                 </p>
               </div>
             </AnimateIn>

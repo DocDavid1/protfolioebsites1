@@ -37,6 +37,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           <BrowserWindowPlaceholder
             url={project.website_url}
             title={project.title}
+            imageUrl={project.preview_image || undefined}
             className="rounded-none border-x-0 border-t-0"
           />
           {/* Hover overlay */}

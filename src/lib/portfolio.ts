@@ -13,21 +13,21 @@ export interface Project {
   website_url: string;
   category: ProjectCategory;
   description: string;
-  full_description?: string;
+  full_description?: string | undefined;
   tags: string[];
   preview_image: string;
-  results?: string[];
+  results?: string[] | undefined;
   created_at: string;
-  featured?: boolean;
+  featured?: boolean | undefined;
 }
 
 export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
-  website: "Website",
-  automation: "Automation",
-  crm: "CRM System",
-  whatsapp: "WhatsApp",
-  "digital-presence": "Digital Presence",
-  "full-system": "Full System",
+  website: "אתר",
+  automation: "אוטומציה",
+  crm: "מערכת CRM",
+  whatsapp: "וואטסאפ",
+  "digital-presence": "נוכחות דיגיטלית",
+  "full-system": "מערכת מלאה",
 };
 
 export const CATEGORY_COLORS: Record<ProjectCategory, string> = {
@@ -39,124 +39,123 @@ export const CATEGORY_COLORS: Record<ProjectCategory, string> = {
   "full-system": "text-orange-400 bg-orange-400/10 border-orange-400/20",
 };
 
-// Mock portfolio data — replace with real projects
 export const projects: Project[] = [
   {
     id: "1",
-    title: "Luxury Real Estate Platform",
+    title: 'פלטפורמת נדל"ן יוקרתית',
     client: "Premium Realty Group",
     website_url: "https://example.com",
     category: "full-system",
     description:
-      "Full-stack real estate platform with WhatsApp lead capture, automated follow-ups, and CRM integration. Reduced lead response time from 24h to under 3 minutes.",
+      'פלטפורמת נדל"ן מלאה עם לכידת לידים בוואטסאפ, מעקבים אוטומטיים ואינטגרציית CRM. זמן תגובה ללידים ירד מ-24 שעות לפחות מ-3 דקות.',
     full_description:
-      "We built a complete digital presence for a luxury real estate group — combining a high-end property showcase website with a WhatsApp automation system that captures leads 24/7. Every inquiry triggers an instant WhatsApp response, qualifies the prospect, and routes them to the right agent.",
-    tags: ["Next.js", "WhatsApp API", "CRM", "Automation"],
+      'בנינו נוכחות דיגיטלית מלאה לקבוצת נדל"ן יוקרתית — שילוב של אתר תצוגת נכסים ברמה גבוהה עם מערכת אוטומציית וואטסאפ שלוכדת לידים 24/7. כל פנייה מפעילה מיד תגובת וואטסאפ, מסיקה את הפוטנציאל ומנתבת אותו לסוכן הנכון.',
+    tags: ["Next.js", "WhatsApp API", "CRM", "אוטומציה"],
     preview_image: "/previews/real-estate.jpg",
     results: [
-      "3x increase in qualified leads",
-      "Response time: 24h → 3 minutes",
-      "40% conversion improvement",
+      "פי 3 יותר לידים מוסיקים",
+      "זמן תגובה: 24 שעות ← 3 דקות",
+      "שיפור המרה של 40%",
     ],
     created_at: "2024-11-01",
     featured: true,
   },
   {
     id: "2",
-    title: "Restaurant Chain Digital Hub",
+    title: "מרכז דיגיטלי לרשת מסעדות",
     client: "Grill Masters Group",
     website_url: "https://example.com",
     category: "website",
     description:
-      "Multi-location restaurant website with online ordering, reservation system, and digital menu management. Built for speed and conversion.",
+      "אתר מסעדה רב-סניפי עם הזמנות אונליין, מערכת הזמנת שולחנות וניהול תפריט דיגיטלי. נבנה למהירות ולהמרה.",
     full_description:
-      "A high-performance website for a restaurant chain with 8 locations. Includes real-time table reservations, online ordering with WhatsApp order confirmations, and a CMS-driven menu system that managers can update without developers.",
-    tags: ["Next.js", "Reservation System", "Online Ordering", "SEO"],
+      "אתר בעל ביצועים גבוהים לרשת מסעדות עם 8 סניפים. כולל הזמנות שולחן בזמן אמת, הזמנות אונליין עם אישורים בוואטסאפ, ומערכת תפריט מונעת CMS שמנהלים יכולים לעדכן ללא מפתחים.",
+    tags: ["Next.js", "מערכת הזמנות", "הזמנות אונליין", "SEO"],
     preview_image: "/previews/restaurant.jpg",
     results: [
-      "Online reservations up 200%",
-      "Page load under 1.2 seconds",
-      "Mobile-first design",
+      "הזמנות אונליין עלו ב-200%",
+      "טעינת עמוד מתחת ל-1.2 שניות",
+      "עיצוב mobile-first",
     ],
     created_at: "2024-09-15",
     featured: true,
   },
   {
     id: "3",
-    title: "WhatsApp Sales Automation",
+    title: "אוטומציית מכירות בוואטסאפ",
     client: "Scale Commerce Ltd",
     website_url: "https://example.com",
     category: "whatsapp",
     description:
-      "End-to-end WhatsApp Business automation system: from lead capture to deal closure. Processes 500+ conversations daily without human intervention.",
+      "מערכת אוטומציה מקצה לקצה בוואטסאפ: מלכידת לידים ועד סגירת עסקה. מעבד 500+ שיחות ביום ללא התערבות אנושית.",
     full_description:
-      "A sophisticated WhatsApp automation pipeline that handles the entire sales funnel autonomously. Prospects are engaged, qualified, presented with offers, and guided to purchase — all through WhatsApp, all automated.",
-    tags: ["WhatsApp Business API", "Automation", "Lead Qualification", "CRM"],
+      "צינור אוטומציית וואטסאפ מתוחכם שמטפל במשפך המכירות כולו באופן עצמאי. פוטנציאל לקוחות נעסקים, מוסיקים, מוצגים להם הצעות ומובלים לרכישה — הכל דרך וואטסאפ, הכל אוטומטי.",
+    tags: ["WhatsApp Business API", "אוטומציה", "סיוק לידים", "CRM"],
     preview_image: "/previews/whatsapp.jpg",
     results: [
-      "500+ daily automated conversations",
-      "32% close rate without human touch",
-      "ROI positive within 30 days",
+      "500+ שיחות אוטומטיות ביום",
+      "שיעור סגירה של 32% ללא מגע אנושי",
+      "חיובי לROI תוך 30 יום",
     ],
     created_at: "2024-08-10",
     featured: false,
   },
   {
     id: "4",
-    title: "Medical Clinic Management System",
+    title: "מערכת ניהול מרפאה רפואית",
     client: "Tel Aviv Medical Group",
     website_url: "https://example.com",
     category: "crm",
     description:
-      "Complete patient management system with appointment booking, automated reminders, WhatsApp confirmations, and staff dashboard.",
+      "מערכת ניהול מטופלים מלאה עם הזמנת תורים, תזכורות אוטומטיות, אישורים בוואטסאפ ולוח בקרה לצוות.",
     full_description:
-      "We built a unified management platform for a medical group. Patients book online, receive automated WhatsApp reminders, and staff manage everything from a single dashboard. No-shows dropped by 60%.",
-    tags: ["CRM", "Scheduling", "WhatsApp Reminders", "Dashboard"],
+      "בנינו פלטפורמת ניהול מאוחדת לקבוצה רפואית. מטופלים מזמינים אונליין, מקבלים תזכורות אוטומטיות בוואטסאפ, והצוות מנהל הכל מלוח בקרה אחד. אי-הגעות ירדו ב-60%.",
+    tags: ["CRM", "תיאום", "תזכורות וואטסאפ", "לוח בקרה"],
     preview_image: "/previews/medical.jpg",
     results: [
-      "60% reduction in no-shows",
-      "Staff efficiency +45%",
-      "Patient satisfaction score 9.4/10",
+      "ירידה של 60% באי-הגעות",
+      "יעילות הצוות +45%",
+      "ציון שביעות רצון מטופלים 9.4/10",
     ],
     created_at: "2024-07-20",
     featured: true,
   },
   {
     id: "5",
-    title: "E-commerce Brand Launchpad",
+    title: "מקפצה למותג אי-קומרס",
     client: "Urban Thread Co.",
     website_url: "https://example.com",
     category: "digital-presence",
     description:
-      "Brand-new digital presence for a fashion startup — website, social strategy, WhatsApp catalog, and SEO foundation built for rapid growth.",
+      "נוכחות דיגיטלית חדשה לחלוטין לסטארטאפ אופנה — אתר, אסטרטגיית רשתות חברתיות, קטלוג וואטסאפ ויסוד SEO הבנוי לצמיחה מהירה.",
     full_description:
-      "We took a fashion startup from zero to fully operational digital presence in 3 weeks. Complete brand identity online, product catalog, Instagram-connected shopping, and WhatsApp order processing.",
-    tags: ["E-commerce", "Brand Identity", "SEO", "Social Commerce"],
+      "לקחנו סטארטאפ אופנה מאפס לנוכחות דיגיטלית פעילה מלאה תוך 3 שבועות. זהות מותג מלאה אונליין, קטלוג מוצרים, קנייה מחוברת לאינסטגרם ועיבוד הזמנות בוואטסאפ.",
+    tags: ["אי-קומרס", "זהות מותג", "SEO", "מסחר חברתי"],
     preview_image: "/previews/ecommerce.jpg",
     results: [
-      "0 to 10,000 monthly visitors in 60 days",
-      "First sale within 48 hours of launch",
-      "Google page 1 in 6 weeks",
+      "מ-0 ל-10,000 מבקרים חודשיים תוך 60 יום",
+      "מכירה ראשונה תוך 48 שעות מהשקה",
+      "עמוד 1 בגוגל תוך 6 שבועות",
     ],
     created_at: "2024-06-05",
     featured: false,
   },
   {
     id: "6",
-    title: "B2B Lead Capture System",
+    title: "מערכת לכידת לידים B2B",
     client: "Apex Industrial Solutions",
     website_url: "https://example.com",
     category: "automation",
     description:
-      "Automated B2B lead pipeline: LinkedIn targeting, landing pages, WhatsApp qualification, and CRM sync. Full funnel on autopilot.",
+      "צינור לידים אוטומטי B2B: טרגוט בלינקדאין, דפי נחיתה, סיוק בוואטסאפ וסנכרון CRM. משפך מלא בטייס אוטומטי.",
     full_description:
-      "A complete B2B lead generation machine. Qualified prospects land on optimized pages, fill a form, and immediately enter an automated WhatsApp qualification sequence. Qualified leads are synced to CRM and assigned to sales reps.",
-    tags: ["Lead Generation", "B2B", "Automation", "CRM Sync"],
+      "מכונת יצירת לידים B2B מלאה. פוטנציאל לקוחות מוסיקים נוחתים בדפים ממוטבים, ממלאים טופס, ונכנסים מיד לרצף סיוק בוואטסאפ אוטומטי. לידים מוסיקים מסונכרנים ל-CRM ומוקצים לנציגי מכירות.",
+    tags: ["יצירת לידים", "B2B", "אוטומציה", "סנכרון CRM"],
     preview_image: "/previews/b2b.jpg",
     results: [
-      "120 qualified leads per month",
-      "Cost per qualified lead down 65%",
-      "Sales cycle shortened 40%",
+      "120 לידים מוסיקים בחודש",
+      "עלות לליד מוסיק ירדה ב-65%",
+      "מחזור מכירות קוצר ב-40%",
     ],
     created_at: "2024-05-12",
     featured: false,
@@ -167,3 +166,46 @@ export const getFeaturedProjects = () => projects.filter((p) => p.featured);
 export const getProjectById = (id: string) => projects.find((p) => p.id === id);
 export const getProjectsByCategory = (category: ProjectCategory) =>
   projects.filter((p) => p.category === category);
+
+// ── Supabase DB helpers ──────────────────────────────────────────────────────
+
+/** Build a public Supabase Storage URL from a stored path. */
+export function getStorageImageUrl(path: string | null | undefined): string {
+  if (!path) return "";
+  if (path.startsWith("http")) return path;
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!base) return "";
+  return `${base}/storage/v1/object/public/previews/${path}`;
+}
+
+/** Convert a Supabase DB row to the Project shape used by UI components. */
+export function dbProjectToProject(row: {
+  id: string;
+  title: string;
+  client: string | null;
+  website_url: string;
+  category: string | null;
+  description: string | null;
+  full_description: string | null;
+  tags: string[] | null;
+  preview_image_path: string | null;
+  results: string[] | null;
+  is_featured: boolean;
+  sort_order: number;
+  created_at: string;
+}): Project {
+  return {
+    id: row.id,
+    title: row.title,
+    client: row.client ?? "",
+    website_url: row.website_url,
+    category: (row.category as ProjectCategory) ?? "website",
+    description: row.description ?? "",
+    full_description: row.full_description ?? undefined,
+    tags: row.tags ?? [],
+    preview_image: getStorageImageUrl(row.preview_image_path),
+    results: row.results ?? undefined,
+    created_at: row.created_at,
+    featured: row.is_featured,
+  };
+}

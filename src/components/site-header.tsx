@@ -1,33 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle } from "lucide-react";
+import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
 import { cn } from "@/lib/utils";
 
 const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Fighters Builders!")}`;
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState(DEFAULT_NAV_LINKS);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(NAV_STORAGE_KEY);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as Array<{ href: string; label: string }>;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        startTransition(() => setNavLinks(parsed));
+      }
+    } catch (_e) {
+      // ignore parse errors — fall back to defaults
+    }
+  }, []);
 
   return (
     <>
       {/* Skip to content */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#0d0d18] focus:text-white focus:border focus:border-blue-500/30 focus:rounded-md text-sm"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#0d0d18] focus:text-white focus:border focus:border-blue-500/30 focus:rounded-md text-sm"
       >
-        Skip to main content
+        דלג לתוכן הראשי
       </a>
 
       <header
@@ -36,13 +44,13 @@ export function SiteHeader() {
       >
         <nav
           className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4"
-          aria-label="Main navigation"
+          aria-label="ניווט ראשי"
         >
           {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2.5 shrink-0 group"
-            aria-label="Fighters Builders — Go to homepage"
+            aria-label="פייטרס בילדרס — חזור לעמוד הראשי"
           >
             {/* Logo mark */}
             <div className="w-8 h-8 rounded-lg bg-blue-500/15 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/25 transition-colors">
@@ -67,7 +75,7 @@ export function SiteHeader() {
             className="hidden md:flex items-center gap-1"
             role="list"
           >
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
                   ? pathname === "/"
@@ -104,14 +112,14 @@ export function SiteHeader() {
               }}
             >
               <MessageCircle className="w-4 h-4" />
-              <span className="hidden lg:inline">WhatsApp</span>
+              <span className="hidden lg:inline">וואטסאפ</span>
             </a>
 
             {/* Mobile menu toggle */}
             <button
               className="md:hidden p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.05] transition-all"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
               aria-expanded={mobileOpen}
             >
               {mobileOpen ? (
@@ -126,7 +134,7 @@ export function SiteHeader() {
         {/* Mobile menu */}
         {mobileOpen && (
           <div className="md:hidden border-t border-white/[0.06] bg-[#05050b] px-4 py-3 space-y-1">
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
                   ? pathname === "/"
@@ -160,7 +168,7 @@ export function SiteHeader() {
                 onClick={() => setMobileOpen(false)}
               >
                 <MessageCircle className="w-4 h-4" />
-                Start on WhatsApp
+                התחל בוואטסאפ
               </a>
             </div>
           </div>

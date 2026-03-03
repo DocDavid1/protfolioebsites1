@@ -9,46 +9,90 @@ const WHATSAPP_NUMBER = "972501234567";
 const CONTACT_OPTIONS = [
   {
     icon: MessageCircle,
-    title: "WhatsApp",
-    description: "Fastest response. We reply within minutes.",
-    action: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Fighters Builders! I'd like to discuss a project.")}`,
-    actionLabel: "Open WhatsApp",
+    title: "וואטסאפ",
+    description: "המענה המהיר ביותר. אנחנו עונים תוך דקות.",
+    action: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.")}`,
+    actionLabel: "פתח וואטסאפ",
     color: "emerald",
     highlight: true,
   },
   {
     icon: Mail,
-    title: "Email",
-    description: "For detailed briefs and formal inquiries.",
+    title: "אימייל",
+    description: "לתדריכים מפורטים ופניות רשמיות.",
     action: "mailto:hello@fightersbuilders.com",
-    actionLabel: "Send Email",
+    actionLabel: "שלח אימייל",
     color: "blue",
     highlight: false,
   },
 ];
 
 const SERVICES_OPTIONS = [
-  "Website Development",
-  "WhatsApp Automation",
-  "CRM Integration",
-  "Lead Tracking System",
-  "Full Digital Presence",
-  "Consultation Only",
+  "פיתוח אתרים",
+  "אוטומציית וואטסאפ",
+  "אינטגרציית CRM",
+  "מערכת מעקב לידים",
+  "נוכחות דיגיטלית מלאה",
+  "ייעוץ בלבד",
 ];
+
+interface FormState {
+  name: string;
+  business: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
+  const [form, setForm] = useState<FormState>({
     name: "",
     business: "",
+    email: "",
+    phone: "",
     service: "",
     message: "",
   });
+  // Honeypot — hidden from real users, filled by bots
+  const [honeypot, setHoneypot] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Future: send to API route
-    setSubmitted(true);
+    setServerError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          business: form.business || undefined,
+          email: form.email || undefined,
+          phone: form.phone || undefined,
+          service: form.service || undefined,
+          message: form.message,
+          _h: honeypot, // honeypot
+        }),
+      });
+
+      const json = (await res.json()) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !json.ok) {
+        setServerError(json.error ?? "שגיאה בשליחת הטופס. נסה שוב.");
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setServerError("שגיאת רשת. בדוק את החיבור שלך ונסה שוב.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,19 +101,18 @@ export default function ContactPage() {
         {/* Header */}
         <AnimateIn className="mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
-            Get In Touch
+            צור קשר
           </span>
           <h1
             className="text-5xl md:text-6xl font-bold text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            BEGIN YOUR
+            התחל את
             <br />
-            <span className="gradient-text-blue">MISSION</span>
+            <span className="gradient-text-blue">המשימה שלך</span>
           </h1>
           <p className="text-white/40 max-w-lg text-lg leading-relaxed">
-            Tell us about your business. We&apos;ll tell you exactly how to
-            build it right.
+            ספר לנו על העסק שלך. אנחנו נגיד לך בדיוק איך לבנות אותו נכון.
           </p>
         </AnimateIn>
 
@@ -79,7 +122,7 @@ export default function ContactPage() {
             {CONTACT_OPTIONS.map((option, i) => {
               const Icon = option.icon;
               return (
-                <AnimateIn key={option.title} delay={i * 100} from="left">
+                <AnimateIn key={option.title} delay={i * 100} from="right">
                   <a
                     href={option.action}
                     target={option.action.startsWith("http") ? "_blank" : undefined}
@@ -106,7 +149,7 @@ export default function ContactPage() {
                         </p>
                         {option.highlight && (
                           <span className="text-[10px] text-emerald-400 font-medium">
-                            Recommended
+                            מומלץ
                           </span>
                         )}
                       </div>
@@ -121,7 +164,7 @@ export default function ContactPage() {
                           : "text-blue-400"
                       } group-hover:underline`}
                     >
-                      {option.actionLabel} →
+                      {option.actionLabel} ←
                     </span>
                   </a>
                 </AnimateIn>
@@ -129,24 +172,24 @@ export default function ContactPage() {
             })}
 
             {/* Response time */}
-            <AnimateIn delay={200} from="left">
+            <AnimateIn delay={200} from="right">
               <div className="p-4 rounded-xl border border-white/[0.05] bg-white/[0.02]">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-xs font-medium text-white/50">
-                    Currently available
+                    זמין כעת
                   </span>
                 </div>
                 <p className="text-xs text-white/25">
-                  Average response time:{" "}
-                  <span className="text-white/50">under 2 hours</span>
+                  זמן מענה ממוצע:{" "}
+                  <span className="text-white/50">פחות מ-2 שעות</span>
                 </p>
               </div>
             </AnimateIn>
           </div>
 
           {/* Contact form */}
-          <AnimateIn delay={100} from="right" className="lg:col-span-3">
+          <AnimateIn delay={100} from="left" className="lg:col-span-3">
             <div className="surface-card rounded-xl border border-white/7 p-6 md:p-8">
               {submitted ? (
                 <div className="text-center py-12">
@@ -154,60 +197,98 @@ export default function ContactPage() {
                     <CheckCircle className="w-7 h-7 text-emerald-400" />
                   </div>
                   <h3 className="text-xl font-semibold text-white/90 mb-2">
-                    Brief Received
+                    התדריך התקבל
                   </h3>
                   <p className="text-sm text-white/45">
-                    We&apos;ll review your project details and be in touch within
-                    2 hours via WhatsApp or email.
+                    נסקור את פרטי הפרויקט שלך ונצור קשר תוך 2 שעות דרך וואטסאפ או אימייל.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  {/* Honeypot — visually hidden, ARIA hidden, no label */}
+                  <div
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0 }}
+                    tabIndex={-1}
+                  >
+                    <input
+                      type="text"
+                      name="_h"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      autoComplete="off"
+                      tabIndex={-1}
+                    />
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
-                        Your Name *
+                        שמך *
                       </label>
                       <input
                         type="text"
                         required
                         value={form.name}
-                        onChange={(e) =>
-                          setForm({ ...form, name: e.target.value })
-                        }
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
                         className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
-                        placeholder="John Doe"
+                        placeholder="ישראל ישראלי"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
-                        Business Name
+                        שם העסק
                       </label>
                       <input
                         type="text"
                         value={form.business}
-                        onChange={(e) =>
-                          setForm({ ...form, business: e.target.value })
-                        }
+                        onChange={(e) => setForm({ ...form, business: e.target.value })}
                         className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
-                        placeholder="Acme Corp"
+                        placeholder='חברה בע"מ'
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                        אימייל
+                      </label>
+                      <input
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        placeholder="you@example.com"
+                        dir="ltr"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                        טלפון / WhatsApp
+                      </label>
+                      <input
+                        type="tel"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        placeholder="050-000-0000"
+                        dir="ltr"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
-                      Service Needed
+                      שירות נדרש
                     </label>
                     <select
                       value={form.service}
-                      onChange={(e) =>
-                        setForm({ ...form, service: e.target.value })
-                      }
+                      onChange={(e) => setForm({ ...form, service: e.target.value })}
                       className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/60 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all appearance-none"
                     >
                       <option value="" className="bg-[#0d0d18]">
-                        Select a service...
+                        בחר שירות...
                       </option>
                       {SERVICES_OPTIONS.map((s) => (
                         <option key={s} value={s} className="bg-[#0d0d18]">
@@ -219,31 +300,33 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
-                      Project Brief *
+                      תדריך הפרויקט *
                     </label>
                     <textarea
                       required
                       rows={5}
                       value={form.message}
-                      onChange={(e) =>
-                        setForm({ ...form, message: e.target.value })
-                      }
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
-                      placeholder="Describe your business, what you need, and your goals..."
+                      placeholder="תאר את העסק שלך, מה אתה צריך ומהן המטרות שלך..."
                     />
                   </div>
 
+                  {serverError && (
+                    <p className="text-xs text-red-400/80 text-center">{serverError}</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-300"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-300 disabled:opacity-60"
                     style={{
-                      background:
-                        "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
+                      background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
                       boxShadow: "0 0 20px rgba(59,130,246,0.2)",
                     }}
                   >
                     <Send className="w-4 h-4" />
-                    Send Brief
+                    {loading ? "שולח..." : "שלח תדריך"}
                   </button>
                 </form>
               )}

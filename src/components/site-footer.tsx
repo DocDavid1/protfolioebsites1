@@ -2,20 +2,20 @@ import Link from "next/link";
 import { MessageCircle, Mail, Shield } from "lucide-react";
 
 const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Fighters Builders!")}`;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
 
 const FOOTER_LINKS = {
-  Services: [
-    { label: "Website Development", href: "/#services" },
-    { label: "WhatsApp Systems", href: "/#services" },
-    { label: "CRM Integration", href: "/#services" },
-    { label: "Lead Tracking", href: "/#services" },
-    { label: "Automation", href: "/#services" },
+  "שירותים": [
+    { label: "פיתוח אתרים", href: "/#services" },
+    { label: "מערכות וואטסאפ", href: "/#services" },
+    { label: "אינטגרציית CRM", href: "/#services" },
+    { label: "מעקב לידים", href: "/#services" },
+    { label: "אוטומציה", href: "/#services" },
   ],
-  Company: [
-    { label: "About Us", href: "/about" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Contact", href: "/contact" },
+  "חברה": [
+    { label: "אודות", href: "/about" },
+    { label: "פורטפוליו", href: "/portfolio" },
+    { label: "צור קשר", href: "/contact" },
   ],
 };
 
@@ -50,9 +50,7 @@ export function SiteFooter() {
             </Link>
 
             <p className="text-sm text-white/35 max-w-xs leading-relaxed mb-5">
-              Three combat veterans building digital infrastructure for
-              businesses that mean business. Military precision. Agency
-              results.
+              שלושה לוחמי קרב בונים תשתית דיגיטלית לעסקים שמתכוונים ברצינות. דיוק צבאי. תוצאות של סוכנות.
             </p>
 
             {/* Contact */}
@@ -64,7 +62,7 @@ export function SiteFooter() {
                 className="flex items-center gap-2 text-sm text-white/35 hover:text-emerald-400 transition-colors"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
-                WhatsApp (Fastest)
+                וואטסאפ (הכי מהיר)
               </a>
               <a
                 href="mailto:hello@fightersbuilders.com"
@@ -102,10 +100,10 @@ export function SiteFooter() {
         <div className="border-t border-white/[0.05] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/20 flex items-center gap-2">
             <Shield className="w-3 h-3 text-blue-400/50" />
-            {currentYear} Fighters Builders. All rights reserved.
+            {currentYear} פייטרס בילדרס. כל הזכויות שמורות.
           </p>
           <p className="text-xs text-white/15">
-            Built with military precision. Deployed with speed.
+            נבנה בדיוק צבאי. פורס במהירות.
           </p>
         </div>
       </div>

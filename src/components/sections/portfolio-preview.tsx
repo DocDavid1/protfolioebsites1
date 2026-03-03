@@ -2,10 +2,30 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import { AnimateIn } from "@/components/ui/animate-in";
-import { getFeaturedProjects } from "@/lib/portfolio";
+import { dbProjectToProject, getFeaturedProjects } from "@/lib/portfolio";
+import { createClient } from "@/lib/supabase/server";
 
-export function PortfolioPreview() {
-  const featured = getFeaturedProjects();
+async function getFeatured() {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*")
+      .eq("is_featured", true)
+      .order("sort_order", { ascending: true })
+      .limit(6);
+
+    if (error || !data || data.length === 0) {
+      return getFeaturedProjects(); // fallback to mock data
+    }
+    return data.map(dbProjectToProject);
+  } catch {
+    return getFeaturedProjects();
+  }
+}
+
+export async function PortfolioPreview() {
+  const featured = await getFeatured();
 
   return (
     <section
@@ -21,22 +41,22 @@ export function PortfolioPreview() {
         <AnimateIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
             <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
-              Selected Work
+              עבודות נבחרות
             </span>
             <h2
               className="text-4xl md:text-5xl font-bold text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              OPERATIONS
+              מבצעים
               <br />
-              <span className="gradient-text-blue">EXECUTED</span>
+              <span className="gradient-text-blue">שבוצעו</span>
             </h2>
           </div>
           <Link
             href="/portfolio"
             className="group inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors whitespace-nowrap"
           >
-            View all projects
+            צפה בכל הפרויקטים
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </AnimateIn>
@@ -56,7 +76,7 @@ export function PortfolioPreview() {
             href="/portfolio"
             className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-blue-500/30 hover:text-white hover:bg-blue-500/[0.06] transition-all duration-300"
           >
-            See All {featured.length > 0 ? "6" : ""} Projects
+            ראה את כל הפרויקטים
             <ArrowRight className="w-4 h-4" />
           </Link>
         </AnimateIn>

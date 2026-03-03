@@ -90,15 +90,19 @@ export function BrowserWindow({
   );
 }
 
-// Placeholder component when no image is available
+// Placeholder component — shows real image when available, grid pattern otherwise
 export function BrowserWindowPlaceholder({
   url,
   title,
+  imageUrl,
   className,
+  priority = false,
 }: {
   url: string;
   title: string;
-  className?: string;
+  imageUrl?: string | undefined;
+  className?: string | undefined;
+  priority?: boolean | undefined;
 }) {
   const displayUrl = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
@@ -131,33 +135,46 @@ export function BrowserWindowPlaceholder({
         </div>
       </div>
       <div className="relative aspect-[16/10] bg-[#0d0d18] flex items-center justify-center">
-        {/* Decorative grid */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(to right, rgba(59,130,246,0.3) 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
-          }}
-        />
-        <div className="relative text-center space-y-2">
-          <div className="w-8 h-8 mx-auto rounded border border-white/10 flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-white/20"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
-              />
-            </svg>
-          </div>
-          <p className="text-[10px] text-white/20 font-mono">{title}</p>
-        </div>
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={`Preview of ${title}`}
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={priority}
+          />
+        ) : (
+          <>
+            {/* Decorative grid fallback */}
+            <div
+              className="absolute inset-0 opacity-10"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(to right, rgba(59,130,246,0.3) 1px, transparent 1px)",
+                backgroundSize: "30px 30px",
+              }}
+            />
+            <div className="relative text-center space-y-2">
+              <div className="w-8 h-8 mx-auto rounded border border-white/10 flex items-center justify-center">
+                <svg
+                  className="w-4 h-4 text-white/20"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
+                  />
+                </svg>
+              </div>
+              <p className="text-[10px] text-white/20 font-mono">{title}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

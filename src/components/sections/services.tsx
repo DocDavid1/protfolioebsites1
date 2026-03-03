@@ -20,50 +20,50 @@ interface Service {
 const SERVICES: Service[] = [
   {
     icon: Globe,
-    title: "Combat-Ready Websites",
+    title: "אתרים מוכנים לקרב",
     description:
-      "High-performance websites built to convert visitors into clients. No templates — every site is engineered for speed, SEO, and results.",
-    highlight: "Lighthouse 95+ performance",
+      "אתרים בעלי ביצועים גבוהים הבנויים להמיר מבקרים ללקוחות. ללא תבניות — כל אתר מהונדס למהירות, SEO ותוצאות.",
+    highlight: "ביצועי Lighthouse 95+",
     accent: "blue",
   },
   {
     icon: MessageCircle,
-    title: "WhatsApp Systems",
+    title: "מערכות וואטסאפ",
     description:
-      "Automated WhatsApp funnels that engage, qualify, and convert leads 24/7. Your best salesperson never sleeps.",
-    highlight: "500+ conversations automated daily",
+      "משפכי וואטסאפ אוטומטיים שמעסיקים, מסיקים ומסיקים לידים 24/7. איש המכירות הטוב ביותר שלך לא ישן.",
+    highlight: "500+ שיחות אוטומטיות ביום",
     accent: "emerald",
   },
   {
     icon: BarChart2,
-    title: "Lead Tracking",
+    title: "מעקב לידים",
     description:
-      "Never lose a prospect again. Full-funnel tracking from first click to signed contract, with real-time dashboards.",
-    highlight: "Zero lead left behind",
+      "לעולם אל תאבד פוטנציאל לקוח שוב. מעקב מלא על כל המשפך מהקלקול הראשון ועד חתימת החוזה, עם דשבורדים בזמן אמת.",
+    highlight: "אפס לידים שאבדו",
     accent: "amber",
   },
   {
     icon: Users,
-    title: "CRM Integration",
+    title: "אינטגרציית CRM",
     description:
-      "Command your entire customer relationship from one operations center. Synced, organized, and battle-ready.",
-    highlight: "Full pipeline visibility",
+      "שלוט על כל מערכת היחסים עם הלקוח ממרכז פעולות אחד. מסונכרן, מאורגן ומוכן לקרב.",
+    highlight: "נראות מלאה של הצינור",
     accent: "purple",
   },
   {
     icon: Zap,
-    title: "Automation Systems",
+    title: "מערכות אוטומציה",
     description:
-      "Deploy systems, not effort. We automate your repetitive processes so your team focuses on what matters most.",
-    highlight: "80% of repetitive tasks automated",
+      "פרוס מערכות, לא מאמץ. אנחנו מאטוטמים את התהליכים החוזרים שלך כדי שהצוות שלך יתמקד במה שחשוב.",
+    highlight: "80% מהמשימות החוזרות אוטומטיות",
     accent: "orange",
   },
   {
     icon: TrendingUp,
-    title: "Digital Presence",
+    title: "נוכחות דיגיטלית",
     description:
-      "Dominate your market online. SEO, social presence, brand identity, and ad campaigns built with military precision.",
-    highlight: "Market-leading positioning",
+      "שלוט בשוק שלך אונליין. SEO, נוכחות ברשתות חברתיות, זהות מותג וקמפיינים פרסומיים הבנויים בדיוק צבאי.",
+    highlight: "מיצוב מוביל בשוק",
     accent: "cyan",
   },
 ];
@@ -118,18 +118,17 @@ export function ServicesSection() {
         {/* Section header */}
         <AnimateIn className="text-center mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
-            What We Deploy
+            מה אנחנו מפרסים
           </span>
           <h2
             className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            DIGITAL WEAPONS
-            <span className="gradient-text-amber"> ARSENAL</span>
+            ארסנל הנשק
+            <span className="gradient-text-amber"> הדיגיטלי</span>
           </h2>
           <p className="text-white/40 max-w-2xl mx-auto text-lg">
-            Every tool in our stack is chosen for performance and ROI. No fluff,
-            no bloat — just systems that execute.
+            כל כלי בסטאק שלנו נבחר לביצועים ולROI. ללא שטויות, ללא נפיחות — רק מערכות שמבצעות.
           </p>
         </AnimateIn>
 

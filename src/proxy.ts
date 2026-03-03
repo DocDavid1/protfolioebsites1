@@ -1,25 +1,69 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
-/**
- * Next.js 16 Proxy for auth protection.
- * Uses cookie-based checks for fast, optimistic redirects.
- *
- * Note: This only checks for cookie existence, not validity.
- * Full session validation should be done in each protected page/route.
- */
 export async function proxy(request: NextRequest) {
-  const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
 
-  // Optimistic redirect - cookie existence check only
-  // Full validation happens in page components via auth.api.getSession()
-  if (!sessionCookie) {
-    return NextResponse.redirect(new URL("/", request.url));
+  // Only protect /admin routes
+  if (!pathname.startsWith("/admin")) {
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  // /admin/login is always accessible
+  if (pathname === "/admin/login") {
+    return NextResponse.next();
+  }
+
+  let response = NextResponse.next({ request });
+
+  // Create a Supabase client scoped to this request
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          response = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  // Refresh session if expired
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Not logged in → redirect to /admin/login
+  if (!user) {
+    const loginUrl = new URL("/admin/login", request.url);
+    loginUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Check admin status
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_admin")
+    .eq("id", user.id)
+    .single();
+
+  if (!profile?.is_admin) {
+    return NextResponse.redirect(new URL("/admin/403", request.url));
+  }
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/dashboard", "/chat", "/profile"], // Protected routes
+  matcher: ["/admin/:path*"],
 };

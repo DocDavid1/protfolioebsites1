@@ -24,36 +24,36 @@ const rajdhani = Rajdhani({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fighters Builders — Digital Agency",
-    template: "%s | Fighters Builders",
+    default: "פייטרס בילדרס — סוכנות דיגיטלית",
+    template: "%s | פייטרס בילדרס",
   },
   description:
-    "Fighters Builders is a premium digital agency built by Israeli combat veterans. We build websites, WhatsApp systems, CRM solutions, and automation tools that help businesses grow with military precision.",
+    "פייטרס בילדרס היא סוכנות דיגיטלית פרמיום שנבנתה על ידי לוחמי קרב ישראלים. אנחנו בונים אתרים, מערכות וואטסאפ, פתרונות CRM וכלי אוטומציה שעוזרים לעסקים לצמוח בדיוק צבאי.",
   keywords: [
-    "digital agency",
-    "web development",
-    "WhatsApp automation",
-    "CRM integration",
-    "lead tracking",
-    "business automation",
-    "Fighters Builders",
-    "Israel",
+    "סוכנות דיגיטלית",
+    "פיתוח אתרים",
+    "אוטומציית וואטסאפ",
+    "אינטגרציית CRM",
+    "מעקב לידים",
+    "אוטומציה עסקית",
+    "פייטרס בילדרס",
+    "ישראל",
   ],
-  authors: [{ name: "Fighters Builders" }],
-  creator: "Fighters Builders",
+  authors: [{ name: "פייטרס בילדרס" }],
+  creator: "פייטרס בילדרס",
   openGraph: {
     type: "website",
-    locale: "en_US",
-    siteName: "Fighters Builders",
-    title: "Fighters Builders — Digital Agency",
+    locale: "he_IL",
+    siteName: "פייטרס בילדרס",
+    title: "פייטרס בילדרס — סוכנות דיגיטלית",
     description:
-      "Built by combat veterans. Engineered for growth. Premium digital systems for businesses that mean business.",
+      "נבנה על ידי לוחמי קרב. מהונדס לצמיחה. מערכות דיגיטליות פרמיום לעסקים שמתכוונים ברצינות.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fighters Builders — Digital Agency",
+    title: "פייטרס בילדרס — סוכנות דיגיטלית",
     description:
-      "Built by combat veterans. Engineered for growth. Premium digital systems for businesses that mean business.",
+      "נבנה על ידי לוחמי קרב. מהונדס לצמיחה. מערכות דיגיטליות פרמיום לעסקים שמתכוונים ברצינות.",
   },
   robots: {
     index: true,
@@ -83,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="he" dir="rtl" suppressHydrationWarning className="dark">
       <head>
         <script
           type="application/ld+json"

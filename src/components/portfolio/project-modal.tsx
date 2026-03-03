@@ -43,6 +43,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           <BrowserWindowPlaceholder
             url={project.website_url}
             title={project.title}
+            imageUrl={project.preview_image || undefined}
             className="rounded-none border-x-0 border-t-0"
           />
         </div>

@@ -5,13 +5,17 @@ import { z } from "zod";
  * These variables are only available on the server.
  */
 const serverEnvSchema = z.object({
-  // Database
-  POSTGRES_URL: z.string().url("Invalid database URL"),
+  // Database (Drizzle / legacy)
+  POSTGRES_URL: z.string().url("Invalid database URL").optional(),
 
-  // Authentication
+  // Authentication (BetterAuth — existing users)
   BETTER_AUTH_SECRET: z
     .string()
-    .min(32, "BETTER_AUTH_SECRET must be at least 32 characters"),
+    .min(32, "BETTER_AUTH_SECRET must be at least 32 characters")
+    .optional(),
+
+  // Supabase — server-only key (bypasses RLS, admin actions only)
+  SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
 
   // OAuth
   GOOGLE_CLIENT_ID: z.string().optional(),
@@ -36,6 +40,9 @@ const serverEnvSchema = z.object({
  */
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+  // Supabase public keys (safe to expose to browser)
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url("Invalid Supabase URL").optional(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
