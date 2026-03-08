@@ -119,6 +119,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-weight: 700;
   }
   ::selection {
     background: rgba(59, 130, 246, 0.3);
@@ -415,7 +416,7 @@
 
 /* Divider line with gradient */
 .divider-brand {
-  height: 1px;
+  height: 3px;
   background: linear-gradient(
     to right,
     transparent,
@@ -486,4 +487,256 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ============================================
+   ATMOSPHERIC BACKGROUND SYSTEM
+   ============================================ */
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  30% { transform: translate(3%, -4%) scale(1.06); }
+  60% { transform: translate(-4%, 3%) scale(0.96); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  35% { transform: translate(-5%, 5%) scale(1.08); }
+  70% { transform: translate(6%, -3%) scale(0.93); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  50% { transform: translate(4%, 6%) scale(1.05); }
+}
+
+@keyframes aurora-drift-4 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  40% { transform: translate(-3%, -5%) scale(1.04); }
+  80% { transform: translate(5%, 2%) scale(0.97); }
+}
+
+@keyframes scan-sweep {
+  0% { transform: translateY(-2px); opacity: 0; }
+  4% { opacity: 0.8; }
+  96% { opacity: 0.25; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+.global-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.aurora-blue {
+  width: min(900px, 85vw);
+  height: 500px;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(59,130,246,0.15) 0%, rgba(99,102,241,0.07) 45%, transparent 70%);
+  animation: aurora-drift-1 28s ease-in-out infinite;
+}
+
+.aurora-violet {
+  width: 650px;
+  height: 650px;
+  top: 25vh;
+  left: -220px;
+  background: radial-gradient(ellipse at center, rgba(139,92,246,0.1) 0%, transparent 65%);
+  animation: aurora-drift-2 34s ease-in-out infinite 5s;
+}
+
+.aurora-amber {
+  width: 550px;
+  height: 550px;
+  bottom: 5vh;
+  right: -150px;
+  background: radial-gradient(ellipse at center, rgba(245,158,11,0.09) 0%, transparent 65%);
+  animation: aurora-drift-3 22s ease-in-out infinite 9s;
+}
+
+.aurora-emerald {
+  width: 420px;
+  height: 420px;
+  bottom: 35vh;
+  left: 12%;
+  background: radial-gradient(ellipse at center, rgba(16,185,129,0.06) 0%, transparent 65%);
+  animation: aurora-drift-4 38s ease-in-out infinite 14s;
+}
+
+.aurora-rose {
+  width: 500px;
+  height: 500px;
+  top: 55vh;
+  right: 8%;
+  background: radial-gradient(ellipse at center, rgba(244,63,94,0.05) 0%, transparent 65%);
+  animation: aurora-drift-1 45s ease-in-out infinite 20s;
+}
+
+.grain-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+
+.hero-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 8%,
+    rgba(59,130,246,0.6) 30%,
+    rgba(139,92,246,0.5) 50%,
+    rgba(59,130,246,0.6) 70%,
+    transparent 92%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(59,130,246,0.4), 0 0 24px rgba(99,102,241,0.2);
+  animation: scan-sweep 14s linear infinite 3s;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+
+.hud-corner::before,
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  background: rgba(59,130,246,0.4);
+}
+
+.hud-tl { top: 20px; left: 20px; }
+.hud-tl::before { top: 0; left: 0; width: 100%; height: 1.5px; }
+.hud-tl::after  { top: 0; left: 0; width: 1.5px; height: 100%; }
+
+.hud-tr { top: 20px; right: 20px; }
+.hud-tr::before { top: 0; right: 0; width: 100%; height: 1.5px; }
+.hud-tr::after  { top: 0; right: 0; width: 1.5px; height: 100%; }
+
+.hud-bl { bottom: 40px; left: 20px; }
+.hud-bl::before { bottom: 0; left: 0; width: 100%; height: 1.5px; }
+.hud-bl::after  { bottom: 0; left: 0; width: 1.5px; height: 100%; }
+
+.hud-br { bottom: 40px; right: 20px; }
+.hud-br::before { bottom: 0; right: 0; width: 100%; height: 1.5px; }
+.hud-br::after  { bottom: 0; right: 0; width: 1.5px; height: 100%; }
+
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(59,130,246,0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-topo {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 Q50 60 100 80 T200 80' fill='none' stroke='rgba(59,130,246,0.07)' stroke-width='1'/%3E%3Cpath d='M0 120 Q50 100 100 120 T200 120' fill='none' stroke='rgba(59,130,246,0.05)' stroke-width='1'/%3E%3Cpath d='M0 40 Q50 20 100 40 T200 40' fill='none' stroke='rgba(59,130,246,0.04)' stroke-width='1'/%3E%3Cpath d='M0 160 Q50 140 100 160 T200 160' fill='none' stroke='rgba(59,130,246,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ============================================
+   PREMIUM CARD SYSTEM
+   ============================================ */
+
+/* Update surface-card with real depth */
+.surface-card {
+  background: linear-gradient(160deg, #12121f 0%, #0c0c18 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Update hover to be actually impressive */
+.surface-card-hover:hover {
+  border-color: rgba(59, 130, 246, 0.38);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(59, 130, 246, 0.14), inset 0 1px 0 rgba(59, 130, 246, 0.18);
+  transform: translateY(-3px);
+}
+
+/* Portfolio card — premium showcase tile */
+.card-portfolio {
+  background: linear-gradient(160deg, #13132a 0%, #0b0b17 100%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-portfolio:hover {
+  border-color: rgba(59, 130, 246, 0.42);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.75), 0 0 50px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(59, 130, 246, 0.22);
+  transform: translateY(-4px);
+}
+
+/* Service card */
+.card-service {
+  background: linear-gradient(160deg, #11111e 0%, #0d0d1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-service:hover {
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Founder / team card */
+.card-founder {
+  background: linear-gradient(135deg, #111120 0%, #0c0c18 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-founder:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Premium modal panel */
+.modal-premium {
+  background: linear-gradient(160deg, #14142a 0%, #0d0d1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(59, 130, 246, 0.08);
+}
+
+/* Browser chrome window */
+.window-browser {
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.06);
+}
+
+/* ============================================
+   INFINITE MARQUEE SLIDER
+   ============================================ */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
 }

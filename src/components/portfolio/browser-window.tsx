@@ -22,12 +22,12 @@ export function BrowserWindow({
   return (
     <div
       className={cn(
-        "rounded-lg overflow-hidden border border-white/10 shadow-2xl",
+        "rounded-lg overflow-hidden window-browser",
         className
       )}
     >
       {/* Browser chrome */}
-      <div className="bg-[#1a1a2e] border-b border-white/10 px-3 py-2 flex items-center gap-2">
+      <div className="bg-[#16162e] border-b-2 border-white/15 px-3 py-2.5 flex items-center gap-2">
         {/* Traffic lights */}
         <div className="flex items-center gap-1.5 shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] opacity-90" />
@@ -109,11 +109,11 @@ export function BrowserWindowPlaceholder({
   return (
     <div
       className={cn(
-        "rounded-lg overflow-hidden border border-white/10 shadow-2xl",
+        "rounded-lg overflow-hidden window-browser",
         className
       )}
     >
-      <div className="bg-[#1a1a2e] border-b border-white/10 px-3 py-2 flex items-center gap-2">
+      <div className="bg-[#16162e] border-b-2 border-white/15 px-3 py-2.5 flex items-center gap-2">
         <div className="flex items-center gap-1.5 shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] opacity-90" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e] opacity-90" />
@@ -146,32 +146,36 @@ export function BrowserWindowPlaceholder({
           />
         ) : (
           <>
-            {/* Decorative grid fallback */}
+            {/* Gradient atmosphere */}
             <div
-              className="absolute inset-0 opacity-10"
+              className="absolute inset-0"
               style={{
-                backgroundImage:
-                  "linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(to right, rgba(59,130,246,0.3) 1px, transparent 1px)",
-                backgroundSize: "30px 30px",
+                background:
+                  "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.08) 50%, transparent 80%), linear-gradient(135deg, #0e0e20 0%, #080812 100%)",
               }}
             />
-            <div className="relative text-center space-y-2">
-              <div className="w-8 h-8 mx-auto rounded border border-white/10 flex items-center justify-center">
-                <svg
-                  className="w-4 h-4 text-white/20"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
-                  />
+            {/* Subtle dot grid */}
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: "radial-gradient(rgba(59,130,246,0.25) 1px, transparent 1px)",
+                backgroundSize: "24px 24px",
+              }}
+            />
+            {/* Glowing orb */}
+            <div
+              className="absolute top-1/3 left-1/3 w-32 h-32 rounded-full blur-3xl opacity-30"
+              style={{ background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)" }}
+            />
+            {/* Title display */}
+            <div className="relative text-center px-6 space-y-3">
+              <div className="w-10 h-10 mx-auto rounded-xl border border-blue-500/25 bg-blue-500/10 flex items-center justify-center">
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </div>
-              <p className="text-[10px] text-white/20 font-mono">{title}</p>
+              <p className="text-sm font-bold text-white/60 leading-tight">{title}</p>
+              <p className="text-[10px] text-white/25 font-mono uppercase tracking-widest">live project</p>
             </div>
           </>
         )}

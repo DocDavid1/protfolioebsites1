@@ -28,7 +28,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-scale-in bg-[#0d0d18] border border-white/10 rounded-2xl shadow-2xl">
+      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-scale-in rounded-2xl modal-premium">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -79,7 +79,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           </div>
 
           {/* Description */}
-          <p className="text-white/60 leading-relaxed mb-6">
+          <p className="text-white/70 leading-relaxed mb-6">
             {project.full_description || project.description}
           </p>
 
@@ -93,10 +93,10 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                 {project.results.map((result, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 bg-emerald-500/5 border border-emerald-500/10 rounded-lg p-3"
+                    className="flex items-start gap-2 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-lg p-3"
                   >
                     <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-xs text-white/60">{result}</span>
+                    <span className="text-xs text-white/75">{result}</span>
                   </div>
                 ))}
               </div>
@@ -122,7 +122,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+          <div className="flex items-center gap-3 pt-4 border-t border-white/[0.1]">
             <a
               href={project.website_url}
               target="_blank"

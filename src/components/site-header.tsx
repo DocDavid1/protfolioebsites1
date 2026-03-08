@@ -3,7 +3,7 @@
 import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, Settings } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
 import { cn } from "@/lib/utils";
 
@@ -114,6 +114,17 @@ export function SiteHeader() {
               <MessageCircle className="w-4 h-4" />
               <span className="hidden lg:inline">וואטסאפ</span>
             </a>
+
+            {/* Admin link */}
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
+              aria-label="פאנל ניהול"
+              title="Admin"
+            >
+              <Settings className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Admin</span>
+            </Link>
 
             {/* Mobile menu toggle */}
             <button

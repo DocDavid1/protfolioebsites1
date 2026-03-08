@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Rajdhani } from "next/font/google";
 import "./globals.css";
+import { GlobalBackground } from "@/components/global-background";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -92,7 +93,9 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}
+        suppressHydrationWarning
       >
+        <GlobalBackground />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

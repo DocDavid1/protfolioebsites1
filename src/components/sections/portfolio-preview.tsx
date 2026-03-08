@@ -1,31 +1,33 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ProjectCard } from "@/components/portfolio/project-card";
+import { PortfolioSlider } from "@/components/portfolio/portfolio-slider";
 import { AnimateIn } from "@/components/ui/animate-in";
-import { dbProjectToProject, getFeaturedProjects } from "@/lib/portfolio";
+import { dbProjectToProject, projects as mockProjects } from "@/lib/portfolio";
 import { createClient } from "@/lib/supabase/server";
 
-async function getFeatured() {
+async function getAllProjects() {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("projects")
       .select("*")
-      .eq("is_featured", true)
-      .order("sort_order", { ascending: true })
-      .limit(6);
+      .order("sort_order", { ascending: true });
 
     if (error || !data || data.length === 0) {
-      return getFeaturedProjects(); // fallback to mock data
+      return mockProjects;
     }
     return data.map(dbProjectToProject);
   } catch {
-    return getFeaturedProjects();
+    return mockProjects;
   }
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
 export async function PortfolioPreview() {
-  const featured = await getFeatured();
+  const featured = shuffle(await getAllProjects());
 
   return (
     <section
@@ -36,6 +38,15 @@ export async function PortfolioPreview() {
       {/* Section divider */}
       <div className="divider-brand absolute top-0 left-0 right-0" />
 
+      {/* Section background — makes cards pop */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 90% 60% at 50% 50%, rgba(6,6,20,0.7) 0%, transparent 80%)",
+        }}
+        aria-hidden="true"
+      />
+
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section header */}
         <AnimateIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
@@ -44,7 +55,7 @@ export async function PortfolioPreview() {
               עבודות נבחרות
             </span>
             <h2
-              className="text-4xl md:text-5xl font-bold text-white/90"
+              className="text-4xl md:text-5xl font-bold text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               מבצעים
@@ -54,27 +65,24 @@ export async function PortfolioPreview() {
           </div>
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors whitespace-nowrap"
+            className="group inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-white transition-colors whitespace-nowrap"
           >
             צפה בכל הפרויקטים
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </AnimateIn>
 
-        {/* Featured projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {featured.map((project, i) => (
-            <AnimateIn key={project.id} delay={i * 100}>
-              <ProjectCard project={project} index={i} />
-            </AnimateIn>
-          ))}
-        </div>
+        {/* Infinite slider */}
+        <AnimateIn>
+          <PortfolioSlider projects={featured} />
+        </AnimateIn>
 
         {/* CTA row */}
-        <AnimateIn delay={300} className="mt-12 text-center">
+        <AnimateIn delay={200} className="mt-10 text-center">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-blue-500/30 hover:text-white hover:bg-blue-500/[0.06] transition-all duration-300"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm text-white/80 border border-white/15 hover:border-blue-500/45 hover:text-white hover:bg-blue-500/[0.09] transition-all duration-300"
+            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}
           >
             ראה את כל הפרויקטים
             <ArrowRight className="w-4 h-4" />

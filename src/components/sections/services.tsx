@@ -114,6 +114,17 @@ export function ServicesSection() {
       {/* Subtle top divider */}
       <div className="divider-brand mb-0 absolute top-0 left-0 right-0" />
 
+      {/* Section atmosphere */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(99,102,241,0.05) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-dot-grid opacity-30" aria-hidden="true" />
+
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section header */}
         <AnimateIn className="text-center mb-16">
@@ -140,7 +151,7 @@ export function ServicesSection() {
             return (
               <AnimateIn key={service.title} delay={i * 80} from="bottom">
                 <div
-                  className={`group relative surface-card rounded-xl p-6 border border-white/7 transition-all duration-300 h-full ${styles.border} hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]`}
+                  className={`group relative card-service rounded-xl p-6 transition-all duration-300 h-full ${styles.border}`}
                 >
                   {/* Icon */}
                   <div
@@ -150,12 +161,12 @@ export function ServicesSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-white/90 mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-white/45 leading-relaxed mb-5">
+                  <p className="text-sm text-white/65 leading-relaxed mb-5">
                     {service.description}
                   </p>
 

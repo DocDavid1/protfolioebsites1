@@ -18,13 +18,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   return (
     <>
       <article
-        className={cn(
-          "group relative cursor-pointer",
-          "surface-card rounded-xl overflow-hidden",
-          "border border-white/7 transition-all duration-300 ease-out",
-          "hover:border-blue-500/30 hover:-translate-y-1",
-          "hover:shadow-[0_0_30px_rgba(59,130,246,0.08)]"
-        )}
+        className="group relative cursor-pointer rounded-xl overflow-hidden card-portfolio"
         style={{ animationDelay: `${index * 100}ms` }}
         onClick={() => setModalOpen(true)}
         role="button"
@@ -41,31 +35,35 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             className="rounded-none border-x-0 border-t-0"
           />
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-300 pointer-events-none" />
+          <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/[0.06] transition-colors duration-300 pointer-events-none" />
+          {/* Shine effect on hover */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 60%)" }}
+          />
         </div>
 
         {/* Card content */}
-        <div className="p-5">
-          {/* Category badge */}
+        <div className="p-5 pt-4">
+          {/* Category badge + year */}
           <div className="flex items-center justify-between mb-3">
             <span
               className={cn(
-                "text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border",
+                "text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border",
                 CATEGORY_COLORS[project.category]
               )}
             >
               {CATEGORY_LABELS[project.category]}
             </span>
-            <span className="text-[10px] text-white/25 font-mono">
+            <span className="text-[10px] text-white/45 font-mono font-bold">
               {new Date(project.created_at).getFullYear()}
             </span>
           </div>
 
-          <h3 className="font-semibold text-white/90 text-base mb-1.5 group-hover:text-white transition-colors line-clamp-1">
+          <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-blue-100 transition-colors line-clamp-1 tracking-tight">
             {project.title}
           </h3>
 
-          <p className="text-sm text-white/40 line-clamp-2 mb-4 leading-relaxed">
+          <p className="text-sm text-white/60 line-clamp-2 mb-4 leading-relaxed">
             {project.description}
           </p>
 
@@ -74,21 +72,21 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             {project.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] text-white/35 bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full"
+                className="text-[10px] font-bold text-white/55 bg-white/[0.06] border border-white/[0.1] px-2 py-0.5 rounded-full"
               >
                 {tag}
               </span>
             ))}
             {project.tags.length > 3 && (
-              <span className="text-[10px] text-white/25 px-1">
+              <span className="text-[10px] text-white/35 font-bold px-1">
                 +{project.tags.length - 3}
               </span>
             )}
           </div>
 
           {/* Action row */}
-          <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-            <span className="text-xs text-blue-400/70 group-hover:text-blue-400 transition-colors font-medium">
+          <div className="flex items-center justify-between pt-3 border-t border-white/[0.09]">
+            <span className="text-xs text-blue-400 group-hover:text-blue-300 transition-colors font-bold tracking-wide">
               View case study →
             </span>
             <a
@@ -96,7 +94,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="p-1.5 rounded-md text-white/20 hover:text-white/60 hover:bg-white/[0.06] transition-all"
+              className="p-1.5 rounded-md text-white/35 hover:text-white/80 hover:bg-white/[0.08] transition-all"
               aria-label={`Visit ${project.title} website`}
             >
               <ExternalLink className="w-3.5 h-3.5" />

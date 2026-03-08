@@ -49,7 +49,7 @@ export function SiteFooter() {
               </span>
             </Link>
 
-            <p className="text-sm text-white/35 max-w-xs leading-relaxed mb-5">
+            <p className="text-sm text-white/55 max-w-xs leading-relaxed mb-5">
               שלושה לוחמי קרב בונים תשתית דיגיטלית לעסקים שמתכוונים ברצינות. דיוק צבאי. תוצאות של סוכנות.
             </p>
 
@@ -59,14 +59,16 @@ export function SiteFooter() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-white/35 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-2 text-sm text-white/55 hover:text-emerald-400 transition-colors"
+                suppressHydrationWarning
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 וואטסאפ (הכי מהיר)
               </a>
               <a
                 href="mailto:hello@fightersbuilders.com"
-                className="flex items-center gap-2 text-sm text-white/35 hover:text-blue-400 transition-colors"
+                className="flex items-center gap-2 text-sm text-white/55 hover:text-blue-400 transition-colors"
+                suppressHydrationWarning
               >
                 <Mail className="w-3.5 h-3.5" />
                 hello@fightersbuilders.com
@@ -77,7 +79,7 @@ export function SiteFooter() {
           {/* Link columns */}
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
             <div key={category}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-white/25 mb-4">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-white/45 mb-4">
                 {category}
               </h3>
               <ul className="space-y-2.5">
@@ -85,7 +87,8 @@ export function SiteFooter() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/35 hover:text-white/70 transition-colors"
+                      className="text-sm text-white/55 hover:text-white/85 transition-colors"
+                      suppressHydrationWarning
                     >
                       {link.label}
                     </Link>
@@ -98,11 +101,11 @@ export function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/[0.05] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-white/20 flex items-center gap-2">
+          <p className="text-xs text-white/40 flex items-center gap-2">
             <Shield className="w-3 h-3 text-blue-400/50" />
             {currentYear} פייטרס בילדרס. כל הזכויות שמורות.
           </p>
-          <p className="text-xs text-white/15">
+          <p className="text-xs text-white/35">
             נבנה בדיוק צבאי. פורס במהירות.
           </p>
         </div>

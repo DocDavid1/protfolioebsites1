@@ -44,16 +44,16 @@ export function StorySection() {
       id="story"
       aria-label="הסיפור שלנו"
     >
-      {/* Background texture */}
+      {/* Section atmosphere */}
       <div
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 50%)",
-          backgroundSize: "20px 20px",
+          background:
+            "radial-gradient(ellipse 70% 80% at 100% 50%, rgba(245,158,11,0.05) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 0% 50%, rgba(59,130,246,0.04) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
+      <div className="absolute inset-0 bg-topo opacity-40" aria-hidden="true" />
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -74,7 +74,7 @@ export function StorySection() {
             </AnimateIn>
 
             <AnimateIn delay={100}>
-              <div className="space-y-4 text-white/50 leading-relaxed">
+              <div className="space-y-4 text-white/65 leading-relaxed">
                 <p className="text-base">
                   אנחנו שלושה לוחמי קרב ישראלים ומשרתי מילואים פעילים. שירתנו
                   בכמה מהיחידות הדורשניות ביותר בצה&quot;ל — והבאנו את המשמעת הזו
@@ -126,9 +126,8 @@ export function StorySection() {
               return (
                 <AnimateIn key={founder.codename} delay={i * 100} from="right">
                   <div
-                    className={`flex items-start gap-5 p-5 rounded-xl transition-all duration-300 ${founder.hoverShadow}`}
+                    className={`flex items-start gap-5 p-5 rounded-xl card-founder`}
                     style={{
-                      background: "#0d0d18",
                       border: `1px solid ${founder.borderColor}`,
                     }}
                   >
@@ -153,7 +152,7 @@ export function StorySection() {
                           {founder.role}
                         </span>
                       </div>
-                      <p className="text-sm text-white/45 leading-relaxed">
+                      <p className="text-sm text-white/65 leading-relaxed">
                         {founder.bio}
                       </p>
                     </div>

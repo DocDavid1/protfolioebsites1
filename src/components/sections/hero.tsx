@@ -17,6 +17,7 @@ export function HeroSection() {
 
       {/* Tactical grid background */}
       <div className="absolute inset-0 bg-tactical-grid opacity-40" aria-hidden="true" />
+      <div className="absolute inset-0 bg-topo opacity-60" aria-hidden="true" />
 
       {/* Radial glow gradients */}
       <div
@@ -24,6 +25,16 @@ export function HeroSection() {
         style={{
           background:
             "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.12) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(245,158,11,0.06) 0%, transparent 50%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Diagonal light shafts */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "conic-gradient(from 270deg at 50% -10%, rgba(59,130,246,0.06) 0deg, transparent 30deg, transparent 330deg, rgba(59,130,246,0.06) 360deg)",
         }}
         aria-hidden="true"
       />
@@ -53,6 +64,15 @@ export function HeroSection() {
         }}
         aria-hidden="true"
       />
+
+      {/* Scan line sweep */}
+      <div className="hero-scan-line" aria-hidden="true" />
+
+      {/* HUD targeting corners */}
+      <div className="hud-corner hud-tl" aria-hidden="true" />
+      <div className="hud-corner hud-tr" aria-hidden="true" />
+      <div className="hud-corner hud-bl" aria-hidden="true" />
+      <div className="hud-corner hud-br" aria-hidden="true" />
 
       <div className="relative container mx-auto px-4 sm:px-6 py-24 md:py-32">
         <div className="max-w-4xl">

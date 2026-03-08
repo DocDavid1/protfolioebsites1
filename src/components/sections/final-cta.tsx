@@ -20,7 +20,7 @@ export function FinalCTA() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.04) 40%, transparent 70%)",
+            "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.06) 40%, transparent 70%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(245,158,11,0.06) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
@@ -34,7 +34,7 @@ export function FinalCTA() {
             מוכן לביצוע
           </span>
           <h2
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white/90 mb-4 leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הפסק לתכנן.
@@ -44,7 +44,7 @@ export function FinalCTA() {
         </AnimateIn>
 
         <AnimateIn delay={100}>
-          <p className="text-lg text-white/40 max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg text-white/65 max-w-xl mx-auto mb-10 leading-relaxed">
             הודעת וואטסאפ אחת היא כל מה שצריך כדי להתחיל לבנות את התשתית הדיגיטלית שהעסק שלך ראוי לה.
           </p>
         </AnimateIn>
@@ -76,7 +76,7 @@ export function FinalCTA() {
         </AnimateIn>
 
         {/* Trust signals */}
-        <AnimateIn delay={300} className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-white/25">
+        <AnimateIn delay={300} className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-white/45">
           {[
             "מענה מהיר מובטח",
             "ייעוץ ראשוני חינם",
