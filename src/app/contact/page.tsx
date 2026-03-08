@@ -192,7 +192,7 @@ export default function ContactPage() {
           <AnimateIn delay={100} from="left" className="lg:col-span-3">
             <div className="surface-card rounded-xl border border-white/7 p-6 md:p-8">
               {submitted ? (
-                <div className="text-center py-12">
+                <div className="text-center py-12" aria-live="polite">
                   <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-7 h-7 text-emerald-400" />
                   </div>
@@ -205,6 +205,7 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  <p className="text-xs text-white/50 mb-4">שדות המסומנים ב-* הם שדות חובה</p>
                   {/* Honeypot — visually hidden, ARIA hidden, no label */}
                   <div
                     aria-hidden="true"
@@ -231,6 +232,7 @@ export default function ContactPage() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        aria-invalid={serverError ? true : undefined}
                         className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                         placeholder="ישראל ישראלי"
                       />
@@ -307,18 +309,20 @@ export default function ContactPage() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      aria-invalid={serverError ? true : undefined}
                       className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                       placeholder="תאר את העסק שלך, מה אתה צריך ומהן המטרות שלך..."
                     />
                   </div>
 
                   {serverError && (
-                    <p className="text-xs text-red-400/80 text-center">{serverError}</p>
+                    <p className="text-xs text-red-400/80 text-center" role="alert">{serverError}</p>
                   )}
 
                   <button
                     type="submit"
                     disabled={loading}
+                    aria-busy={loading}
                     className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-300 disabled:opacity-60"
                     style={{
                       background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useCallback } from "react";
 import { ExternalLink, X, CheckCircle, Tag } from "lucide-react";
 import { type Project, CATEGORY_LABELS, CATEGORY_COLORS } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,51 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Focus the close button when the modal opens
+  useEffect(() => {
+    if (open) {
+      closeButtonRef.current?.focus();
+    }
+  }, [open]);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onClose]);
+
+  // Focus trap: keep Tab/Shift+Tab within the modal
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== "Tab" || !modalRef.current) return;
+
+    const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+
+    const first = focusable[0]!;
+    const last = focusable[focusable.length - 1]!;
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, []);
+
   if (!open) return null;
 
   return (
@@ -20,6 +66,8 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label={project.title}
+      onKeyDown={handleKeyDown}
+      ref={modalRef}
     >
       {/* Backdrop */}
       <div
@@ -31,9 +79,10 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
       <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-scale-in rounded-2xl modal-premium">
         {/* Close button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all"
-          aria-label="Close modal"
+          aria-label="סגור חלון"
         >
           <X className="w-4 h-4" />
         </button>
@@ -127,6 +176,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
               href={project.website_url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${project.title} — נפתח בחלון חדש`}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium transition-colors"
             >
               <ExternalLink className="w-4 h-4" />

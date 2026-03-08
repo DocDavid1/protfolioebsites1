@@ -16,6 +16,7 @@ const FOOTER_LINKS = {
     { label: "אודות", href: "/about" },
     { label: "פורטפוליו", href: "/portfolio" },
     { label: "צור קשר", href: "/contact" },
+    { label: "הצהרת נגישות", href: "/accessibility" },
   ],
 };
 
@@ -59,10 +60,11 @@ export function SiteFooter() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="וואטסאפ — נפתח בחלון חדש"
                 className="flex items-center gap-2 text-sm text-white/55 hover:text-emerald-400 transition-colors"
                 suppressHydrationWarning
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
                 וואטסאפ (הכי מהיר)
               </a>
               <a
@@ -70,7 +72,7 @@ export function SiteFooter() {
                 className="flex items-center gap-2 text-sm text-white/55 hover:text-blue-400 transition-colors"
                 suppressHydrationWarning
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5" aria-hidden="true" />
                 hello@fightersbuilders.com
               </a>
             </div>
@@ -102,7 +104,7 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="border-t border-white/[0.05] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/40 flex items-center gap-2">
-            <Shield className="w-3 h-3 text-blue-400/50" />
+            <Shield className="w-3 h-3 text-blue-400/50" aria-hidden="true" />
             {currentYear} פייטרס בילדרס. כל הזכויות שמורות.
           </p>
           <p className="text-xs text-white/35">

@@ -23,7 +23,12 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         onClick={() => setModalOpen(true)}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setModalOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setModalOpen(true);
+          }
+        }}
         aria-label={`View ${project.title} project details`}
       >
         {/* Browser window preview */}
@@ -95,7 +100,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="p-1.5 rounded-md text-white/35 hover:text-white/80 hover:bg-white/[0.08] transition-all"
-              aria-label={`Visit ${project.title} website`}
+              aria-label={`${project.title} — נפתח בחלון חדש`}
             >
               <ExternalLink className="w-3.5 h-3.5" />
             </a>

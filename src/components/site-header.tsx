@@ -15,6 +15,16 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [navLinks, setNavLinks] = useState(DEFAULT_NAV_LINKS);
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
   useEffect(() => {
     const stored = localStorage.getItem(NAV_STORAGE_KEY);
     if (!stored) return;
@@ -64,6 +74,7 @@ export function SiteHeader() {
             <span
               className="font-bold text-white/90 group-hover:text-white transition-colors tracking-wide hidden sm:block"
               style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}
+              lang="en"
             >
               FIGHTERS{" "}
               <span className="gradient-text-blue">BUILDERS</span>
@@ -84,6 +95,7 @@ export function SiteHeader() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    aria-current={isActive ? "page" : undefined}
                     className={cn(
                       "px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                       isActive
@@ -105,6 +117,7 @@ export function SiteHeader() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="וואטסאפ — נפתח בחלון חדש"
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-200"
               style={{
                 background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
@@ -155,6 +168,7 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "block px-4 py-2.5 rounded-lg text-sm font-medium transition-all",
                     isActive
@@ -171,6 +185,7 @@ export function SiteHeader() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="התחל בוואטסאפ — נפתח בחלון חדש"
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white"
                 style={{
                   background:
