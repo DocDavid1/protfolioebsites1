@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Rajdhani } from "next/font/google";
 import "./globals.css";
+import { AccessibilityWidget } from "@/components/accessibility-widget";
 import { GlobalBackground } from "@/components/global-background";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -106,6 +107,7 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <SiteFooter />
           <Toaster richColors position="top-right" />
+          <AccessibilityWidget />
         </ThemeProvider>
       </body>
     </html>
