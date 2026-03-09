@@ -17,15 +17,17 @@ export function CookieBanner() {
   const [showPrefs, setShowPrefs] = useState(false);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (!stored) {
+    // Defer to a callback to satisfy react-hooks/set-state-in-effect rule
+    const id = setTimeout(() => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) setVisible(true);
+      } catch {
+        // localStorage unavailable — show banner
         setVisible(true);
       }
-    } catch {
-      // localStorage unavailable — show banner
-      setVisible(true);
-    }
+    }, 0);
+    return () => clearTimeout(id);
   }, []);
 
   const saveConsent = useCallback((accepted: boolean) => {
@@ -43,7 +45,7 @@ export function CookieBanner() {
 
     // Expose for future analytics wiring
     if (typeof window !== "undefined") {
-      (window as Record<string, unknown>).__cookieConsent = consent;
+      (window as unknown as Record<string, unknown>).__cookieConsent = consent;
     }
 
     setVisible(false);

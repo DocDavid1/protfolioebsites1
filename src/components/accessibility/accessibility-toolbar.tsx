@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Accessibility,
   X,
@@ -136,19 +136,19 @@ function clearAllAttrs(): void {
 export function AccessibilityToolbar() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  // Use a ref for prefs to avoid setState-in-effect lint error.
-  // Trigger re-renders with a simple counter via useReducer.
-  const prefsRef = useRef<A11yPrefs>({});
-  const [, forceRender] = useReducer((c: number) => c + 1, 0);
+  // Lazy init reads localStorage only on client (SSR-safe: returns {} on server)
+  const [prefs, setPrefs] = useState<A11yPrefs>(() => {
+    if (typeof window === "undefined") return {};
+    return loadPrefs();
+  });
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Apply saved preferences on mount — only DOM side effects, no setState for prefs
+  // Apply saved preferences as DOM attributes on mount
   useEffect(() => {
-    const saved = loadPrefs();
-    prefsRef.current = saved;
-    applyPrefs(saved);
+    applyPrefs(prefs);
     setMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Trap focus within the panel when open
@@ -192,54 +192,42 @@ export function AccessibilityToolbar() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
-  const updatePref = useCallback(
-    (key: PrefKey, value: boolean | string | undefined) => {
-      const next: A11yPrefs = { ...prefsRef.current, [key]: value };
-      prefsRef.current = next;
-      savePrefs(next);
-      applyPrefs(next);
-      forceRender();
+  const handleToggle = useCallback(
+    (key: PrefKey) => {
+      setPrefs((prev) => {
+        const next: A11yPrefs = { ...prev, [key]: !prev[key] };
+        savePrefs(next);
+        applyPrefs(next);
+        return next;
+      });
     },
     []
   );
 
-  const handleToggle = useCallback(
-    (key: PrefKey) => {
-      const current = prefsRef.current[key];
-      updatePref(key, !current);
-    },
-    [updatePref]
-  );
-
   const handleTextSize = useCallback(
     (size: "large" | "small") => {
-      const current = prefsRef.current.textSize;
-      // If already set to this size, remove it (toggle off)
-      updatePref("textSize", current === size ? undefined : size);
+      setPrefs((prev) => {
+        const next: A11yPrefs = {
+          ...prev,
+          textSize: prev.textSize === size ? undefined : size,
+        };
+        savePrefs(next);
+        applyPrefs(next);
+        return next;
+      });
     },
-    [updatePref]
+    []
   );
 
   const handleReset = useCallback(() => {
     clearAllAttrs();
-    prefsRef.current = {};
+    setPrefs({});
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
       // Ignore
     }
-    forceRender();
   }, []);
-
-  const isActive = useCallback(
-    (key: PrefKey, value?: "large" | "small"): boolean => {
-      if (key === "textSize") {
-        return prefsRef.current.textSize === value;
-      }
-      return !!prefsRef.current[key];
-    },
-    []
-  );
 
   // Don't render interactive content before mount to avoid hydration mismatch
   if (!mounted) {
@@ -310,8 +298,8 @@ export function AccessibilityToolbar() {
               const Icon = control.icon;
               const active =
                 control.type === "textSize"
-                  ? isActive(control.key, control.value)
-                  : isActive(control.key);
+                  ? prefs.textSize === control.value
+                  : !!prefs[control.key];
 
               return (
                 <button
