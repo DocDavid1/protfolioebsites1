@@ -16,7 +16,6 @@ const FOOTER_LINKS = {
     { label: "אודות", href: "/about" },
     { label: "פורטפוליו", href: "/portfolio" },
     { label: "צור קשר", href: "/contact" },
-    { label: "הצהרת נגישות", href: "/accessibility" },
   ],
 };
 
@@ -98,6 +97,24 @@ export function SiteFooter() {
                 ))}
               </ul>
             </div>
+          ))}
+        </div>
+
+        {/* Legal links */}
+        <div className="border-t border-white/[0.04] pt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-6">
+          {[
+            { label: "מדיניות פרטיות", href: "/privacy-policy" },
+            { label: "תנאי שימוש", href: "/terms-of-use" },
+            { label: "עוגיות", href: "/cookies" },
+            { label: "נגישות", href: "/accessibility" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs text-white/30 hover:text-white/55 transition-colors"
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
 

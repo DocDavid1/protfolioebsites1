@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MessageCircle, Mail, Send, CheckCircle } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 
@@ -57,6 +58,8 @@ export default function ContactPage() {
     service: "",
     message: "",
   });
+  const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
   // Honeypot — hidden from real users, filled by bots
   const [honeypot, setHoneypot] = useState("");
 
@@ -76,6 +79,11 @@ export default function ContactPage() {
           phone: form.phone || undefined,
           service: form.service || undefined,
           message: form.message,
+          privacy_policy_accepted: privacyConsent,
+          consent_to_contact: privacyConsent,
+          marketing_consent: marketingConsent,
+          privacy_policy_version: "1.0",
+          source_page: "/contact",
           _h: honeypot, // honeypot
         }),
       });
@@ -313,6 +321,35 @@ export default function ContactPage() {
                       className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                       placeholder="תאר את העסק שלך, מה אתה צריך ומהן המטרות שלך..."
                     />
+                  </div>
+
+                  {/* Privacy consent */}
+                  <div className="space-y-3 pt-1">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={privacyConsent}
+                        onChange={(e) => setPrivacyConsent(e.target.checked)}
+                        className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/30"
+                      />
+                      <span className="text-xs text-white/50 leading-relaxed">
+                        קראתי ואני מסכים/ה ל
+                        <Link href="/privacy-policy" className="text-blue-400 hover:underline mx-1">מדיניות הפרטיות</Link>
+                        ומסכים/ה לקבלת פניות בחזרה *
+                      </span>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={marketingConsent}
+                        onChange={(e) => setMarketingConsent(e.target.checked)}
+                        className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/30"
+                      />
+                      <span className="text-xs text-white/50 leading-relaxed">
+                        אני מסכים/ה לקבל עדכונים ותוכן שיווקי (לא חובה)
+                      </span>
+                    </label>
                   </div>
 
                   {serverError && (
