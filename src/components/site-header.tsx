@@ -59,26 +59,93 @@ export function SiteHeader() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 shrink-0 group"
+            className="flex items-center gap-3 shrink-0 group"
             aria-label="פייטרס בילדרס — חזור לעמוד הראשי"
           >
-            {/* Logo mark */}
-            <div className="w-8 h-8 rounded-lg bg-blue-500/15 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/25 transition-colors">
+            {/* Logo mark — tactical shield emblem */}
+            <div className="relative w-9 h-10 group-hover:scale-105 transition-transform duration-300">
+              {/* Ambient glow behind shield */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: "radial-gradient(circle, rgba(96,165,250,0.25) 0%, transparent 70%)",
+                  filter: "blur(8px)",
+                  transform: "scale(1.5)",
+                }}
+              />
+              {/* Shield SVG */}
+              <svg
+                viewBox="0 0 38 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="relative w-full h-full"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="shield-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#7c3aed" />
+                  </linearGradient>
+                  <linearGradient id="shield-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(59,130,246,0.08)" />
+                    <stop offset="100%" stopColor="rgba(124,58,237,0.06)" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M19 2L34 9.5V22C34 30 27.5 36 19 38C10.5 36 4 30 4 22V9.5L19 2Z"
+                  fill="url(#shield-fill)"
+                  stroke="url(#shield-stroke)"
+                  strokeWidth="1.5"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {/* FB text overlay centered on shield */}
               <span
-                className="text-blue-400 font-bold text-sm"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 800,
+                  fontSize: "12px",
+                  letterSpacing: "0.15em",
+                  background: "linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+                aria-hidden="true"
               >
                 FB
               </span>
             </div>
-            <span
-              className="font-bold text-white/90 group-hover:text-white transition-colors tracking-wide hidden sm:block"
-              style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}
-              lang="en"
-            >
-              FIGHTERS{" "}
-              <span className="gradient-text-blue">BUILDERS</span>
-            </span>
+
+            {/* Wordmark — stacked layout */}
+            <div className="hidden sm:flex flex-col leading-none" lang="en">
+              <span
+                className="uppercase tracking-[0.2em] text-white/40"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                }}
+              >
+                FIGHTERS
+              </span>
+              <span
+                className="font-bold"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.1rem",
+                  letterSpacing: "0.05em",
+                  background: "linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                BUILDERS
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}
