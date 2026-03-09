@@ -31,6 +31,11 @@ const leadSchema = z.object({
   phone: z.string().max(30).optional(),
   service: z.string().max(100).optional(),
   message: z.string().min(5, "נדרש תיאור של לפחות 5 תווים").max(2000),
+  privacy_policy_accepted: z.boolean().optional(),
+  consent_to_contact: z.boolean().optional(),
+  marketing_consent: z.boolean().optional(),
+  privacy_policy_version: z.string().optional(),
+  source_page: z.string().optional(),
   // Honeypot — bots fill this, humans don't see it
   _h: z.string().max(0, "honeypot").optional(),
 });
@@ -84,6 +89,11 @@ export async function POST(req: NextRequest) {
       message: data.message,
       source: "contact_form",
       status: "new",
+      privacy_policy_accepted: data.privacy_policy_accepted ?? false,
+      consent_to_contact: data.consent_to_contact ?? false,
+      marketing_consent: data.marketing_consent ?? false,
+      privacy_policy_version: data.privacy_policy_version ?? "1.0",
+      source_page: data.source_page ?? null,
     });
 
     if (error) {
