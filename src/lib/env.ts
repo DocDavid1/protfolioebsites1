@@ -5,30 +5,10 @@ import { z } from "zod";
  * These variables are only available on the server.
  */
 const serverEnvSchema = z.object({
-  // Database (Drizzle / legacy)
-  POSTGRES_URL: z.string().url("Invalid database URL").optional(),
-
-  // Authentication (BetterAuth — existing users)
-  BETTER_AUTH_SECRET: z
-    .string()
-    .min(32, "BETTER_AUTH_SECRET must be at least 32 characters")
-    .optional(),
-
-  // Supabase — server-only key (bypasses RLS, admin actions only)
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
-
-  // OAuth
-  GOOGLE_CLIENT_ID: z.string().optional(),
-  GOOGLE_CLIENT_SECRET: z.string().optional(),
-
-  // AI
   OPENROUTER_API_KEY: z.string().optional(),
-  OPENROUTER_MODEL: z.string().default("openai/gpt-5-mini"),
-
-  // Storage
+  OPENROUTER_MODEL: z.string().default("openai/gpt-4o-mini"),
   BLOB_READ_WRITE_TOKEN: z.string().optional(),
-
-  // App
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
@@ -40,9 +20,8 @@ const serverEnvSchema = z.object({
  */
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
-  // Supabase public keys (safe to expose to browser)
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url("Invalid Supabase URL").optional(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url("Invalid Supabase URL"),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1, "Supabase anon key required"),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
@@ -73,6 +52,8 @@ export function getServerEnv(): ServerEnv {
 export function getClientEnv(): ClientEnv {
   const parsed = clientEnvSchema.safeParse({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   });
 
   if (!parsed.success) {
@@ -84,41 +65,4 @@ export function getClientEnv(): ClientEnv {
   }
 
   return parsed.data;
-}
-
-/**
- * Checks if required environment variables are set.
- * Logs warnings for missing optional variables.
- */
-export function checkEnv(): void {
-  const warnings: string[] = [];
-
-  // Check required variables
-  if (!process.env.POSTGRES_URL) {
-    throw new Error("POSTGRES_URL is required");
-  }
-
-  if (!process.env.BETTER_AUTH_SECRET) {
-    throw new Error("BETTER_AUTH_SECRET is required");
-  }
-
-  // Check optional variables and warn
-  if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-    warnings.push("Google OAuth is not configured. Social login will be disabled.");
-  }
-
-  if (!process.env.OPENROUTER_API_KEY) {
-    warnings.push("OPENROUTER_API_KEY is not set. AI chat will not work.");
-  }
-
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    warnings.push("BLOB_READ_WRITE_TOKEN is not set. Using local storage for file uploads.");
-  }
-
-  // Log warnings in development
-  if (process.env.NODE_ENV === "development" && warnings.length > 0) {
-    console.warn("\n⚠️  Environment warnings:");
-    warnings.forEach((w) => console.warn(`   - ${w}`));
-    console.warn("");
-  }
 }

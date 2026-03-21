@@ -1,10 +1,8 @@
-import { headers } from "next/headers";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
-import { streamText, UIMessage, convertToModelMessages } from "ai";
+import { streamText, type UIMessage, convertToModelMessages } from "ai";
 import { z } from "zod";
-import { auth } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
-// Zod schema for message validation
 const messagePartSchema = z.object({
   type: z.string(),
   text: z.string().max(10000, "Message text too long").optional(),
@@ -22,9 +20,12 @@ const chatRequestSchema = z.object({
 });
 
 export async function POST(req: Request) {
-  // Verify user is authenticated
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  // Verify user is authenticated via Supabase
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { "Content-Type": "application/json" },
@@ -56,21 +57,26 @@ export async function POST(req: Request) {
     );
   }
 
-  const { messages }: { messages: UIMessage[] } = parsed.data as { messages: UIMessage[] };
+  const { messages }: { messages: UIMessage[] } = parsed.data as {
+    messages: UIMessage[];
+  };
 
   // Initialize OpenRouter with API key from environment
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: "OpenRouter API key not configured" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "OpenRouter API key not configured" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   const openrouter = createOpenRouter({ apiKey });
 
   const result = streamText({
-    model: openrouter(process.env.OPENROUTER_MODEL || "openai/gpt-5-mini"),
+    model: openrouter(process.env.OPENROUTER_MODEL ?? "openai/gpt-4o-mini"),
     messages: convertToModelMessages(messages),
   });
 

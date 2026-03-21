@@ -2,18 +2,23 @@
 
 import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle, Settings } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, MessageCircle, Settings, LogOut, LogIn } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
+import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import type { User } from "@supabase/supabase-js";
 
 const WHATSAPP_NUMBER = "972501234567";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [navLinks, setNavLinks] = useState(DEFAULT_NAV_LINKS);
+  const [user, setUser] = useState<User | null>(null);
+  const [signingOut, setSigningOut] = useState(false);
 
   // Close mobile menu on Escape key
   useEffect(() => {
@@ -34,9 +39,29 @@ export function SiteHeader() {
         startTransition(() => setNavLinks(parsed));
       }
     } catch (_e) {
-      // ignore parse errors — fall back to defaults
+      // ignore parse errors
     }
   }, []);
+
+  // Track auth state
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(null);
+    setSigningOut(false);
+    router.push("/");
+    router.refresh();
+  };
 
   return (
     <>
@@ -62,9 +87,7 @@ export function SiteHeader() {
             className="flex items-center gap-3 shrink-0 group"
             aria-label="פייטרס בילדרס — חזור לעמוד הראשי"
           >
-            {/* Logo mark — tactical shield emblem */}
             <div className="relative w-9 h-10 group-hover:scale-105 transition-transform duration-300">
-              {/* Ambient glow behind shield */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
@@ -74,7 +97,6 @@ export function SiteHeader() {
                   transform: "scale(1.5)",
                 }}
               />
-              {/* Shield SVG */}
               <svg
                 viewBox="0 0 38 40"
                 fill="none"
@@ -100,7 +122,6 @@ export function SiteHeader() {
                   strokeLinejoin="round"
                 />
               </svg>
-              {/* FB text overlay centered on shield */}
               <span
                 className="absolute inset-0 flex items-center justify-center"
                 style={{
@@ -119,15 +140,10 @@ export function SiteHeader() {
               </span>
             </div>
 
-            {/* Wordmark — stacked layout */}
             <div className="hidden sm:flex flex-col leading-none" lang="en">
               <span
                 className="uppercase tracking-[0.2em] text-white/40"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "10px",
-                  fontWeight: 600,
-                }}
+                style={{ fontFamily: "var(--font-display)", fontSize: "10px", fontWeight: 600 }}
               >
                 FIGHTERS
               </span>
@@ -149,15 +165,10 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <ul
-            className="hidden md:flex items-center gap-1"
-            role="list"
-          >
+          <ul className="hidden md:flex items-center gap-1" role="list">
             {navLinks.map((link) => {
               const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
+                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
                 <li key={link.href}>
                   <Link
@@ -178,7 +189,7 @@ export function SiteHeader() {
           </ul>
 
           {/* Right side */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {/* WhatsApp CTA */}
             <a
               href={WHATSAPP_URL}
@@ -195,16 +206,37 @@ export function SiteHeader() {
               <span className="hidden lg:inline">וואטסאפ</span>
             </a>
 
-            {/* Admin link */}
-            <Link
-              href="/admin"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
-              aria-label="פאנל ניהול"
-              title="Admin"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Admin</span>
-            </Link>
+            {/* Auth / Admin controls */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/admin/projects"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
+                  aria-label="פאנל ניהול"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Admin</span>
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  disabled={signingOut}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white/40 bg-white/[0.04] border border-white/[0.08] hover:text-white/70 hover:border-white/[0.15] transition-all disabled:opacity-50"
+                  aria-label="התנתק"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">יציאה</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/login?redirect=/admin/projects"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
+                aria-label="כניסה לפאנל ניהול"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Admin</span>
+              </Link>
+            )}
 
             {/* Mobile menu toggle */}
             <button
@@ -213,11 +245,7 @@ export function SiteHeader() {
               aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </nav>
@@ -227,9 +255,7 @@ export function SiteHeader() {
           <div className="md:hidden border-t border-white/[0.06] bg-[#05050b] px-4 py-3 space-y-1">
             {navLinks.map((link) => {
               const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
+                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
                 <Link
                   key={link.href}
@@ -247,22 +273,46 @@ export function SiteHeader() {
                 </Link>
               );
             })}
-            <div className="pt-2 pb-1">
+            <div className="pt-2 space-y-2 pb-1">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="התחל בוואטסאפ — נפתח בחלון חדש"
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
-                }}
+                style={{ background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)" }}
                 onClick={() => setMobileOpen(false)}
               >
                 <MessageCircle className="w-4 h-4" />
                 התחל בוואטסאפ
               </a>
+              {user ? (
+                <>
+                  <Link
+                    href="/admin/projects"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/10"
+                  >
+                    <Settings className="w-4 h-4" />
+                    Admin Panel
+                  </Link>
+                  <button
+                    onClick={() => { setMobileOpen(false); void handleSignOut(); }}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white/50 border border-white/[0.08] bg-white/[0.03]"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    יציאה מהמערכת
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/auth/login?redirect=/admin/projects"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/10"
+                >
+                  <LogIn className="w-4 h-4" />
+                  כניסה לאדמין
+                </Link>
+              )}
             </div>
           </div>
         )}

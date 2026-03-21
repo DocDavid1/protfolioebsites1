@@ -1,4 +1,14 @@
-import { toNextJsHandler } from "better-auth/next-js"
-import { auth } from "@/lib/auth"
+import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
-export const { GET, POST } = toNextJsHandler(auth)
+export async function POST() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  return NextResponse.redirect(
+    new URL("/", process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000")
+  );
+}
+
+export async function GET() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}

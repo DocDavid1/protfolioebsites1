@@ -8,11 +8,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// TODO: Implement authentication guard before this panel goes live
-// Use: import { auth } from "@/lib/auth"
-// const session = await auth.api.getSession({ headers: await headers() })
-// if (!session || !session.user) redirect("/login")
-
 type AdminColor = "blue" | "purple" | "amber" | "emerald" | "orange" | "red";
 
 const MODULES: Array<{
@@ -113,8 +108,8 @@ export default function AdminPage() {
               Authentication Required
             </p>
             <p className="text-xs text-white/35">
-              This page will be protected by BetterAuth session validation.
-              Unauthenticated users will be redirected to /login.
+              גישה לדף זה מוגנת על ידי Supabase Auth. משתמשים לא מחוברים
+              מועברים אוטומטית לדף הכניסה.
             </p>
           </div>
         </div>

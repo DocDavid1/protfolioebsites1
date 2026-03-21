@@ -1,48 +1,41 @@
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
 /**
- * Protected routes that require authentication.
- * These are also configured in src/proxy.ts for optimistic redirects.
+ * Returns the current Supabase user, or null if not authenticated.
  */
-export const protectedRoutes = ["/chat", "/dashboard", "/profile"];
+export async function getCurrentUser() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+}
 
 /**
- * Checks if the current request is authenticated.
- * Should be called in Server Components for protected routes.
- *
- * @returns The session object if authenticated
- * @throws Redirects to home page if not authenticated
+ * Requires authentication. Redirects to /admin/login if not authenticated.
  */
 export async function requireAuth() {
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session) {
-    redirect("/");
-  }
-
-  return session;
+  const user = await getCurrentUser();
+  if (!user) redirect("/admin/login");
+  return user;
 }
 
 /**
- * Gets the current session without requiring authentication.
- * Returns null if not authenticated.
- *
- * @returns The session object or null
+ * Requires admin access (is_admin = true in profiles table).
+ * Redirects to /admin/403 if not admin.
  */
-export async function getOptionalSession() {
-  return await auth.api.getSession({ headers: await headers() });
-}
+export async function requireAdmin() {
+  const user = await getCurrentUser();
+  if (!user) redirect("/admin/login");
 
-/**
- * Checks if a given path is a protected route.
- *
- * @param path - The path to check
- * @returns True if the path requires authentication
- */
-export function isProtectedRoute(path: string): boolean {
-  return protectedRoutes.some(
-    (route) => path === route || path.startsWith(`${route}/`)
-  );
+  const supabase = await createClient();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_admin")
+    .eq("id", user.id)
+    .single();
+
+  if (!profile?.is_admin) redirect("/admin/403");
+  return user;
 }
