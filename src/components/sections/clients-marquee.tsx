@@ -26,7 +26,7 @@ export function ClientsMarquee() {
       <div className="divider-glow absolute top-0 left-0 right-0" />
 
       <AnimateIn className="text-center mb-10">
-        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-white/30">
+        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-400 dark:text-white/30">
           עסקים שסמכו עלינו
         </span>
       </AnimateIn>
@@ -59,7 +59,7 @@ export function ClientsMarquee() {
               >
                 {client.charAt(0)}
               </div>
-              <span className="text-sm font-semibold text-white/50 whitespace-nowrap">
+              <span className="text-sm font-semibold text-gray-500 dark:text-white/50 whitespace-nowrap">
                 {client}
               </span>
             </div>

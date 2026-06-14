@@ -54,18 +54,18 @@ function LoginForm() {
             <Shield className="w-6 h-6" style={{ color: isAdminFlow ? "#fbbf24" : "#60a5fa" }} />
           </div>
           <h1
-            className="text-2xl font-bold text-white/90 mb-1"
+            className="text-2xl font-bold text-gray-900 dark:text-white/90 mb-1"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {isAdminFlow ? "ADMIN LOGIN" : "כניסה לחשבון"}
           </h1>
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-gray-400 dark:text-white/30">
             {isAdminFlow ? "גישה מוגבלת לצוות בלבד" : "ברוכים השבים ל-Fighters Builders"}
           </p>
         </div>
 
         <div
-          className="p-6 rounded-xl border bg-[#0d0d18]"
+          className="p-6 rounded-xl border bg-white dark:bg-[#0d0d18]"
           style={{ borderColor: isAdminFlow ? "rgba(245,158,11,0.1)" : "rgba(255,255,255,0.07)" }}
         >
           {resetSuccess && (
@@ -76,7 +76,7 @@ function LoginForm() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                 אימייל
               </label>
               <input
@@ -84,7 +84,7 @@ function LoginForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 outline-none focus:ring-1 transition-all"
+                className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 outline-none focus:ring-1 transition-all"
                 style={
                   isAdminFlow
                     ? ({ "--tw-ring-color": "rgba(245,158,11,0.2)" } as React.CSSProperties)
@@ -104,7 +104,7 @@ function LoginForm() {
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="text-xs font-medium text-white/40 uppercase tracking-wider">
+                <label className="text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider">
                   סיסמה
                 </label>
                 <Link
@@ -121,7 +121,7 @@ function LoginForm() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 pr-10 text-sm text-white/80 placeholder-white/20 outline-none transition-all"
+                  className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 pr-10 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 outline-none transition-all"
                   onFocus={(e) => {
                     e.currentTarget.style.borderColor = isAdminFlow ? "rgba(245,158,11,0.4)" : "rgba(59,130,246,0.4)";
                   }}
@@ -135,7 +135,7 @@ function LoginForm() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-white/30 hover:text-gray-600 dark:hover:text-white/60 transition-colors"
                   aria-label={showPassword ? "הסתר סיסמה" : "הצג סיסמה"}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -167,15 +167,15 @@ function LoginForm() {
         {/* Footer links */}
         <div className="mt-6 space-y-3 text-center">
           {!isAdminFlow && (
-            <p className="text-xs text-white/30">
+            <p className="text-xs text-gray-400 dark:text-white/30">
               אין לך חשבון?{" "}
               <Link href="/auth/register" className="text-blue-400 hover:text-blue-300 transition-colors">
                 הרשמה
               </Link>
             </p>
           )}
-          <p className="text-xs text-white/20">
-            <Link href="/" className="hover:text-white/40 transition-colors">
+          <p className="text-xs text-gray-300 dark:text-white/20">
+            <Link href="/" className="hover:text-gray-400 dark:hover:text-white/40 transition-colors">
               ← חזור לאתר
             </Link>
           </p>

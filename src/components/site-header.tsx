@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, Settings } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const WHATSAPP_NUMBER = "972501234567";
@@ -58,7 +59,7 @@ export function SiteHeader() {
         className={cn(
           "sticky top-0 z-40 transition-all duration-300",
           scrolled
-            ? "bg-[#05050b]/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            ? "bg-white/95 dark:bg-[#05050b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
             : "bg-transparent border-b border-transparent"
         )}
         role="banner"
@@ -129,7 +130,7 @@ export function SiteHeader() {
 
             <div className="hidden sm:flex flex-col leading-none" lang="en">
               <span
-                className="uppercase tracking-[0.2em] text-white/40"
+                className="uppercase tracking-[0.2em] text-gray-400 dark:text-white/40"
                 style={{ fontFamily: "var(--font-display)", fontSize: "10px", fontWeight: 600 }}
               >
                 FIGHTERS
@@ -163,8 +164,8 @@ export function SiteHeader() {
                     className={cn(
                       "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "text-white bg-white/[0.07]"
-                        : "text-white/45 hover:text-white/80 hover:bg-white/[0.04]"
+                        ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-white/[0.07]"
+                        : "text-gray-500 dark:text-white/45 hover:text-gray-900 dark:hover:text-white/80 hover:bg-gray-100 dark:hover:bg-gray-100 dark:hover:bg-white/[0.04]"
                     )}
                   >
                     {link.label}
@@ -176,6 +177,8 @@ export function SiteHeader() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <ThemeToggle />
+
             <a
               href={WHATSAPP_URL}
               target="_blank"
@@ -198,7 +201,7 @@ export function SiteHeader() {
             </Link>
 
             <button
-              className="md:hidden p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/[0.05] transition-all"
+              className="md:hidden p-2 rounded-xl text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-100/80 dark:hover:bg-white/[0.05] transition-all"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
               aria-expanded={mobileOpen}
@@ -210,7 +213,7 @@ export function SiteHeader() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-white/[0.06] bg-[#05050b]/98 backdrop-blur-xl px-4 py-4 space-y-1">
+          <div className="md:hidden border-t border-gray-200 dark:border-white/[0.06] bg-white/98 dark:bg-[#05050b]/98 backdrop-blur-xl px-4 py-4 space-y-1">
             {navLinks.map((link) => {
               const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
@@ -222,8 +225,8 @@ export function SiteHeader() {
                   className={cn(
                     "block px-4 py-3 rounded-xl text-sm font-medium transition-all",
                     isActive
-                      ? "text-white bg-white/[0.06]"
-                      : "text-white/50 hover:text-white hover:bg-white/[0.04]"
+                      ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-white/[0.06]"
+                      : "text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-100 dark:hover:bg-white/[0.04]"
                   )}
                 >
                   {link.label}

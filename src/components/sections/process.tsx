@@ -93,13 +93,13 @@ export function ProcessSection() {
             איך אנחנו עובדים
           </span>
           <h2
-            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             מהתדריך{" "}
             <span className="gradient-text-violet">לשדה הקרב</span>
           </h2>
-          <p className="text-white/40 max-w-lg mx-auto">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg mx-auto">
             תהליך מוכח ושיטתי שמביא תוצאות. כל צעד מתוכנן בדיוק צבאי.
           </p>
         </AnimateIn>
@@ -127,12 +127,12 @@ export function ProcessSection() {
 
                   {/* Content */}
                   <h3
-                    className="text-lg font-bold text-white/90 mb-3"
+                    className="text-lg font-bold text-gray-900 dark:text-white/90 mb-3"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
                     {step.description}
                   </p>
 

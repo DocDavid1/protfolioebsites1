@@ -25,18 +25,18 @@ export default function TermsOfUsePage() {
               משפטי
             </span>
             <h1
-              className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+              className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="gradient-text-blue">תנאי שימוש</span>
             </h1>
-            <p className="text-xs text-white/35">
+            <p className="text-xs text-gray-400 dark:text-white/35">
               עדכון אחרון: {LAST_UPDATED}
             </p>
           </div>
 
           {/* Content */}
-          <div className="space-y-10 text-sm text-white/55 leading-relaxed">
+          <div className="space-y-10 text-sm text-gray-600 dark:text-white/55 leading-relaxed">
             {/* 1 */}
             <section>
               <h2
@@ -46,12 +46,12 @@ export default function TermsOfUsePage() {
                 1. קבלת התנאים
               </h2>
               <p>
-                ברוכים הבאים לאתר של <span className="text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span> (להלן: &ldquo;החברה&rdquo;). גלישה באתר או שימוש בשירותים המוצעים דרכו מהווים הסכמה לתנאי שימוש אלו. אם אינך מסכים לתנאים, נא הימנע משימוש באתר.
+                ברוכים הבאים לאתר של <span className="text-gray-700 dark:text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span> (להלן: &ldquo;החברה&rdquo;). גלישה באתר או שימוש בשירותים המוצעים דרכו מהווים הסכמה לתנאי שימוש אלו. אם אינך מסכים לתנאים, נא הימנע משימוש באתר.
               </p>
               <p className="mt-3">
-                ח.פ / ע.מ: <span className="text-white/70 font-semibold">[ח.פ / ע.מ] [PLACEHOLDER]</span>
+                ח.פ / ע.מ: <span className="text-gray-700 dark:text-white/70 font-semibold">[ח.פ / ע.מ] [PLACEHOLDER]</span>
                 <br />
-                כתובת: <span className="text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span>
+                כתובת: <span className="text-gray-700 dark:text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span>
               </p>
             </section>
 
@@ -77,7 +77,7 @@ export default function TermsOfUsePage() {
                 3. שימוש מורשה ואסור
               </h2>
               <p className="mb-3">
-                הנך רשאי לגלוש באתר לצרכים חוקיים בלבד. השימושים הבאים <strong className="text-white/70">אסורים</strong>:
+                הנך רשאי לגלוש באתר לצרכים חוקיים בלבד. השימושים הבאים <strong className="text-gray-700 dark:text-white/70">אסורים</strong>:
               </p>
               <ul className="space-y-2 list-none">
                 <li className="flex items-start gap-2">
@@ -204,14 +204,14 @@ export default function TermsOfUsePage() {
               </h2>
               <p>לכל שאלה בנוגע לתנאי שימוש אלו, ניתן לפנות אלינו:</p>
               <div className="mt-3 surface-card rounded-xl p-4 space-y-1">
-                <p><strong className="text-white/70">חברה:</strong> <span className="text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span></p>
-                <p><strong className="text-white/70">אימייל:</strong> <span lang="en">hello@fightersbuilders.com</span></p>
-                <p><strong className="text-white/70">כתובת:</strong> <span className="text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">חברה:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">אימייל:</strong> <span lang="en">hello@fightersbuilders.com</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">כתובת:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span></p>
               </div>
             </section>
 
             {/* Links */}
-            <div className="border-t border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
+            <div className="border-t border-gray-200 dark:border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
               <Link href="/" className="text-blue-400 hover:underline">
                 חזרה לדף הבית
               </Link>

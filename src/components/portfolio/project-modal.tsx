@@ -81,7 +81,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
         <button
           ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-500 dark:text-white/50 hover:text-white transition-all"
           aria-label="סגור חלון"
         >
           <X className="w-4 h-4" />
@@ -117,25 +117,25 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                   </span>
                 )}
               </div>
-              <h2 className="text-2xl font-bold text-white mb-1">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                 {project.title}
               </h2>
-              <p className="text-sm text-white/40">
+              <p className="text-sm text-gray-400 dark:text-white/40">
                 לקוח:{" "}
-                <span className="text-white/60">{project.client}</span>
+                <span className="text-gray-600 dark:text-white/60">{project.client}</span>
               </p>
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-white/70 leading-relaxed mb-6">
+          <p className="text-gray-700 dark:text-white/70 leading-relaxed mb-6">
             {project.full_description || project.description}
           </p>
 
           {/* Results */}
           {project.results && project.results.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-3">
                 תוצאות
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -154,7 +154,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
 
           {/* Tags */}
           <div className="mb-6">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3 flex items-center gap-1.5">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-3 flex items-center gap-1.5">
               <Tag className="w-3 h-3" />
               טכנולוגיות
             </h3>
@@ -162,7 +162,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs text-white/50 bg-white/[0.04] border border-white/[0.08] px-3 py-1 rounded-full"
+                  className="text-xs text-gray-500 dark:text-white/50 bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] px-3 py-1 rounded-full"
                 >
                   {tag}
                 </span>

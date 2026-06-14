@@ -107,13 +107,13 @@ export function ServicesSection() {
             מה אנחנו בונים
           </span>
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/90 mb-5"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white/90 mb-5"
             style={{ fontFamily: "var(--font-display)" }}
           >
             כל מה שהעסק שלך צריך{" "}
             <span className="gradient-text-blue">כדי לצמוח</span>
           </h2>
-          <p className="text-white/40 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-400 dark:text-white/40 max-w-2xl mx-auto text-lg">
             מאתרים ועד אוטומציות מלאות — אנחנו בונים את התשתית הדיגיטלית שמייצרת לקוחות, לידים והכנסות.
           </p>
         </AnimateIn>
@@ -162,14 +162,14 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
           {/* Title */}
           <h3
-            className="text-lg font-bold text-white/90 mb-3"
+            className="text-lg font-bold text-gray-900 dark:text-white/90 mb-3"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {service.title}
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-white/55 leading-relaxed mb-5">
+          <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed mb-5">
             {service.description}
           </p>
 

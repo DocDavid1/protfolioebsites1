@@ -79,7 +79,7 @@ export function CampaignKPIs({
         return (
           <div
             key={label}
-            className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]"
+            className="p-5 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]"
           >
             <div
               className={`w-9 h-9 rounded-lg ${c.bg} border ${c.border} flex items-center justify-center mb-3`}
@@ -87,12 +87,12 @@ export function CampaignKPIs({
               <Icon className={`w-4 h-4 ${c.icon}`} />
             </div>
             <p
-              className="text-2xl font-bold text-white/90"
+              className="text-2xl font-bold text-gray-900 dark:text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {value}
             </p>
-            <p className="text-xs text-white/35 mt-1">{label}</p>
+            <p className="text-xs text-gray-400 dark:text-white/35 mt-1">{label}</p>
           </div>
         );
       })}

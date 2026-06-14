@@ -50,13 +50,13 @@ export function StatsCounter() {
             תוצאות מוכחות
           </span>
           <h2
-            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             המספרים{" "}
             <span className="gradient-text-brand">מדברים</span>
           </h2>
-          <p className="text-white/40 max-w-lg mx-auto">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg mx-auto">
             לא מבטיחים — מוכיחים. הנה מה שהלקוחות שלנו חוו.
           </p>
         </AnimateIn>
@@ -78,10 +78,10 @@ export function StatsCounter() {
                 >
                   <Counter end={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-sm md:text-base font-bold text-white/80 mb-1">
+                <p className="text-sm md:text-base font-bold text-gray-800 dark:text-white/80 mb-1">
                   {stat.label}
                 </p>
-                <p className="text-xs text-white/35">
+                <p className="text-xs text-gray-400 dark:text-white/35">
                   {stat.description}
                 </p>
               </div>

@@ -54,7 +54,7 @@ export default function RegisterPage() {
             </svg>
           </div>
           <h2 className="text-xl font-bold text-white mb-2">בדוק את האימייל שלך</h2>
-          <p className="text-white/50 text-sm">{`שלחנו קישור אימות ל‑${email}`}</p>
+          <p className="text-gray-500 dark:text-white/50 text-sm">{`שלחנו קישור אימות ל‑${email}`}</p>
           <Link href="/login" className="mt-6 inline-block text-sm text-blue-400 hover:text-blue-300">
             חזרה להתחברות
           </Link>
@@ -70,27 +70,27 @@ export default function RegisterPage() {
           <h1 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
             FIGHTERS BUILDERS
           </h1>
-          <p className="text-white/40 text-sm mt-1">יצירת חשבון חדש</p>
+          <p className="text-gray-400 dark:text-white/40 text-sm mt-1">יצירת חשבון חדש</p>
         </div>
 
-        <div className="rounded-xl border border-white/[0.08] bg-[#0d0d18] p-6">
+        <div className="rounded-xl border border-gray-200 dark:border-white/[0.08] bg-white dark:bg-[#0d0d18] p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-xs font-medium text-white/60 mb-1.5">אימייל</label>
+              <label htmlFor="email" className="block text-xs font-medium text-gray-600 dark:text-white/60 mb-1.5">אימייל</label>
               <input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
+                className="w-full rounded-lg bg-gray-100/80 dark:bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
                 placeholder="you@example.com" dir="ltr" />
             </div>
             <div>
-              <label htmlFor="password" className="block text-xs font-medium text-white/60 mb-1.5">סיסמה</label>
+              <label htmlFor="password" className="block text-xs font-medium text-gray-600 dark:text-white/60 mb-1.5">סיסמה</label>
               <input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
+                className="w-full rounded-lg bg-gray-100/80 dark:bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
                 placeholder="לפחות 6 תווים" dir="ltr" />
             </div>
             <div>
-              <label htmlFor="confirm" className="block text-xs font-medium text-white/60 mb-1.5">אימות סיסמה</label>
+              <label htmlFor="confirm" className="block text-xs font-medium text-gray-600 dark:text-white/60 mb-1.5">אימות סיסמה</label>
               <input id="confirm" type="password" required value={confirm} onChange={(e) => setConfirm(e.target.value)}
-                className="w-full rounded-lg bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
+                className="w-full rounded-lg bg-gray-100/80 dark:bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
                 placeholder="••••••••" dir="ltr" />
             </div>
 
@@ -104,7 +104,7 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-white/35 mt-4">
+          <p className="text-center text-xs text-gray-400 dark:text-white/35 mt-4">
             יש לך כבר חשבון?{" "}
             <Link href="/login" className="text-blue-400 hover:text-blue-300 transition-colors">כניסה</Link>
           </p>

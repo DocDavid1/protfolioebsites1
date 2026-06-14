@@ -39,8 +39,8 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <h2 className="text-xl font-bold text-white mb-2">בדוק את האימייל שלך</h2>
-          <p className="text-white/50 text-sm mb-1">{`שלחנו קישור לאיפוס סיסמה ל‑${email}`}</p>
-          <p className="text-white/30 text-xs">הקישור בתוקף למשך 60 דקות</p>
+          <p className="text-gray-500 dark:text-white/50 text-sm mb-1">{`שלחנו קישור לאיפוס סיסמה ל‑${email}`}</p>
+          <p className="text-gray-400 dark:text-white/30 text-xs">הקישור בתוקף למשך 60 דקות</p>
           <Link href="/login" className="mt-6 inline-block text-sm text-blue-400 hover:text-blue-300">
             חזרה להתחברות
           </Link>
@@ -56,16 +56,16 @@ export default function ForgotPasswordPage() {
           <h1 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
             FIGHTERS BUILDERS
           </h1>
-          <p className="text-white/40 text-sm mt-1">איפוס סיסמה</p>
+          <p className="text-gray-400 dark:text-white/40 text-sm mt-1">איפוס סיסמה</p>
         </div>
 
-        <div className="rounded-xl border border-white/[0.08] bg-[#0d0d18] p-6">
-          <p className="text-sm text-white/50 mb-4 text-center">הכנס את כתובת האימייל שלך ונשלח לך קישור לאיפוס</p>
+        <div className="rounded-xl border border-gray-200 dark:border-white/[0.08] bg-white dark:bg-[#0d0d18] p-6">
+          <p className="text-sm text-gray-500 dark:text-white/50 mb-4 text-center">הכנס את כתובת האימייל שלך ונשלח לך קישור לאיפוס</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-xs font-medium text-white/60 mb-1.5">אימייל</label>
+              <label htmlFor="email" className="block text-xs font-medium text-gray-600 dark:text-white/60 mb-1.5">אימייל</label>
               <input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
+                className="w-full rounded-lg bg-gray-100/80 dark:bg-white/[0.05] border border-white/[0.1] px-3.5 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/60 transition-all"
                 placeholder="you@example.com" dir="ltr" />
             </div>
 
@@ -79,7 +79,7 @@ export default function ForgotPasswordPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-white/35 mt-4">
+          <p className="text-center text-xs text-gray-400 dark:text-white/35 mt-4">
             <Link href="/login" className="text-blue-400 hover:text-blue-300 transition-colors">חזרה להתחברות</Link>
           </p>
         </div>

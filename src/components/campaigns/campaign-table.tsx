@@ -21,7 +21,7 @@ interface Props {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: "text-white/40 bg-white/[0.05] border-white/[0.08]",
+  draft: "text-gray-400 dark:text-white/40 bg-gray-100/80 dark:bg-white/[0.05] border-gray-200 dark:border-white/[0.08]",
   active: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   paused: "text-amber-400 bg-amber-500/10 border-amber-500/20",
   completed: "text-blue-400 bg-blue-500/10 border-blue-500/20",
@@ -58,8 +58,8 @@ const TABLE_HEADERS = [
 export function CampaignTable({ campaigns }: Props) {
   if (campaigns.length === 0) {
     return (
-      <div className="p-10 rounded-xl border border-white/[0.07] bg-[#0d0d18] text-center">
-        <p className="text-white/25 text-sm">אין קמפיינים עדיין.</p>
+      <div className="p-10 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18] text-center">
+        <p className="text-gray-300 dark:text-white/25 text-sm">אין קמפיינים עדיין.</p>
         <Link
           href="/admin/campaigns/new"
           className="text-blue-400 text-xs mt-2 inline-block hover:text-blue-300"
@@ -71,20 +71,20 @@ export function CampaignTable({ campaigns }: Props) {
   }
 
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#0d0d18] overflow-hidden">
-      <div className="px-5 py-4 border-b border-white/[0.05]">
-        <p className="text-xs font-semibold uppercase tracking-widest text-white/40">
+    <div className="rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18] overflow-hidden">
+      <div className="px-5 py-4 border-b border-gray-200/60 dark:border-white/[0.05]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40">
           כל הקמפיינים
         </p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/[0.05]">
+            <tr className="border-b border-gray-200/60 dark:border-white/[0.05]">
               {TABLE_HEADERS.map((h) => (
                 <th
                   key={h || "actions"}
-                  className="px-4 py-3 text-right text-xs font-medium text-white/25 whitespace-nowrap"
+                  className="px-4 py-3 text-right text-xs font-medium text-gray-300 dark:text-white/25 whitespace-nowrap"
                 >
                   {h}
                 </th>
@@ -96,14 +96,14 @@ export function CampaignTable({ campaigns }: Props) {
               <tr
                 key={c.id}
                 className={cn(
-                  "border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors",
+                  "border-b border-white/[0.03] hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors",
                   i === campaigns.length - 1 && "border-b-0"
                 )}
               >
-                <td className="px-4 py-3 font-medium text-white/80 whitespace-nowrap">
+                <td className="px-4 py-3 font-medium text-gray-800 dark:text-white/80 whitespace-nowrap">
                   {c.name}
                 </td>
-                <td className="px-4 py-3 text-white/40 text-xs">
+                <td className="px-4 py-3 text-gray-400 dark:text-white/40 text-xs">
                   {TYPE_LABELS[c.type] ?? c.type}
                 </td>
                 <td className="px-4 py-3">
@@ -116,10 +116,10 @@ export function CampaignTable({ campaigns }: Props) {
                     {STATUS_LABELS[c.status] ?? c.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-white/60 text-right">
+                <td className="px-4 py-3 text-gray-600 dark:text-white/60 text-right">
                   {Number(c.total_sent ?? 0).toLocaleString()}
                 </td>
-                <td className="px-4 py-3 text-white/60 text-right">
+                <td className="px-4 py-3 text-gray-600 dark:text-white/60 text-right">
                   {Number(c.total_replied ?? 0).toLocaleString()}
                 </td>
                 <td className="px-4 py-3 text-emerald-400 font-medium text-right">
@@ -136,7 +136,7 @@ export function CampaignTable({ campaigns }: Props) {
                 <td className="px-4 py-3">
                   <Link
                     href={`/admin/campaigns/${c.id}`}
-                    className="flex items-center gap-1 text-xs text-white/25 hover:text-blue-400 transition-colors"
+                    className="flex items-center gap-1 text-xs text-gray-300 dark:text-white/25 hover:text-blue-400 transition-colors"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                   </Link>

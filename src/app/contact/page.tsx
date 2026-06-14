@@ -120,14 +120,14 @@ export default function ContactPage() {
             צור קשר
           </span>
           <h1
-            className="text-5xl md:text-6xl font-bold text-white/90 mb-4"
+            className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             התחל את
             <br />
             <span className="gradient-text-blue">המשימה שלך</span>
           </h1>
-          <p className="text-white/40 max-w-lg text-lg leading-relaxed">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg text-lg leading-relaxed">
             ספר לנו על העסק שלך. אנחנו נגיד לך בדיוק איך לבנות אותו נכון.
           </p>
         </AnimateIn>
@@ -146,7 +146,7 @@ export default function ContactPage() {
                     className={`group block p-5 rounded-xl border transition-all duration-300 ${
                       option.highlight
                         ? "border-emerald-500/30 bg-emerald-500/[0.04] hover:bg-emerald-500/[0.08]"
-                        : "border-white/7 bg-[#0d0d18] hover:border-blue-500/25"
+                        : "border-gray-200 dark:border-white/7 bg-white dark:bg-[#0d0d18] hover:border-blue-500/25"
                     }`}
                   >
                     <div className="flex items-center gap-3 mb-2">
@@ -160,7 +160,7 @@ export default function ContactPage() {
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-white/80">
+                        <p className="text-sm font-semibold text-gray-800 dark:text-white/80">
                           {option.title}
                         </p>
                         {option.highlight && (
@@ -170,7 +170,7 @@ export default function ContactPage() {
                         )}
                       </div>
                     </div>
-                    <p className="text-xs text-white/35 mb-3">
+                    <p className="text-xs text-gray-400 dark:text-white/35 mb-3">
                       {option.description}
                     </p>
                     <span
@@ -189,16 +189,16 @@ export default function ContactPage() {
 
             {/* Response time */}
             <AnimateIn delay={200} from="right">
-              <div className="p-4 rounded-xl border border-white/[0.05] bg-white/[0.02]">
+              <div className="p-4 rounded-xl border border-gray-200/60 dark:border-white/[0.05] bg-gray-50 dark:bg-white/[0.02]">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-medium text-white/50">
+                  <span className="text-xs font-medium text-gray-500 dark:text-white/50">
                     זמין כעת
                   </span>
                 </div>
-                <p className="text-xs text-white/25">
+                <p className="text-xs text-gray-300 dark:text-white/25">
                   זמן מענה ממוצע:{" "}
-                  <span className="text-white/50">פחות מ-2 שעות</span>
+                  <span className="text-gray-500 dark:text-white/50">פחות מ-2 שעות</span>
                 </p>
               </div>
             </AnimateIn>
@@ -206,22 +206,22 @@ export default function ContactPage() {
 
           {/* Contact form */}
           <AnimateIn delay={100} from="left" className="lg:col-span-3">
-            <div className="surface-card rounded-xl border border-white/7 p-6 md:p-8">
+            <div className="surface-card rounded-xl border border-gray-200 dark:border-white/7 p-6 md:p-8">
               {submitted ? (
                 <div className="text-center py-12" aria-live="polite">
                   <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-7 h-7 text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white/90 mb-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white/90 mb-2">
                     התדריך התקבל
                   </h3>
-                  <p className="text-sm text-white/45">
+                  <p className="text-sm text-gray-500 dark:text-white/45">
                     נסקור את פרטי הפרויקט שלך ונצור קשר תוך 2 שעות דרך וואטסאפ או אימייל.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                  <p className="text-xs text-white/50 mb-4">שדות המסומנים ב-* הם שדות חובה</p>
+                  <p className="text-xs text-gray-500 dark:text-white/50 mb-4">שדות המסומנים ב-* הם שדות חובה</p>
                   {/* Honeypot — visually hidden, ARIA hidden, no label */}
                   <div
                     aria-hidden="true"
@@ -240,7 +240,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                         שמך *
                       </label>
                       <input
@@ -249,19 +249,19 @@ export default function ContactPage() {
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         aria-invalid={serverError ? true : undefined}
-                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                         placeholder="ישראל ישראלי"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                         שם העסק
                       </label>
                       <input
                         type="text"
                         value={form.business}
                         onChange={(e) => setForm({ ...form, business: e.target.value })}
-                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                         placeholder='חברה בע"מ'
                       />
                     </div>
@@ -269,27 +269,27 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                         אימייל
                       </label>
                       <input
                         type="email"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                         placeholder="you@example.com"
                         dir="ltr"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                         טלפון / WhatsApp
                       </label>
                       <input
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                         placeholder="050-000-0000"
                         dir="ltr"
                       />
@@ -297,19 +297,19 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                       שירות נדרש
                     </label>
                     <select
                       value={form.service}
                       onChange={(e) => setForm({ ...form, service: e.target.value })}
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/60 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all appearance-none"
+                      className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-600 dark:text-white/60 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all appearance-none"
                     >
-                      <option value="" className="bg-[#0d0d18]">
+                      <option value="" className="bg-white dark:bg-[#0d0d18]">
                         בחר שירות...
                       </option>
                       {SERVICES_OPTIONS.map((s) => (
-                        <option key={s} value={s} className="bg-[#0d0d18]">
+                        <option key={s} value={s} className="bg-white dark:bg-[#0d0d18]">
                           {s}
                         </option>
                       ))}
@@ -317,7 +317,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                       תדריך הפרויקט *
                     </label>
                     <textarea
@@ -326,7 +326,7 @@ export default function ContactPage() {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       aria-invalid={serverError ? true : undefined}
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
+                      className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                       placeholder="תאר את העסק שלך, מה אתה צריך ומהן המטרות שלך..."
                     />
                   </div>
@@ -341,7 +341,7 @@ export default function ContactPage() {
                         onChange={(e) => setPrivacyConsent(e.target.checked)}
                         className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/30"
                       />
-                      <span className="text-xs text-white/50 leading-relaxed">
+                      <span className="text-xs text-gray-500 dark:text-white/50 leading-relaxed">
                         קראתי ואני מסכים/ה ל
                         <Link href="/privacy-policy" className="text-blue-400 hover:underline mx-1">מדיניות הפרטיות</Link>
                         ומסכים/ה לקבלת פניות בחזרה *
@@ -354,7 +354,7 @@ export default function ContactPage() {
                         onChange={(e) => setMarketingConsent(e.target.checked)}
                         className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/30"
                       />
-                      <span className="text-xs text-white/50 leading-relaxed">
+                      <span className="text-xs text-gray-500 dark:text-white/50 leading-relaxed">
                         אני מסכים/ה לקבל עדכונים ותוכן שיווקי (לא חובה)
                       </span>
                     </label>

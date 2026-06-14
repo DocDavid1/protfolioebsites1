@@ -29,7 +29,7 @@ export default function NotFound() {
         {/* Headline */}
         <AnimateIn from="bottom" delay={150}>
           <h1
-            className="mt-4 text-3xl font-bold text-white/90 sm:text-4xl"
+            className="mt-4 text-3xl font-bold text-gray-900 dark:text-white/90 sm:text-4xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הדף לא נמצא
@@ -38,7 +38,7 @@ export default function NotFound() {
 
         {/* Subtitle */}
         <AnimateIn from="bottom" delay={300}>
-          <p className="mt-4 text-lg leading-relaxed text-white/45">
+          <p className="mt-4 text-lg leading-relaxed text-gray-500 dark:text-white/45">
             נראה שהגעת למקום לא קיים. אבל אל דאגה — יש לנו הרבה מקומות טובים
             יותר.
           </p>

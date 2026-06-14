@@ -68,12 +68,12 @@ export default function AccessibilityPage() {
             נגישות
           </span>
           <h1
-            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="gradient-text-blue">הצהרת נגישות</span>
           </h1>
-          <p className="text-xs text-white/35">
+          <p className="text-xs text-gray-400 dark:text-white/35">
             עדכון אחרון: מרץ 2026
           </p>
         </AnimateIn>
@@ -87,12 +87,12 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-3"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-3"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   מבוא
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   <span lang="en">FIGHTERS BUILDERS</span> מחויבת לנגישות הדיגיטלית
                   ולהבטיח שאתר זה נגיש לכלל האנשים, כולל אנשים עם מוגבלויות.
                   אנו מאמינים שלכל אדם מגיעה גישה שוויונית למידע ולשירותים דיגיטליים,
@@ -112,18 +112,18 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-3"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-3"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   תקן הנגישות
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   האתר עומד ברמת{" "}
-                  <span className="text-white/80 font-semibold" lang="en">
+                  <span className="text-gray-800 dark:text-white/80 font-semibold" lang="en">
                     WCAG 2.0 AA
                   </span>{" "}
                   (תקן{" "}
-                  <span className="text-white/80 font-semibold" lang="en">
+                  <span className="text-gray-800 dark:text-white/80 font-semibold" lang="en">
                     IS 5568
                   </span>
                   ) — התקן הישראלי לנגישות אתרי אינטרנט. אנו פועלים באופן שוטף לשפר את הנגישות באתר ולעמוד בתקנים המחמירים ביותר, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ&quot;ח-1998, ותקנות הנגישות הרלוונטיות.
@@ -142,12 +142,12 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-2"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   פעולות שננקטו
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   להלן רשימת הפעולות שננקטו להנגשת האתר:
                 </p>
               </div>
@@ -157,7 +157,7 @@ export default function AccessibilityPage() {
               {ACTIONS_TAKEN.map((action, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-3 text-sm text-white/55 leading-relaxed"
+                  className="flex items-start gap-3 text-sm text-gray-600 dark:text-white/55 leading-relaxed"
                 >
                   <span className="text-emerald-400/70 font-mono text-xs mt-0.5 shrink-0">
                     {i + 1}.
@@ -178,12 +178,12 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-2"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   רכיבי הנגישות שבאתר
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   באתר מותקן סרגל נגישות נגיש (בצד שמאל למטה) המאפשר שליטה בהיבטים הבאים:
                 </p>
               </div>
@@ -193,7 +193,7 @@ export default function AccessibilityPage() {
               {TOOLBAR_FEATURES.map((feature) => (
                 <div
                   key={feature}
-                  className="flex items-center gap-2 text-sm text-white/60"
+                  className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0" aria-hidden="true" />
                   {feature}
@@ -201,7 +201,7 @@ export default function AccessibilityPage() {
               ))}
             </div>
 
-            <p className="text-xs text-white/35 mt-4">
+            <p className="text-xs text-gray-400 dark:text-white/35 mt-4">
               ההגדרות נשמרות בדפדפן ונטענות אוטומטית בביקור הבא.
             </p>
           </div>
@@ -216,12 +216,12 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-2"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   מגבלות ידועות
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   למרות מאמצינו, ייתכן שחלקים מסוימים באתר אינם נגישים
                   באופן מלא. אנו עובדים לתקן את הבעיות הבאות:
                 </p>
@@ -232,7 +232,7 @@ export default function AccessibilityPage() {
               {KNOWN_LIMITATIONS.map((limitation, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-3 text-sm text-white/55 leading-relaxed"
+                  className="flex items-start gap-3 text-sm text-gray-600 dark:text-white/55 leading-relaxed"
                 >
                   <span className="text-amber-400/70 font-mono text-xs mt-0.5 shrink-0">
                     {i + 1}.
@@ -253,12 +253,12 @@ export default function AccessibilityPage() {
               </div>
               <div>
                 <h2
-                  className="text-xl font-bold text-white/90 mb-2"
+                  className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   דפדפנים וטכנולוגיות מסייעות שנבדקו
                 </h2>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                   האתר נבדק ונמצא תואם בדפדפנים ובטכנולוגיות המסייעות הבאות.
                 </p>
               </div>
@@ -266,14 +266,14 @@ export default function AccessibilityPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-3">
                   דפדפנים
                 </h3>
                 <ul className="space-y-2">
                   {TESTED_BROWSERS.map((browser) => (
                     <li
                       key={browser}
-                      className="flex items-center gap-2 text-sm text-white/60"
+                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" aria-hidden="true" />
                       <span lang="en">{browser}</span>
@@ -282,7 +282,7 @@ export default function AccessibilityPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3 flex items-center gap-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-3 flex items-center gap-1.5">
                   <Headphones className="w-3 h-3" aria-hidden="true" />
                   טכנולוגיות מסייעות
                 </h3>
@@ -290,7 +290,7 @@ export default function AccessibilityPage() {
                   {ASSISTIVE_TECH.map((tech) => (
                     <li
                       key={tech}
-                      className="flex items-center gap-2 text-sm text-white/60"
+                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0" aria-hidden="true" />
                       <span lang="en">{tech}</span>
@@ -306,12 +306,12 @@ export default function AccessibilityPage() {
         <AnimateIn delay={400} className="mb-10">
           <div className="surface-card rounded-xl p-6 md:p-8">
             <h2
-              className="text-xl font-bold text-white/90 mb-3"
+              className="text-xl font-bold text-gray-900 dark:text-white/90 mb-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
               פניות ודיווח על בעיות
             </h2>
-            <p className="text-sm text-white/55 leading-relaxed mb-6">
+            <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed mb-6">
               נתקלתם בבעיית נגישות? נשמח לשמוע ממכם כדי שנוכל לשפר. ניתן
               לפנות אלינו בכל אחד מהערוצים הבאים:
             </p>
@@ -328,25 +328,25 @@ export default function AccessibilityPage() {
                   <MessageCircle className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors">
+                  <p className="text-sm font-semibold text-gray-800 dark:text-white/80 group-hover:text-white transition-colors">
                     וואטסאפ
                   </p>
-                  <p className="text-xs text-white/35">פנייה בנושא נגישות</p>
+                  <p className="text-xs text-gray-400 dark:text-white/35">פנייה בנושא נגישות</p>
                 </div>
               </a>
 
               <a
                 href="mailto:hello@fightersbuilders.com?subject=פנייה בנושא נגישות"
-                className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.07] bg-[#0d0d18] hover:border-blue-500/25 transition-colors group"
+                className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18] hover:border-blue-500/25 transition-colors group"
               >
                 <div className="w-9 h-9 rounded-lg bg-blue-500/15 flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4 text-blue-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors" lang="en">
+                  <p className="text-sm font-semibold text-gray-800 dark:text-white/80 group-hover:text-white transition-colors" lang="en">
                     hello@fightersbuilders.com
                   </p>
-                  <p className="text-xs text-white/35">אימייל</p>
+                  <p className="text-xs text-gray-400 dark:text-white/35">אימייל</p>
                 </div>
               </a>
             </div>
@@ -357,18 +357,18 @@ export default function AccessibilityPage() {
         <AnimateIn delay={450} className="mb-10">
           <div className="surface-card rounded-xl p-6 md:p-8">
             <h2
-              className="text-xl font-bold text-white/90 mb-3"
+              className="text-xl font-bold text-gray-900 dark:text-white/90 mb-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
               רכז הנגישות
             </h2>
-            <p className="text-sm text-white/55 leading-relaxed mb-4">
+            <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed mb-4">
               לפניות בנושא נגישות ניתן ליצור קשר עם רכז הנגישות שלנו:
             </p>
-            <div className="space-y-1 text-sm text-white/55">
-              <p><strong className="text-white/70">שם:</strong> <span className="text-white/70 font-semibold">[שם רכז נגישות] [PLACEHOLDER]</span></p>
-              <p><strong className="text-white/70">אימייל:</strong> <span lang="en">hello@fightersbuilders.com</span></p>
-              <p><strong className="text-white/70">טלפון / וואטסאפ:</strong> <span dir="ltr">+972-50-123-4567</span></p>
+            <div className="space-y-1 text-sm text-gray-600 dark:text-white/55">
+              <p><strong className="text-gray-700 dark:text-white/70">שם:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[שם רכז נגישות] [PLACEHOLDER]</span></p>
+              <p><strong className="text-gray-700 dark:text-white/70">אימייל:</strong> <span lang="en">hello@fightersbuilders.com</span></p>
+              <p><strong className="text-gray-700 dark:text-white/70">טלפון / וואטסאפ:</strong> <span dir="ltr">+972-50-123-4567</span></p>
             </div>
           </div>
         </AnimateIn>
@@ -376,7 +376,7 @@ export default function AccessibilityPage() {
         {/* 9. Statement date */}
         <AnimateIn delay={500}>
           <div className="text-center space-y-3">
-            <p className="text-xs text-white/30">
+            <p className="text-xs text-gray-400 dark:text-white/30">
               הצהרה זו עודכנה לאחרונה: מרץ 2026
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-xs">

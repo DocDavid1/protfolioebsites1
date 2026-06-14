@@ -25,13 +25,13 @@ export function WhatsAppFab() {
         <div className="glass-strong rounded-xl px-4 py-3 max-w-[200px] animate-fade-up relative">
           <button
             onClick={() => setTooltipDismissed(true)}
-            className="absolute top-1 left-1 p-1 rounded-full text-white/30 hover:text-white/60 transition-colors"
+            className="absolute top-1 left-1 p-1 rounded-full text-gray-400 dark:text-white/30 hover:text-gray-600 dark:hover:text-white/60 transition-colors"
             aria-label="סגור"
           >
             <X className="w-3 h-3" />
           </button>
-          <p className="text-xs text-white/60 leading-relaxed">
-            <span className="text-white/80 font-semibold">צריכים עזרה?</span>
+          <p className="text-xs text-gray-600 dark:text-white/60 leading-relaxed">
+            <span className="text-gray-800 dark:text-white/80 font-semibold">צריכים עזרה?</span>
             <br />
             שלחו לנו הודעה בוואטסאפ ונחזור תוך דקות
           </p>

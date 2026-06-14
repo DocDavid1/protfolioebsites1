@@ -37,7 +37,7 @@ export function BrowserWindow({
 
         {/* URL bar */}
         <div className="flex-1 mx-2">
-          <div className="flex items-center gap-1.5 bg-[#0d0d18] rounded px-2 py-1 border border-white/5">
+          <div className="flex items-center gap-1.5 bg-white dark:bg-[#0d0d18] rounded px-2 py-1 border border-white/5">
             {/* Lock icon */}
             <svg
               className="w-2.5 h-2.5 text-emerald-400 shrink-0"
@@ -46,7 +46,7 @@ export function BrowserWindow({
             >
               <path d="M12 1C8.676 1 6 3.676 6 7v2H4v14h16V9h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v2H8V7c0-2.276 1.724-4 4-4zm0 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" />
             </svg>
-            <span className="text-[10px] text-white/40 font-mono truncate">
+            <span className="text-[10px] text-gray-400 dark:text-white/40 font-mono truncate">
               {displayUrl}
             </span>
           </div>
@@ -54,7 +54,7 @@ export function BrowserWindow({
 
         {/* Reload icon */}
         <svg
-          className="w-3 h-3 text-white/25 shrink-0"
+          className="w-3 h-3 text-gray-300 dark:text-white/25 shrink-0"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ export function BrowserWindow({
       </div>
 
       {/* Site preview */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-[#0d0d18]">
+      <div className="relative aspect-[16/10] overflow-hidden bg-white dark:bg-[#0d0d18]">
         <Image
           src={imageUrl}
           alt={`Preview of ${title}`}
@@ -82,8 +82,8 @@ export function BrowserWindow({
           }}
         />
         {/* Overlay for no image fallback */}
-        <div className="absolute inset-0 flex items-center justify-center bg-[#0d0d18] opacity-0 transition-opacity">
-          <span className="text-white/20 text-sm font-mono">preview</span>
+        <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-[#0d0d18] opacity-0 transition-opacity">
+          <span className="text-gray-300 dark:text-white/20 text-sm font-mono">preview</span>
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@ export function BrowserWindowPlaceholder({
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840] opacity-90" />
         </div>
         <div className="flex-1 mx-2">
-          <div className="flex items-center gap-1.5 bg-[#0d0d18] rounded px-2 py-1 border border-white/5">
+          <div className="flex items-center gap-1.5 bg-white dark:bg-[#0d0d18] rounded px-2 py-1 border border-white/5">
             <svg
               className="w-2.5 h-2.5 text-emerald-400 shrink-0"
               fill="currentColor"
@@ -128,13 +128,13 @@ export function BrowserWindowPlaceholder({
             >
               <path d="M12 1C8.676 1 6 3.676 6 7v2H4v14h16V9h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v2H8V7c0-2.276 1.724-4 4-4zm0 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" />
             </svg>
-            <span className="text-[10px] text-white/40 font-mono truncate">
+            <span className="text-[10px] text-gray-400 dark:text-white/40 font-mono truncate">
               {displayUrl}
             </span>
           </div>
         </div>
       </div>
-      <div className="relative aspect-[16/10] bg-[#0d0d18] flex items-center justify-center">
+      <div className="relative aspect-[16/10] bg-white dark:bg-[#0d0d18] flex items-center justify-center">
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -174,8 +174,8 @@ export function BrowserWindowPlaceholder({
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </div>
-              <p className="text-sm font-bold text-white/60 leading-tight">{title}</p>
-              <p className="text-[10px] text-white/25 font-mono uppercase tracking-widest">live project</p>
+              <p className="text-sm font-bold text-gray-600 dark:text-white/60 leading-tight">{title}</p>
+              <p className="text-[10px] text-gray-300 dark:text-white/25 font-mono uppercase tracking-widest">live project</p>
             </div>
           </>
         )}

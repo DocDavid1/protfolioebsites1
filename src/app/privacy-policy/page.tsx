@@ -25,18 +25,18 @@ export default function PrivacyPolicyPage() {
               משפטי
             </span>
             <h1
-              className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+              className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="gradient-text-blue">מדיניות פרטיות</span>
             </h1>
-            <p className="text-xs text-white/35">
+            <p className="text-xs text-gray-400 dark:text-white/35">
               עדכון אחרון: {LAST_UPDATED}
             </p>
           </div>
 
           {/* Content */}
-          <div className="space-y-10 text-sm text-white/55 leading-relaxed">
+          <div className="space-y-10 text-sm text-gray-600 dark:text-white/55 leading-relaxed">
             {/* 1 */}
             <section>
               <h2
@@ -46,12 +46,12 @@ export default function PrivacyPolicyPage() {
                 1. מהי מדיניות הפרטיות הזו
               </h2>
               <p>
-                מדיניות פרטיות זו מסבירה כיצד <span className="text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span> (להלן: &ldquo;החברה&rdquo;, &ldquo;אנחנו&rdquo;) אוספת, משתמשת, מאחסנת ומגנה על מידע אישי של משתמשי אתר זה. מדיניות זו חלה על כל השירותים שאנו מציעים דרך אתר <span lang="en">FIGHTERS BUILDERS</span>.
+                מדיניות פרטיות זו מסבירה כיצד <span className="text-gray-700 dark:text-white/70 font-semibold">[שם העסק המלא] [PLACEHOLDER]</span> (להלן: &ldquo;החברה&rdquo;, &ldquo;אנחנו&rdquo;) אוספת, משתמשת, מאחסנת ומגנה על מידע אישי של משתמשי אתר זה. מדיניות זו חלה על כל השירותים שאנו מציעים דרך אתר <span lang="en">FIGHTERS BUILDERS</span>.
               </p>
               <p className="mt-3">
-                ח.פ / ע.מ: <span className="text-white/70 font-semibold">[ח.פ / ע.מ] [PLACEHOLDER]</span>
+                ח.פ / ע.מ: <span className="text-gray-700 dark:text-white/70 font-semibold">[ח.פ / ע.מ] [PLACEHOLDER]</span>
                 <br />
-                כתובת: <span className="text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span>
+                כתובת: <span className="text-gray-700 dark:text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span>
               </p>
             </section>
 
@@ -67,19 +67,19 @@ export default function PrivacyPolicyPage() {
               <ul className="space-y-2 list-none">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">פרטי זיהוי:</strong> שם מלא, כתובת אימייל, מספר טלפון, שם עסק.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">פרטי זיהוי:</strong> שם מלא, כתובת אימייל, מספר טלפון, שם עסק.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">תוכן הודעות:</strong> הודעות שנשלחות דרך טופס יצירת הקשר.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">תוכן הודעות:</strong> הודעות שנשלחות דרך טופס יצירת הקשר.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">מידע טכני:</strong> כתובת IP, סוג דפדפן, מערכת הפעלה, דפי הפניה.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">מידע טכני:</strong> כתובת IP, סוג דפדפן, מערכת הפעלה, דפי הפניה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">עוגיות:</strong> עוגיות חיוניות, ניתוח ופונקציונליות (ראו <Link href="/cookies" className="text-blue-400 hover:underline">מדיניות עוגיות</Link>).</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">עוגיות:</strong> עוגיות חיוניות, ניתוח ופונקציונליות (ראו <Link href="/cookies" className="text-blue-400 hover:underline">מדיניות עוגיות</Link>).</span>
                 </li>
               </ul>
             </section>
@@ -161,16 +161,16 @@ export default function PrivacyPolicyPage() {
                 7. שיתוף עם צדדים שלישיים
               </h2>
               <p className="mb-3">
-                אנו <strong className="text-white/70">לא מוכרים</strong> מידע אישי לצדדים שלישיים. ייתכן שנשתף מידע עם ספקי שירות הכרחיים לתפעול האתר:
+                אנו <strong className="text-gray-700 dark:text-white/70">לא מוכרים</strong> מידע אישי לצדדים שלישיים. ייתכן שנשתף מידע עם ספקי שירות הכרחיים לתפעול האתר:
               </p>
               <ul className="space-y-2 list-none">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Vercel</strong> — אירוח אתר ושרתי אפליקציה.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Vercel</strong> — אירוח אתר ושרתי אפליקציה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Supabase</strong> — בסיס נתונים ואחסון מאובטח.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Supabase</strong> — בסיס נתונים ואחסון מאובטח.</span>
                 </li>
               </ul>
               <p className="mt-3">
@@ -207,19 +207,19 @@ export default function PrivacyPolicyPage() {
               <ul className="space-y-2 list-none">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">זכות עיון:</strong> לעיין במידע שנאסף אודותיך.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">זכות עיון:</strong> לעיין במידע שנאסף אודותיך.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">זכות תיקון:</strong> לבקש תיקון מידע שגוי או לא מדויק.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">זכות תיקון:</strong> לבקש תיקון מידע שגוי או לא מדויק.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">זכות מחיקה:</strong> לבקש מחיקת המידע האישי שלך ממערכותינו.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">זכות מחיקה:</strong> לבקש מחיקת המידע האישי שלך ממערכותינו.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70">זכות התנגדות:</strong> להתנגד לעיבוד מידע לצורכי שיווק ישיר.</span>
+                  <span><strong className="text-gray-700 dark:text-white/70">זכות התנגדות:</strong> להתנגד לעיבוד מידע לצורכי שיווק ישיר.</span>
                 </li>
               </ul>
               <p className="mt-3">
@@ -239,9 +239,9 @@ export default function PrivacyPolicyPage() {
                 לכל שאלה או בקשה הנוגעת לפרטיות, ניתן לפנות אל:
               </p>
               <div className="mt-3 surface-card rounded-xl p-4 space-y-1">
-                <p><strong className="text-white/70">ממונה פרטיות:</strong> <span className="text-white/70 font-semibold">[שם ממונה פרטיות] [PLACEHOLDER]</span></p>
-                <p><strong className="text-white/70">אימייל:</strong> <span className="text-white/70 font-semibold">[אימייל פרטיות: privacy@...] [PLACEHOLDER]</span></p>
-                <p><strong className="text-white/70">כתובת:</strong> <span className="text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">ממונה פרטיות:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[שם ממונה פרטיות] [PLACEHOLDER]</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">אימייל:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[אימייל פרטיות: privacy@...] [PLACEHOLDER]</span></p>
+                <p><strong className="text-gray-700 dark:text-white/70">כתובת:</strong> <span className="text-gray-700 dark:text-white/70 font-semibold">[כתובת] [PLACEHOLDER]</span></p>
               </div>
             </section>
 
@@ -272,7 +272,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             {/* Links */}
-            <div className="border-t border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
+            <div className="border-t border-gray-200 dark:border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
               <Link href="/" className="text-blue-400 hover:underline">
                 חזרה לדף הבית
               </Link>

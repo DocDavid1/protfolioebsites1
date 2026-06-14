@@ -59,8 +59,8 @@ export function CampaignCharts({ campaigns }: Props) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {/* Leads per campaign */}
-      <div className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
-        <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+      <div className="p-5 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-4">
           לידים לפי קמפיין
         </p>
         <ResponsiveContainer width="100%" height={220}>
@@ -101,7 +101,7 @@ export function CampaignCharts({ campaigns }: Props) {
           {Object.entries(TYPE_COLORS).map(([type, color]) => (
             <span
               key={type}
-              className="flex items-center gap-1.5 text-xs text-white/30"
+              className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-white/30"
             >
               <span
                 className="w-2 h-2 rounded-full inline-block"
@@ -114,8 +114,8 @@ export function CampaignCharts({ campaigns }: Props) {
       </div>
 
       {/* Reply rate */}
-      <div className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
-        <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+      <div className="p-5 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40 mb-4">
           אחוז תגובה לפי קמפיין
         </p>
         <ResponsiveContainer width="100%" height={220}>

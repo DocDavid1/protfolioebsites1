@@ -267,15 +267,15 @@ export function AccessibilityToolbar() {
           id="a11y-panel"
           role="dialog"
           aria-label="סרגל נגישות"
-          className="fixed bottom-[8.5rem] left-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-xl bg-[#0d0d18] border border-white/10 shadow-2xl"
+          className="fixed bottom-[8.5rem] left-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-xl bg-white dark:bg-[#0d0d18] border border-white/10 shadow-2xl"
           style={{
             animation: "fade-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) both",
           }}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-[#0d0d18] border-b border-white/[0.07] px-4 py-3 flex items-center justify-between z-10">
+          <div className="sticky top-0 bg-white dark:bg-[#0d0d18] border-b border-gray-200 dark:border-white/[0.07] px-4 py-3 flex items-center justify-between z-10">
             <h2
-              className="text-sm font-bold text-white/90"
+              className="text-sm font-bold text-gray-900 dark:text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
               סרגל נגישות
@@ -285,7 +285,7 @@ export function AccessibilityToolbar() {
                 setOpen(false);
                 triggerRef.current?.focus();
               }}
-              className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/[0.06] text-white/50 hover:text-white/80 transition-colors"
+              className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-white/[0.06] text-gray-500 dark:text-white/50 hover:text-gray-800 dark:hover:text-white/80 transition-colors"
               aria-label="סגור סרגל נגישות"
             >
               <X className="w-4 h-4" aria-hidden="true" />
@@ -314,7 +314,7 @@ export function AccessibilityToolbar() {
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                     active
                       ? "bg-blue-500/15 text-blue-400 border border-blue-500/25"
-                      : "text-white/60 hover:bg-white/[0.04] hover:text-white/80 border border-transparent"
+                      : "text-gray-600 dark:text-white/60 hover:bg-gray-100 dark:hover:bg-white/[0.04] hover:text-gray-800 dark:hover:text-white/80 border border-transparent"
                   }`}
                   aria-pressed={active}
                 >
@@ -328,7 +328,7 @@ export function AccessibilityToolbar() {
             })}
 
             {/* Reset button */}
-            <div className="border-t border-white/[0.06] pt-2 mt-2">
+            <div className="border-t border-gray-200 dark:border-white/[0.06] pt-2 mt-2">
               <button
                 onClick={handleReset}
                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-amber-400/80 hover:bg-amber-500/[0.06] hover:text-amber-400 transition-colors border border-transparent"
@@ -340,10 +340,10 @@ export function AccessibilityToolbar() {
           </div>
 
           {/* Footer link */}
-          <div className="border-t border-white/[0.06] px-4 py-2.5">
+          <div className="border-t border-gray-200 dark:border-white/[0.06] px-4 py-2.5">
             <a
               href="/accessibility"
-              className="text-xs text-white/35 hover:text-blue-400 transition-colors"
+              className="text-xs text-gray-400 dark:text-white/35 hover:text-blue-400 transition-colors"
             >
               הצהרת נגישות מלאה
             </a>

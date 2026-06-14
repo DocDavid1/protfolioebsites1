@@ -77,13 +77,13 @@ export default async function PortfolioPage({
             העבודות שלנו
           </span>
           <h1
-            className="text-5xl md:text-6xl font-bold text-white/90 mb-4"
+            className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             יומן{" "}
             <span className="gradient-text-blue">המבצעים</span>
           </h1>
-          <p className="text-white/40 max-w-xl mx-auto text-lg">
+          <p className="text-gray-400 dark:text-white/40 max-w-xl mx-auto text-lg">
             כל פרויקט הוא משימה שהושלמה. הנה הרשומה.
           </p>
         </AnimateIn>
@@ -98,7 +98,7 @@ export default async function PortfolioPage({
           ].map((stat) => (
             <div
               key={stat.label}
-              className="text-center p-5 rounded-xl border border-white/7 bg-[#0d0d18] hover-lift"
+              className="text-center p-5 rounded-xl border border-gray-200 dark:border-white/7 bg-white dark:bg-[#0d0d18] hover-lift"
             >
               <p
                 className="text-3xl font-bold gradient-text-blue mb-1"
@@ -106,7 +106,7 @@ export default async function PortfolioPage({
               >
                 {stat.value}
               </p>
-              <p className="text-xs text-white/35 uppercase tracking-wide">
+              <p className="text-xs text-gray-400 dark:text-white/35 uppercase tracking-wide">
                 {stat.label}
               </p>
             </div>
@@ -121,7 +121,7 @@ export default async function PortfolioPage({
               "px-4 py-2 rounded-lg text-xs font-medium border transition-all",
               !activeCategory
                 ? "text-white bg-blue-500/15 border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.15)]"
-                : "text-white/40 border-white/[0.07] hover:border-white/[0.12] hover:text-white/60"
+                : "text-gray-400 dark:text-white/40 border-gray-200 dark:border-white/[0.07] hover:border-gray-300 dark:hover:border-white/[0.12] hover:text-gray-600 dark:hover:text-white/60"
             )}
           >
             הכל
@@ -134,7 +134,7 @@ export default async function PortfolioPage({
                 "px-4 py-2 rounded-lg text-xs font-medium border transition-all",
                 activeCategory === cat
                   ? "text-white bg-blue-500/15 border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.15)]"
-                  : "text-white/40 border-white/[0.07] hover:border-white/[0.12] hover:text-white/60"
+                  : "text-gray-400 dark:text-white/40 border-gray-200 dark:border-white/[0.07] hover:border-gray-300 dark:hover:border-white/[0.12] hover:text-gray-600 dark:hover:text-white/60"
               )}
             >
               {CATEGORY_LABELS[cat]}
@@ -153,15 +153,15 @@ export default async function PortfolioPage({
 
         {allProjects.length === 0 && (
           <AnimateIn className="text-center py-16">
-            <p className="text-white/30 text-sm">אין פרויקטים בקטגוריה זו עדיין.</p>
+            <p className="text-gray-400 dark:text-white/30 text-sm">אין פרויקטים בקטגוריה זו עדיין.</p>
           </AnimateIn>
         )}
 
         {/* Screenshot notice */}
         <AnimateIn delay={400} className="mt-12 text-center">
-          <p className="text-xs text-white/20 max-w-md mx-auto">
+          <p className="text-xs text-gray-300 dark:text-white/20 max-w-md mx-auto">
             צילומי מסך של תצוגה מקדימה נוצרים דרך לכידה אוטומטית בדפדפן.{" "}
-            <span className="text-white/30">תצוגות חיות מתעדכנות מדי שבוע.</span>
+            <span className="text-gray-400 dark:text-white/30">תצוגות חיות מתעדכנות מדי שבוע.</span>
           </p>
         </AnimateIn>
       </div>

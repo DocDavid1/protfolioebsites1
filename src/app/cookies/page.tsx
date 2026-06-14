@@ -45,18 +45,18 @@ export default function CookiesPage() {
               משפטי
             </span>
             <h1
-              className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+              className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="gradient-text-blue">מדיניות עוגיות</span>
             </h1>
-            <p className="text-xs text-white/35">
+            <p className="text-xs text-gray-400 dark:text-white/35">
               עדכון אחרון: {LAST_UPDATED}
             </p>
           </div>
 
           {/* Content */}
-          <div className="space-y-10 text-sm text-white/55 leading-relaxed">
+          <div className="space-y-10 text-sm text-gray-600 dark:text-white/55 leading-relaxed">
             {/* 1 */}
             <section>
               <h2
@@ -82,7 +82,7 @@ export default function CookiesPage() {
                 {COOKIE_TYPES.map((type) => (
                   <div key={type.name} className="surface-card rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-base font-semibold text-white/80">
+                      <h3 className="text-base font-semibold text-gray-800 dark:text-white/80">
                         {type.name}
                       </h3>
                       {type.required && (
@@ -92,8 +92,8 @@ export default function CookiesPage() {
                       )}
                     </div>
                     <p className="mb-2">{type.description}</p>
-                    <p className="text-xs text-white/35">
-                      <strong className="text-white/45">דוגמאות:</strong> {type.examples}
+                    <p className="text-xs text-gray-400 dark:text-white/35">
+                      <strong className="text-gray-500 dark:text-white/45">דוגמאות:</strong> {type.examples}
                     </p>
                   </div>
                 ))}
@@ -127,19 +127,19 @@ export default function CookiesPage() {
               <ul className="space-y-2 list-none">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Chrome:</strong> הגדרות &rarr; פרטיות ואבטחה &rarr; עוגיות</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Chrome:</strong> הגדרות &rarr; פרטיות ואבטחה &rarr; עוגיות</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Firefox:</strong> הגדרות &rarr; פרטיות ואבטחה &rarr; עוגיות ונתוני אתרים</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Firefox:</strong> הגדרות &rarr; פרטיות ואבטחה &rarr; עוגיות ונתוני אתרים</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Safari:</strong> העדפות &rarr; פרטיות &rarr; ניהול נתוני אתרים</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Safari:</strong> העדפות &rarr; פרטיות &rarr; ניהול נתוני אתרים</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-400 mt-0.5 shrink-0">•</span>
-                  <span><strong className="text-white/70" lang="en">Edge:</strong> הגדרות &rarr; עוגיות והרשאות אתרים</span>
+                  <span><strong className="text-gray-700 dark:text-white/70" lang="en">Edge:</strong> הגדרות &rarr; עוגיות והרשאות אתרים</span>
                 </li>
               </ul>
             </section>
@@ -175,7 +175,7 @@ export default function CookiesPage() {
             </section>
 
             {/* Links */}
-            <div className="border-t border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
+            <div className="border-t border-gray-200 dark:border-white/[0.06] pt-6 flex flex-wrap gap-4 text-xs">
               <Link href="/" className="text-blue-400 hover:underline">
                 חזרה לדף הבית
               </Link>

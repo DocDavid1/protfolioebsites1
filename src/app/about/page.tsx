@@ -107,14 +107,14 @@ export default function AboutPage() {
               אודות
             </span>
             <h1
-              className="text-5xl md:text-7xl font-bold text-white/90 mb-6 leading-tight"
+              className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white/90 mb-6 leading-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
               שלושה לוחמים.
               <br />
               <span className="gradient-text-amber">משימה אחת.</span>
             </h1>
-            <p className="text-xl text-white/45 max-w-2xl leading-relaxed">
+            <p className="text-xl text-gray-500 dark:text-white/45 max-w-2xl leading-relaxed">
               החלפנו את המדים במקלדות — אבל שמרנו על החשיבה שהובילה אותנו דרך מצבים בלתי אפשריים.
             </p>
           </AnimateIn>
@@ -131,17 +131,17 @@ export default function AboutPage() {
               return (
                 <AnimateIn key={value.title} delay={i * 100}>
                   <div
-                    className={`p-6 rounded-xl surface-card border border-white/7 ${value.borderHover} transition-all`}
+                    className={`p-6 rounded-xl surface-card border border-gray-200 dark:border-white/7 ${value.borderHover} transition-all`}
                   >
                     <div
                       className={`w-10 h-10 rounded-lg ${value.iconBg} flex items-center justify-center mb-4`}
                     >
                       <Icon className={`w-5 h-5 ${value.iconColor}`} />
                     </div>
-                    <h3 className="text-lg font-semibold text-white/90 mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white/90 mb-2">
                       {value.title}
                     </h3>
-                    <p className="text-sm text-white/45 leading-relaxed">
+                    <p className="text-sm text-gray-500 dark:text-white/45 leading-relaxed">
                       {value.description}
                     </p>
                   </div>
@@ -157,7 +157,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
           <AnimateIn className="mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-white/90"
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
               יומן{" "}
@@ -167,7 +167,7 @@ export default function AboutPage() {
 
           <div className="relative">
             {/* Vertical line — right side for RTL */}
-            <div className="absolute right-3 top-0 bottom-0 w-px bg-white/[0.06]" />
+            <div className="absolute right-3 top-0 bottom-0 w-px bg-gray-100 dark:bg-white/[0.06]" />
 
             <div className="space-y-8">
               {TIMELINE.map((item, i) => (
@@ -206,10 +206,10 @@ export default function AboutPage() {
                       >
                         {item.year}
                       </span>
-                      <p className="text-sm font-semibold text-white/80 mt-0.5">
+                      <p className="text-sm font-semibold text-gray-800 dark:text-white/80 mt-0.5">
                         {item.event}
                       </p>
-                      <p className="text-xs text-white/35 mt-0.5">
+                      <p className="text-xs text-gray-400 dark:text-white/35 mt-0.5">
                         {item.detail}
                       </p>
                     </div>
@@ -228,14 +228,14 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
             <AnimateIn from="right">
               <h2
-                className="text-3xl md:text-4xl font-bold text-white/90 mb-6"
+                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white/90 mb-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 למה לעבוד
                 <br />
                 <span className="gradient-text-amber">איתנו</span>
               </h2>
-              <p className="text-white/45 mb-6 leading-relaxed">
+              <p className="text-gray-500 dark:text-white/45 mb-6 leading-relaxed">
                 אנחנו לא רק מספקים פרויקטים — אנחנו פורסים פתרונות. כל התקשרות מטופלת כמשימה עם מטרה ברורה, תוצאות מדידות ואחריות מלאה.
               </p>
               <a
@@ -262,7 +262,7 @@ export default function AboutPage() {
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-sm text-white/55">{item}</span>
+                    <span className="text-sm text-gray-600 dark:text-white/55">{item}</span>
                   </div>
                 ))}
               </div>

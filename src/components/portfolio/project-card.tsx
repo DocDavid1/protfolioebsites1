@@ -56,8 +56,8 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
                 onClick={(e) => e.stopPropagation()}
                 className="flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/15 hover:bg-black/80 transition-colors"
               >
-                <ExternalLink className="w-4 h-4 text-white/90" />
-                <span className="text-xs font-semibold text-white/90 tracking-wide">בקר באתר</span>
+                <ExternalLink className="w-4 h-4 text-gray-900 dark:text-white/90" />
+                <span className="text-xs font-semibold text-gray-900 dark:text-white/90 tracking-wide">בקר באתר</span>
               </a>
             </div>
           </div>
@@ -74,16 +74,16 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
               >
                 {CATEGORY_LABELS[project.category]}
               </span>
-              <span className="text-[10px] text-white/45 font-mono font-bold">
+              <span className="text-[10px] text-gray-500 dark:text-white/45 font-mono font-bold">
                 {new Date(project.created_at).getFullYear()}
               </span>
             </div>
 
-            <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-blue-100 transition-colors line-clamp-1 tracking-tight">
+            <h3 className="font-bold text-gray-900 dark:text-white text-base mb-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-100 transition-colors line-clamp-1 tracking-tight">
               {project.title}
             </h3>
 
-            <p className="text-sm text-white/60 line-clamp-2 mb-4 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-white/60 line-clamp-2 mb-4 leading-relaxed">
               {project.description}
             </p>
 
@@ -92,13 +92,13 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-bold text-white/55 bg-white/[0.06] border border-white/[0.1] px-2 py-0.5 rounded-full"
+                  className="text-[10px] font-bold text-gray-600 dark:text-white/55 bg-gray-100 dark:bg-white/[0.06] border border-white/[0.1] px-2 py-0.5 rounded-full"
                 >
                   {tag}
                 </span>
               ))}
               {project.tags.length > 3 && (
-                <span className="text-[10px] text-white/35 font-bold px-1">
+                <span className="text-[10px] text-gray-400 dark:text-white/35 font-bold px-1">
                   +{project.tags.length - 3}
                 </span>
               )}
@@ -114,7 +114,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="p-1.5 rounded-md text-white/35 hover:text-white/80 hover:bg-white/[0.08] transition-all"
+                className="p-1.5 rounded-md text-gray-400 dark:text-white/35 hover:text-gray-800 dark:hover:text-white/80 hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all"
                 aria-label={`${project.title} — נפתח בחלון חדש`}
               >
                 <ExternalLink className="w-3.5 h-3.5" />

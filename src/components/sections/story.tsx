@@ -116,13 +116,13 @@ export function StorySection() {
             הסיפור שלנו
           </span>
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/90 mb-6 leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white/90 mb-6 leading-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             משדה הקרב{" "}
             <span className="gradient-text-amber">לשדה העסקים</span>
           </h2>
-          <p className="text-lg text-white/55 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-white/55 max-w-3xl mx-auto leading-relaxed">
             אנחנו לא עוד סוכנות דיגיטלית. אנחנו שלושה לוחמי קרב ישראלים שהחליטו להשתמש בכל מה שלמדנו בצבא —
             כדי לעזור לעסקים קטנים לצמוח. בלי יומרות. בלי מחירים מנופחים. רק עבודה קשה ותוצאות.
           </p>
@@ -165,13 +165,13 @@ export function StorySection() {
                         {item.period}
                       </span>
                       <h3
-                        className="text-xl font-bold text-white/90 mb-2"
+                        className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
                         <Icon className="w-4 h-4 inline-block ml-2 -mt-0.5" style={{ color: item.color }} />
                         {item.title}
                       </h3>
-                      <p className="text-sm text-white/55 leading-relaxed">
+                      <p className="text-sm text-gray-600 dark:text-white/55 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -185,12 +185,12 @@ export function StorySection() {
         {/* ── Part 3: The Team ── */}
         <AnimateIn className="text-center mb-12">
           <h3
-            className="text-3xl md:text-4xl font-bold text-white/90 mb-3"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white/90 mb-3"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הצוות
           </h3>
-          <p className="text-white/40 max-w-lg mx-auto">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg mx-auto">
             שלושה אנשים, שלוש נקודות חוזק, משימה אחת.
           </p>
         </AnimateIn>
@@ -223,12 +223,12 @@ export function StorySection() {
                       {founder.name}
                     </span>
                   </div>
-                  <p className="text-xs text-white/40 mb-4">
+                  <p className="text-xs text-gray-400 dark:text-white/40 mb-4">
                     {founder.role}
                   </p>
 
                   {/* Bio */}
-                  <p className="text-sm text-white/60 leading-relaxed">
+                  <p className="text-sm text-gray-600 dark:text-white/60 leading-relaxed">
                     {founder.bio}
                   </p>
                 </div>
@@ -240,13 +240,13 @@ export function StorySection() {
         {/* ── Part 4: Values ── */}
         <AnimateIn className="text-center mb-12">
           <h3
-            className="text-3xl md:text-4xl font-bold text-white/90 mb-3"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white/90 mb-3"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הערכים שלנו?{" "}
             <span className="gradient-text-blue">מהשטח.</span>
           </h3>
-          <p className="text-white/40 max-w-lg mx-auto">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg mx-auto">
             ערכים שלא למדנו מספרים. למדנו אותם בתנאים הקשים ביותר.
           </p>
         </AnimateIn>
@@ -269,7 +269,7 @@ export function StorySection() {
                   <h4 className="text-base font-bold text-white/85 mb-2">
                     {value.title}
                   </h4>
-                  <p className="text-xs text-white/45 leading-relaxed">
+                  <p className="text-xs text-gray-500 dark:text-white/45 leading-relaxed">
                     {value.description}
                   </p>
                 </div>
@@ -290,12 +290,12 @@ export function StorySection() {
             />
             <div className="relative">
               <h3
-                className="text-2xl md:text-3xl font-bold text-white/90 mb-4"
+                className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white/90 mb-4"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 למה מחירים נגישים?
               </h3>
-              <p className="text-base text-white/60 leading-relaxed mb-6 max-w-xl mx-auto">
+              <p className="text-base text-gray-600 dark:text-white/60 leading-relaxed mb-6 max-w-xl mx-auto">
                 כי אנחנו יודעים מה זה להתחיל מאפס. אנחנו בונים ניסיון, פורטפוליו ומוניטין —
                 ובתמורה אתם מקבלים שירות ברמה הגבוהה ביותר במחיר שעסק קטן יכול להרשות לעצמו.
                 <span className="block mt-3 text-white/75 font-medium">
@@ -319,8 +319,8 @@ export function StorySection() {
         <AnimateIn delay={200} className="mt-8 text-center">
           <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full glass-light">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <p className="text-xs text-white/40">
-              <span className="text-white/60 font-medium">משרתי מילואים פעילים.</span>{" "}
+            <p className="text-xs text-gray-400 dark:text-white/40">
+              <span className="text-gray-600 dark:text-white/60 font-medium">משרתי מילואים פעילים.</span>{" "}
               כשהמדינה קוראת — אנחנו שם. כשהעסק שלך צריך אותנו — אנחנו שם.
             </p>
           </div>

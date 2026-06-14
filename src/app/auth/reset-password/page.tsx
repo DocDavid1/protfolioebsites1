@@ -82,12 +82,12 @@ function ResetPasswordForm() {
             <AlertCircle className="w-8 h-8 text-red-400" />
           </div>
           <h2
-            className="text-xl font-bold text-white/90 mb-2"
+            className="text-xl font-bold text-gray-900 dark:text-white/90 mb-2"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הקישור פג תוקף
           </h2>
-          <p className="text-sm text-white/40 mb-6">
+          <p className="text-sm text-gray-400 dark:text-white/40 mb-6">
             הקישור לאיפוס הסיסמה אינו תקף או שפג תוקפו.
           </p>
           <button
@@ -115,12 +115,12 @@ function ResetPasswordForm() {
             <CheckCircle2 className="w-8 h-8 text-green-400" />
           </div>
           <h2
-            className="text-2xl font-bold text-white/90 mb-2"
+            className="text-2xl font-bold text-gray-900 dark:text-white/90 mb-2"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הסיסמה עודכנה!
           </h2>
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-gray-400 dark:text-white/40">
             מעביר אותך לדף הכניסה...
           </p>
         </div>
@@ -139,20 +139,20 @@ function ResetPasswordForm() {
             <Lock className="w-6 h-6 text-blue-400" />
           </div>
           <h1
-            className="text-2xl font-bold text-white/90 mb-1"
+            className="text-2xl font-bold text-gray-900 dark:text-white/90 mb-1"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הגדרת סיסמה חדשה
           </h1>
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-gray-400 dark:text-white/30">
             בחר סיסמה חזקה לחשבון שלך
           </p>
         </div>
 
-        <div className="p-6 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
+        <div className="p-6 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                 סיסמה חדשה
               </label>
               <div className="relative">
@@ -161,7 +161,7 @@ function ResetPasswordForm() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 pr-10 text-sm text-white/80 placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                  className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 pr-10 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                   placeholder="לפחות 6 תווים"
                   dir="ltr"
                   autoComplete="new-password"
@@ -169,7 +169,7 @@ function ResetPasswordForm() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-white/30 hover:text-gray-600 dark:hover:text-white/60 transition-colors"
                   aria-label={showPassword ? "הסתר סיסמה" : "הצג סיסמה"}
                 >
                   {showPassword ? (
@@ -182,7 +182,7 @@ function ResetPasswordForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-white/40 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-gray-400 dark:text-white/40 uppercase tracking-wider mb-2">
                 אישור סיסמה
               </label>
               <input
@@ -190,7 +190,7 @@ function ResetPasswordForm() {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                className="w-full bg-gray-100 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-gray-800 dark:text-white/80 placeholder-gray-400 dark:placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                 placeholder="חזור על הסיסמה"
                 dir="ltr"
                 autoComplete="new-password"

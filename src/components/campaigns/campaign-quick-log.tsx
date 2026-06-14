@@ -24,7 +24,7 @@ const EVENTS: {
     successLabel: "נוסף!",
     icon: Send,
     color:
-      "text-white/60 bg-white/[0.05] border-white/[0.1] hover:border-white/[0.2]",
+      "text-gray-600 dark:text-white/60 bg-gray-100/80 dark:bg-white/[0.05] border-white/[0.1] hover:border-white/[0.2]",
   },
   {
     type: "replied",
@@ -72,8 +72,8 @@ export function CampaignQuickLog({ campaignId }: Props) {
   };
 
   return (
-    <div className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
-      <p className="text-xs font-semibold uppercase tracking-widest text-white/25 mb-4">
+    <div className="p-5 rounded-xl border border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]">
+      <p className="text-xs font-semibold uppercase tracking-widest text-gray-300 dark:text-white/25 mb-4">
         הוספת אירוע מהירה
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

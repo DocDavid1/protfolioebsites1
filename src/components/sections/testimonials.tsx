@@ -64,13 +64,13 @@ export function TestimonialsSection() {
             לקוחות מספרים
           </span>
           <h2
-            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white/90 mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הם סמכו עלינו.{" "}
             <span className="gradient-text-amber">הם צמחו.</span>
           </h2>
-          <p className="text-white/40 max-w-lg mx-auto">
+          <p className="text-gray-400 dark:text-white/40 max-w-lg mx-auto">
             כל לקוח מגיע עם אתגר שונה. אנחנו מגיעים עם אותה מחויבות — לתוצאות.
           </p>
         </AnimateIn>
@@ -96,7 +96,7 @@ export function TestimonialsSection() {
                 </div>
 
                 {/* Quote text */}
-                <p className="text-sm md:text-base text-white/70 leading-relaxed mb-6 flex-1">
+                <p className="text-sm md:text-base text-gray-700 dark:text-white/70 leading-relaxed mb-6 flex-1">
                   &ldquo;{t.text}&rdquo;
                 </p>
 
@@ -117,7 +117,7 @@ export function TestimonialsSection() {
                   >
                     {t.metric}
                   </span>
-                  <span className="text-xs text-white/35">{t.metricDetail}</span>
+                  <span className="text-xs text-gray-400 dark:text-white/35">{t.metricDetail}</span>
                 </div>
 
                 {/* Author */}
@@ -133,8 +133,8 @@ export function TestimonialsSection() {
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-white/80">{t.name}</p>
-                    <p className="text-xs text-white/35">{t.role}</p>
+                    <p className="text-sm font-bold text-gray-800 dark:text-white/80">{t.name}</p>
+                    <p className="text-xs text-gray-400 dark:text-white/35">{t.role}</p>
                   </div>
                 </div>
               </div>

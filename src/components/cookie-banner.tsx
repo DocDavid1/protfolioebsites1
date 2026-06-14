@@ -57,7 +57,7 @@ export function CookieBanner() {
     <>
       {/* Cookie consent bar */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/[0.07] bg-[#0d0d18]/95 backdrop-blur-sm"
+        className="fixed bottom-0 left-0 right-0 z-40 border-t border-gray-200 dark:border-white/[0.07] bg-white dark:bg-[#0d0d18]/95 backdrop-blur-sm"
         role="banner"
         aria-label="באנר עוגיות"
         style={{
@@ -65,7 +65,7 @@ export function CookieBanner() {
         }}
       >
         <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-white/50 leading-relaxed max-w-xl">
+          <p className="text-xs text-gray-500 dark:text-white/50 leading-relaxed max-w-xl">
             אתר זה משתמש בעוגיות כדי להבטיח חוויית גלישה מיטבית.{" "}
             <Link
               href="/cookies"
@@ -85,13 +85,13 @@ export function CookieBanner() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowPrefs(true)}
-              className="px-3 py-1.5 text-xs text-white/40 hover:text-white/60 transition-colors rounded-lg border border-white/[0.06] hover:border-white/[0.12]"
+              className="px-3 py-1.5 text-xs text-gray-400 dark:text-white/40 hover:text-gray-600 dark:hover:text-white/60 transition-colors rounded-lg border border-gray-200 dark:border-white/[0.06] hover:border-gray-300 dark:hover:border-white/[0.12]"
             >
               העדפות
             </button>
             <button
               onClick={() => saveConsent(false)}
-              className="px-3 py-1.5 text-xs text-white/50 hover:text-white/70 transition-colors rounded-lg border border-white/[0.08] hover:border-white/[0.15]"
+              className="px-3 py-1.5 text-xs text-gray-500 dark:text-white/50 hover:text-gray-700 dark:hover:text-white/70 transition-colors rounded-lg border border-gray-200 dark:border-white/[0.08] hover:border-white/[0.15]"
             >
               סרב לאי-הכרחיות
             </button>
@@ -117,16 +117,16 @@ export function CookieBanner() {
           aria-label="העדפות עוגיות"
         >
           <div
-            className="bg-[#0d0d18] border border-white/10 rounded-xl p-6 max-w-sm mx-4"
+            className="bg-white dark:bg-[#0d0d18] border border-white/10 rounded-xl p-6 max-w-sm mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             <h3
-              className="text-lg font-bold text-white/90 mb-3"
+              className="text-lg font-bold text-gray-900 dark:text-white/90 mb-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
               העדפות עוגיות
             </h3>
-            <p className="text-sm text-white/50 mb-5 leading-relaxed">
+            <p className="text-sm text-gray-500 dark:text-white/50 mb-5 leading-relaxed">
               בקרוב — ניהול העדפות עוגיות
             </p>
             <button

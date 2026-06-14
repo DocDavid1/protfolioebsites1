@@ -87,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="he" dir="rtl" suppressHydrationWarning className="dark">
+    <html lang="he" dir="rtl" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -102,8 +102,8 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
+          enableSystem
+          disableTransitionOnChange={false}
         >
           <SiteHeader />
           <main id="main-content">{children}</main>

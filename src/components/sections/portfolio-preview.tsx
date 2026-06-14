@@ -53,19 +53,19 @@ export async function PortfolioPreview() {
               עבודות נבחרות
             </span>
             <h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               פרויקטים{" "}
               <span className="gradient-text-blue">שהשלמנו</span>
             </h2>
-            <p className="text-white/40 mt-3 max-w-xl">
+            <p className="text-gray-400 dark:text-white/40 mt-3 max-w-xl">
               כל פרויקט הוא משימה. כל לקוח הוא שותף. הנה חלק מהעבודות האחרונות שלנו.
             </p>
           </div>
           <Link
             href="/portfolio"
-            className="btn-outline group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white/60 whitespace-nowrap"
+            className="btn-outline group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600 dark:text-white/60 whitespace-nowrap"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             כל הפרויקטים
@@ -97,7 +97,7 @@ export async function PortfolioPreview() {
                 >
                   {stat.value}
                 </p>
-                <p className="text-xs text-white/35">{stat.label}</p>
+                <p className="text-xs text-gray-400 dark:text-white/35">{stat.label}</p>
               </div>
             ))}
           </div>
