@@ -1,191 +1,140 @@
-import { Lock, FolderOpen, Bot, Zap, Users, BarChart2 } from "lucide-react";
-import { LinksManager } from "../links-manager";
+import Link from "next/link";
+import { Target, Users, Megaphone, Settings, FolderOpen, ArrowLeft, TrendingUp, Shield } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
-  title: "Admin",
-  description: "Fighters Builders admin panel",
+  title: "Admin — לוח בקרה",
   robots: { index: false, follow: false },
 };
 
-type AdminColor = "blue" | "purple" | "amber" | "emerald" | "orange" | "red";
-
-const MODULES: Array<{
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  status: string;
-  color: AdminColor;
-}> = [
+const MODULES = [
   {
-    icon: FolderOpen,
-    title: "Portfolio Manager",
-    description:
-      "Add, edit, and remove portfolio projects. Upload preview screenshots.",
-    status: "planned",
+    href: "/admin/lead-gen",
+    icon: Target,
+    title: "יצירת לידים",
+    description: "חיפוש עסקים דרך Google, ניקוד 0-100, סריקת אתרים ויצירת תוכן AI ב-7 נגיעות",
     color: "blue",
   },
   {
-    icon: Bot,
-    title: "AI Onboarding Agent",
-    description:
-      "Configure the AI agent that qualifies new leads via WhatsApp.",
-    status: "planned",
-    color: "purple",
-  },
-  {
-    icon: Zap,
-    title: "Automation Control",
-    description: "Manage active automation flows and triggers.",
-    status: "planned",
-    color: "amber",
-  },
-  {
+    href: "/admin/leads",
     icon: Users,
-    title: "CRM Sync",
-    description:
-      "View and manage incoming leads, contacts, and deal pipeline.",
-    status: "planned",
+    title: "פניות",
+    description: "ניהול פניות שנכנסו מטופס יצירת קשר באתר",
     color: "emerald",
   },
   {
-    icon: BarChart2,
-    title: "Analytics Dashboard",
-    description:
-      "Site performance, conversion rates, and campaign attribution.",
-    status: "planned",
-    color: "orange",
+    href: "/admin/campaigns",
+    icon: Megaphone,
+    title: "קמפיינים",
+    description: "ניהול קמפיינים שיווקיים ומעקב אחר תוצאות",
+    color: "purple",
   },
   {
-    icon: Lock,
-    title: "Access Control",
-    description: "Team member management, roles, and API key management.",
-    status: "planned",
-    color: "red",
+    href: "/admin/projects",
+    icon: FolderOpen,
+    title: "פרויקטים",
+    description: "ניהול פרויקטים בפורטפוליו",
+    color: "amber",
   },
-];
+  {
+    href: "/admin/settings",
+    icon: Settings,
+    title: "הגדרות",
+    description: "הגדרות מערכת וקישורי ניווט האתר",
+    color: "slate",
+  },
+] as const;
 
-const COLOR_MAP: Record<AdminColor, { icon: string; badge: string }> = {
-  blue: { icon: "text-blue-400 bg-blue-500/10", badge: "text-blue-400/60 bg-blue-500/[0.05] border-blue-500/15" },
-  purple: { icon: "text-purple-400 bg-purple-500/10", badge: "text-purple-400/60 bg-purple-500/[0.05] border-purple-500/15" },
-  amber: { icon: "text-amber-400 bg-amber-500/10", badge: "text-amber-400/60 bg-amber-500/[0.05] border-amber-500/15" },
-  emerald: { icon: "text-emerald-400 bg-emerald-500/10", badge: "text-emerald-400/60 bg-emerald-500/[0.05] border-emerald-500/15" },
-  orange: { icon: "text-orange-400 bg-orange-500/10", badge: "text-orange-400/60 bg-orange-500/[0.05] border-orange-500/15" },
-  red: { icon: "text-red-400 bg-red-500/10", badge: "text-red-400/60 bg-red-500/[0.05] border-red-500/15" },
+type ModuleColor = "blue" | "emerald" | "purple" | "amber" | "slate";
+
+const COLOR_MAP: Record<ModuleColor, { card: string; icon: string }> = {
+  blue: { card: "border-blue-500/15 hover:border-blue-500/30 hover:bg-blue-500/[0.03]", icon: "text-blue-400 bg-blue-500/10" },
+  emerald: { card: "border-emerald-500/15 hover:border-emerald-500/30 hover:bg-emerald-500/[0.03]", icon: "text-emerald-400 bg-emerald-500/10" },
+  purple: { card: "border-purple-500/15 hover:border-purple-500/30 hover:bg-purple-500/[0.03]", icon: "text-purple-400 bg-purple-500/10" },
+  amber: { card: "border-amber-500/15 hover:border-amber-500/30 hover:bg-amber-500/[0.03]", icon: "text-amber-400 bg-amber-500/10" },
+  slate: { card: "border-white/10 hover:border-white/20 hover:bg-white/[0.02]", icon: "text-white/50 bg-white/[0.06]" },
 };
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const supabase = await createClient();
+
+  const [
+    { count: leadsCount },
+    { count: bizLeadsCount },
+    { count: campaignsCount },
+  ] = await Promise.all([
+    supabase.from("leads").select("*", { count: "exact", head: true }),
+    supabase.from("business_leads").select("*", { count: "exact", head: true }),
+    supabase.from("campaigns").select("*", { count: "exact", head: true }),
+  ]);
+
+  const stats = [
+    { label: "פניות מהאתר", value: leadsCount ?? 0, icon: Users, color: "text-emerald-400" },
+    { label: "עסקים שנסרקו", value: bizLeadsCount ?? 0, icon: Target, color: "text-blue-400" },
+    { label: "קמפיינים", value: campaignsCount ?? 0, icon: TrendingUp, color: "text-purple-400" },
+  ];
+
   return (
-    <div className="min-h-screen py-24">
-      <div className="container mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-              <Lock className="w-4 h-4 text-amber-400" />
-            </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-amber-400">
-              Admin Panel
-            </span>
+    <div className="max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="mb-10 flex items-start justify-between">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Shield className="w-4 h-4 text-amber-400" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-amber-400">מרכז פעולות</span>
           </div>
           <h1
-            className="text-4xl font-bold text-white/90 mb-2"
+            className="text-3xl font-bold text-white/90"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            OPERATIONS CENTER
+            לוח בקרה
           </h1>
-          <p className="text-white/35 text-sm">
-            This panel is under construction. Authentication and full module
-            implementation coming soon.
-          </p>
         </div>
+        <Link
+          href="/"
+          className="text-xs text-white/30 hover:text-white/60 transition-colors flex items-center gap-1"
+        >
+          <ArrowLeft className="w-3 h-3" />
+          חזור לאתר
+        </Link>
+      </div>
 
-        {/* Auth placeholder notice */}
-        <div className="p-4 mb-10 rounded-xl border border-amber-500/20 bg-amber-500/[0.04] flex items-start gap-3">
-          <Lock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm font-medium text-amber-400 mb-0.5">
-              Authentication Required
-            </p>
-            <p className="text-xs text-white/35">
-              גישה לדף זה מוגנת על ידי Supabase Auth. משתמשים לא מחוברים
-              מועברים אוטומטית לדף הכניסה.
-            </p>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-4 mb-10">
+        {stats.map(({ label, value, icon: Icon, color }) => (
+          <div key={label} className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
+            <Icon className={`w-5 h-5 mb-3 ${color}`} />
+            <p className="text-2xl font-bold text-white/90 mb-1">{value}</p>
+            <p className="text-xs text-white/35">{label}</p>
           </div>
-        </div>
+        ))}
+      </div>
 
-        {/* Module grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {MODULES.map((module) => {
-            const Icon = module.icon;
-            const colors = COLOR_MAP[module.color];
-            return (
-              <div
-                key={module.title}
-                className="p-5 rounded-xl border border-white/7 bg-[#0d0d18] opacity-60"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.icon}`}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <span
-                    className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${colors.badge}`}
-                  >
-                    {module.status}
-                  </span>
-                </div>
-                <h3 className="text-sm font-semibold text-white/60 mb-1.5">
-                  {module.title}
-                </h3>
-                <p className="text-xs text-white/30 leading-relaxed">
-                  {module.description}
-                </p>
+      {/* Module cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {MODULES.map(({ href, icon: Icon, title, description, color }) => {
+          const colors = COLOR_MAP[color];
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`group p-5 rounded-xl border bg-[#0d0d18] transition-all ${colors.card}`}
+            >
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 ${colors.icon}`}>
+                <Icon className="w-4.5 h-4.5" />
               </div>
-            );
-          })}
-        </div>
-
-        {/* Nav Links Manager — active module */}
-        <div className="mt-10 mb-2">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-xs font-semibold uppercase tracking-widest text-blue-400">
-              פעיל
-            </span>
-            <div className="flex-1 h-px bg-blue-500/10" />
-          </div>
-          <LinksManager />
-        </div>
-
-        {/* File structure reference */}
-        <div className="mt-10 p-5 rounded-xl border border-white/[0.05] bg-white/[0.01]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-3">
-            Architecture Reference
-          </p>
-          <div className="font-mono text-xs text-white/20 space-y-1">
-            <p>
-              <span className="text-white/40">src/</span>
-              agents/ — AI agent definitions
-            </p>
-            <p>
-              <span className="text-white/40">src/</span>
-              automations/ — automation workflows
-            </p>
-            <p>
-              <span className="text-white/40">src/</span>
-              lib/ai/ — AI provider configs
-            </p>
-            <p>
-              <span className="text-white/40">src/</span>
-              lib/integrations/ — CRM, WhatsApp, webhooks
-            </p>
-            <p>
-              <span className="text-white/40">src/</span>
-              app/api/admin/ — protected API routes
-            </p>
-          </div>
-        </div>
+              <h3 className="text-sm font-semibold text-white/80 group-hover:text-white/95 mb-1.5 transition-colors">
+                {title}
+              </h3>
+              <p className="text-xs text-white/35 leading-relaxed">
+                {description}
+              </p>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

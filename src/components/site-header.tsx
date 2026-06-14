@@ -3,9 +3,10 @@
 import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, LayoutDashboard } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
 import { whatsappUrl } from "@/lib/config";
+import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס!");
@@ -15,6 +16,7 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [navLinks, setNavLinks] = useState(DEFAULT_NAV_LINKS);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -43,6 +45,15 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
+      if (!user) return;
+      const { data } = await supabase.from("profiles").select("is_admin").eq("id", user.id).single();
+      if (data?.is_admin) setIsAdmin(true);
+    });
   }, []);
 
   return (
@@ -176,6 +187,15 @@ export function SiteHeader() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400/80 hover:text-amber-400 bg-amber-500/[0.06] hover:bg-amber-500/[0.12] border border-amber-500/15 transition-all"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                לוח בקרה
+              </Link>
+            )}
             <a
               href={WHATSAPP_URL}
               target="_blank"

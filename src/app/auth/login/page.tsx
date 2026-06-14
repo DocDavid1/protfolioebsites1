@@ -9,7 +9,7 @@ import { createClient } from "@/lib/supabase/client";
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirect") ?? "/";
+  const redirectTo = searchParams.get("redirect") ?? "/admin";
   const resetSuccess = searchParams.get("reset") === "success";
 
   const [email, setEmail] = useState("");
