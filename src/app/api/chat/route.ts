@@ -3,6 +3,8 @@ import { streamText, type UIMessage, convertToModelMessages } from "ai";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 const messagePartSchema = z.object({
   type: z.string(),
   text: z.string().max(10000, "Message text too long").optional(),

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 // ── Rate limiting (in-memory, per IP) ────────────────────────────────────────
 const RATE_WINDOW_MS = 60_000; // 1 minute
 const RATE_MAX = 3; // max 3 submissions per window per IP

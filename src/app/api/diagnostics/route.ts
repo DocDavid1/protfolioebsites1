@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 type StatusLevel = "ok" | "warn" | "error";
 
 interface DiagnosticsResponse {
