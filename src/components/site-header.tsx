@@ -3,13 +3,12 @@
 import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle, Settings } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { whatsappUrl } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
+const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס!");
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -177,8 +176,6 @@ export function SiteHeader() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
-
             <a
               href={WHATSAPP_URL}
               target="_blank"
@@ -189,16 +186,6 @@ export function SiteHeader() {
               <MessageCircle className="w-4 h-4" />
               <span className="hidden lg:inline">וואטסאפ</span>
             </a>
-
-            <Link
-              href="/admin"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
-              aria-label="פאנל ניהול"
-              title="Admin"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Admin</span>
-            </Link>
 
             <button
               className="md:hidden p-2 rounded-xl text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-100/80 dark:hover:bg-white/[0.05] transition-all"

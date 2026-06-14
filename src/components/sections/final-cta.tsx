@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { MessageCircle, ArrowRight, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { BUSINESS, whatsappUrl } from "@/lib/config";
 
-const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_MESSAGE = "שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.");
 
 export function FinalCTA() {
   return (
@@ -116,19 +115,19 @@ export function FinalCTA() {
               <p className="text-sm text-gray-500 dark:text-white/50 mb-4">או דברו איתנו ישירות:</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                 <a
-                  href={`tel:+${WHATSAPP_NUMBER}`}
+                  href={`tel:${BUSINESS.phone}`}
                   className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60 hover:text-blue-400 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  <span dir="ltr">+972-50-123-4567</span>
+                  <span dir="ltr">{BUSINESS.phone}</span>
                 </a>
                 <div className="w-px h-4 bg-white/10 hidden sm:block" />
                 <a
-                  href="mailto:hello@fightersbuilders.com"
+                  href={`mailto:${BUSINESS.email}`}
                   className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60 hover:text-blue-400 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  hello@fightersbuilders.com
+                  {BUSINESS.email}
                 </a>
               </div>
             </div>

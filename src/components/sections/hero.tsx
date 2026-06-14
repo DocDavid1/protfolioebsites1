@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, MessageCircle, ChevronDown, Sparkles } from "lucide-react";
+import { whatsappUrl } from "@/lib/config";
 import { HeroVideo } from "./hero-video";
 
-const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_MESSAGE = "שלום פייטרס בילדרס! אני מתעניין בשירותים שלכם.";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס! אני מתעניין בשירותים שלכם.");
 
 export function HeroSection() {
   return (

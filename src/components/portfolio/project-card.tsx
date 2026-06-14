@@ -48,18 +48,20 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             {/* Blue tint on hover */}
             <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/[0.06] transition-colors duration-300 pointer-events-none" />
             {/* Visit Site pill — fades in on hover, opens external URL */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <a
-                href={project.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/15 hover:bg-black/80 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4 text-gray-900 dark:text-white/90" />
-                <span className="text-xs font-semibold text-gray-900 dark:text-white/90 tracking-wide">בקר באתר</span>
-              </a>
-            </div>
+            {project.website_url && project.website_url !== "https://example.com" && (
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <a
+                  href={project.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/15 hover:bg-black/80 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4 text-gray-900 dark:text-white/90" />
+                  <span className="text-xs font-semibold text-gray-900 dark:text-white/90 tracking-wide">בקר באתר</span>
+                </a>
+              </div>
+            )}
           </div>
 
           {/* Card content */}
@@ -107,18 +109,20 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             {/* Action row */}
             <div className="flex items-center justify-between pt-3 border-t border-white/[0.09]">
               <span className="text-xs text-blue-400 group-hover:text-blue-300 transition-colors font-bold tracking-wide">
-                View case study →
+                ראה פרויקט ←
               </span>
-              <a
-                href={project.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="p-1.5 rounded-md text-gray-400 dark:text-white/35 hover:text-gray-800 dark:hover:text-white/80 hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all"
-                aria-label={`${project.title} — נפתח בחלון חדש`}
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              {project.website_url && project.website_url !== "https://example.com" && (
+                <a
+                  href={project.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="p-1.5 rounded-md text-gray-400 dark:text-white/35 hover:text-gray-800 dark:hover:text-white/80 hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all"
+                  aria-label={`${project.title} — נפתח בחלון חדש`}
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
           </div>
         </article>

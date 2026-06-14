@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FolderOpen, Users, Settings, LogOut, Shield, Megaphone } from "lucide-react";
+import { FolderOpen, Users, Settings, LogOut, Shield, Megaphone, Target } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin/projects", label: "פרויקטים", icon: FolderOpen },
-  { href: "/admin/leads", label: "לידים", icon: Users },
+  { href: "/admin/lead-gen", label: "יצירת לידים", icon: Target },
+  { href: "/admin/leads", label: "פניות", icon: Users },
   { href: "/admin/campaigns", label: "קמפיינים", icon: Megaphone },
   { href: "/admin/settings", label: "הגדרות", icon: Settings },
 ];

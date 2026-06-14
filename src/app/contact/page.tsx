@@ -4,15 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Mail, Send, CheckCircle } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
-
-const WHATSAPP_NUMBER = "972501234567";
+import { BUSINESS, whatsappUrl } from "@/lib/config";
 
 const CONTACT_OPTIONS = [
   {
     icon: MessageCircle,
     title: "וואטסאפ",
     description: "המענה המהיר ביותר. אנחנו עונים תוך דקות.",
-    action: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.")}`,
+    action: whatsappUrl("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט."),
     actionLabel: "פתח וואטסאפ",
     color: "emerald",
     highlight: true,
@@ -21,7 +20,7 @@ const CONTACT_OPTIONS = [
     icon: Mail,
     title: "אימייל",
     description: "לתדריכים מפורטים ופניות רשמיות.",
-    action: "mailto:hello@fightersbuilders.com",
+    action: `mailto:${BUSINESS.email}`,
     actionLabel: "שלח אימייל",
     color: "blue",
     highlight: false,

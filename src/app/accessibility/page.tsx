@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   MessageCircle,
   Mail,
@@ -9,7 +10,6 @@ import {
   Accessibility,
   Keyboard,
 } from "lucide-react";
-import Link from "next/link";
 import { AnimateIn } from "@/components/ui/animate-in";
 import type { Metadata } from "next";
 

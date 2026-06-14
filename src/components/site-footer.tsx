@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { MessageCircle, Mail, Phone, Shield, ArrowRight } from "lucide-react";
+import { BUSINESS, whatsappUrl } from "@/lib/config";
 
-const WHATSAPP_NUMBER = "972501234567";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
+const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס!");
 
 const FOOTER_LINKS = {
   "שירותים": [
@@ -104,24 +104,24 @@ export function SiteFooter() {
                 וואטסאפ (הכי מהיר)
               </a>
               <a
-                href={`tel:+${WHATSAPP_NUMBER}`}
+                href={`tel:${BUSINESS.phone}`}
                 className="flex items-center gap-2.5 text-sm text-gray-500 dark:text-white/50 hover:text-blue-400 transition-colors group"
                 suppressHydrationWarning
               >
                 <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
                   <Phone className="w-3.5 h-3.5 text-blue-400" aria-hidden="true" />
                 </div>
-                <span dir="ltr">+972-50-123-4567</span>
+                <span dir="ltr">{BUSINESS.phone}</span>
               </a>
               <a
-                href="mailto:hello@fightersbuilders.com"
+                href={`mailto:${BUSINESS.email}`}
                 className="flex items-center gap-2.5 text-sm text-gray-500 dark:text-white/50 hover:text-blue-400 transition-colors group"
                 suppressHydrationWarning
               >
                 <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
                   <Mail className="w-3.5 h-3.5 text-blue-400" aria-hidden="true" />
                 </div>
-                hello@fightersbuilders.com
+                {BUSINESS.email}
               </a>
             </div>
           </div>

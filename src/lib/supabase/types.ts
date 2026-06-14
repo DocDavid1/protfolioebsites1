@@ -8,6 +8,103 @@ export type ProjectCategory =
 
 export type LeadStatus = "new" | "contacted" | "qualified" | "closed" | "lost";
 
+export type BusinessLeadStatus =
+  | "new"
+  | "qualified"
+  | "contacted"
+  | "follow_up"
+  | "won"
+  | "lost";
+
+export type TouchpointChannel =
+  | "whatsapp"
+  | "email"
+  | "phone"
+  | "linkedin"
+  | "manual"
+  | "pdf";
+
+export type TouchpointStatus = "draft" | "sent" | "opened" | "replied";
+
+export type UserRole = "owner" | "admin" | "editor";
+
+export interface BusinessLead {
+  id: string;
+  name: string;
+  category: string | null;
+  address: string | null;
+  city: string | null;
+  country: string;
+  phone: string | null;
+  website: string | null;
+  google_maps_url: string | null;
+  place_id: string | null;
+  google_rating: number | null;
+  review_count: number | null;
+  has_website: boolean;
+  score: number;
+  score_reasons: string[] | null;
+  status: BusinessLeadStatus;
+  search_query: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface LeadAudit {
+  id: string;
+  lead_id: string;
+  audited_at: string;
+  http_status: number | null;
+  is_https: boolean | null;
+  redirects_to_https: boolean | null;
+  page_title: string | null;
+  meta_description: string | null;
+  has_favicon: boolean | null;
+  load_speed_ms: number | null;
+  mobile_friendly: boolean | null;
+  has_cta: boolean | null;
+  has_contact_form: boolean | null;
+  has_phone: boolean | null;
+  social_links: string[] | null;
+  raw: Record<string, unknown> | null;
+  audit_score_delta: number;
+}
+
+export interface LeadTouchpoint {
+  id: string;
+  lead_id: string;
+  touch_number: number;
+  channel: TouchpointChannel | null;
+  status: TouchpointStatus;
+  content: string | null;
+  notes: string | null;
+  reminder_date: string | null;
+  sent_at: string | null;
+  created_at: string;
+}
+
+export interface LeadReport {
+  id: string;
+  lead_id: string;
+  content: ReportContent;
+  created_at: string;
+}
+
+export interface ReportContent {
+  business_name: string;
+  website: string | null;
+  score: number;
+  score_reasons: string[];
+  tips: ReportTip[];
+  generated_at: string;
+}
+
+export interface ReportTip {
+  category: string;
+  title: string;
+  body: string;
+}
+
 export type CampaignType =
   | "whatsapp"
   | "email"
@@ -96,6 +193,11 @@ export interface Database {
           message: string | null;
           source: string | null;
           status: LeadStatus;
+          privacy_policy_accepted: boolean;
+          consent_to_contact: boolean;
+          marketing_consent: boolean;
+          privacy_policy_version: string | null;
+          source_page: string | null;
           created_at: string;
         };
         Insert: {
@@ -108,6 +210,11 @@ export interface Database {
           message?: string | null;
           source?: string | null;
           status?: LeadStatus;
+          privacy_policy_accepted?: boolean;
+          consent_to_contact?: boolean;
+          marketing_consent?: boolean;
+          privacy_policy_version?: string | null;
+          source_page?: string | null;
           created_at?: string;
         };
         Update: {
@@ -120,6 +227,11 @@ export interface Database {
           message?: string | null;
           source?: string | null;
           status?: LeadStatus;
+          privacy_policy_accepted?: boolean;
+          consent_to_contact?: boolean;
+          marketing_consent?: boolean;
+          privacy_policy_version?: string | null;
+          source_page?: string | null;
           created_at?: string;
         };
         Relationships: [];
@@ -300,6 +412,180 @@ export interface Database {
           sales: number;
           revenue: number;
         }>;
+        Relationships: [];
+      };
+      business_leads: {
+        Row: {
+          id: string;
+          name: string;
+          category: string | null;
+          address: string | null;
+          city: string | null;
+          country: string;
+          phone: string | null;
+          website: string | null;
+          google_maps_url: string | null;
+          place_id: string | null;
+          google_rating: number | null;
+          review_count: number | null;
+          has_website: boolean;
+          score: number;
+          score_reasons: string[] | null;
+          status: BusinessLeadStatus;
+          search_query: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          category?: string | null;
+          address?: string | null;
+          city?: string | null;
+          country?: string;
+          phone?: string | null;
+          website?: string | null;
+          google_maps_url?: string | null;
+          place_id?: string | null;
+          google_rating?: number | null;
+          review_count?: number | null;
+          has_website?: boolean;
+          score?: number;
+          score_reasons?: string[] | null;
+          status?: BusinessLeadStatus;
+          search_query?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          name?: string;
+          category?: string | null;
+          address?: string | null;
+          city?: string | null;
+          country?: string;
+          phone?: string | null;
+          website?: string | null;
+          google_maps_url?: string | null;
+          place_id?: string | null;
+          google_rating?: number | null;
+          review_count?: number | null;
+          has_website?: boolean;
+          score?: number;
+          score_reasons?: string[] | null;
+          status?: BusinessLeadStatus;
+          search_query?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      lead_audits: {
+        Row: {
+          id: string;
+          lead_id: string;
+          audited_at: string;
+          http_status: number | null;
+          is_https: boolean | null;
+          redirects_to_https: boolean | null;
+          page_title: string | null;
+          meta_description: string | null;
+          has_favicon: boolean | null;
+          load_speed_ms: number | null;
+          mobile_friendly: boolean | null;
+          has_cta: boolean | null;
+          has_contact_form: boolean | null;
+          has_phone: boolean | null;
+          social_links: string[] | null;
+          raw: Record<string, unknown> | null;
+          audit_score_delta: number;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          audited_at?: string;
+          http_status?: number | null;
+          is_https?: boolean | null;
+          redirects_to_https?: boolean | null;
+          page_title?: string | null;
+          meta_description?: string | null;
+          has_favicon?: boolean | null;
+          load_speed_ms?: number | null;
+          mobile_friendly?: boolean | null;
+          has_cta?: boolean | null;
+          has_contact_form?: boolean | null;
+          has_phone?: boolean | null;
+          social_links?: string[] | null;
+          raw?: Record<string, unknown> | null;
+          audit_score_delta?: number;
+        };
+        Update: {
+          http_status?: number | null;
+          is_https?: boolean | null;
+          redirects_to_https?: boolean | null;
+          page_title?: string | null;
+          meta_description?: string | null;
+          has_favicon?: boolean | null;
+          load_speed_ms?: number | null;
+          mobile_friendly?: boolean | null;
+          has_cta?: boolean | null;
+          has_contact_form?: boolean | null;
+          has_phone?: boolean | null;
+          social_links?: string[] | null;
+          raw?: Record<string, unknown> | null;
+          audit_score_delta?: number;
+        };
+        Relationships: [];
+      };
+      lead_touchpoints: {
+        Row: {
+          id: string;
+          lead_id: string;
+          touch_number: number;
+          channel: TouchpointChannel | null;
+          status: TouchpointStatus;
+          content: string | null;
+          notes: string | null;
+          reminder_date: string | null;
+          sent_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          touch_number: number;
+          channel?: TouchpointChannel | null;
+          status?: TouchpointStatus;
+          content?: string | null;
+          notes?: string | null;
+          reminder_date?: string | null;
+          sent_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          channel?: TouchpointChannel | null;
+          status?: TouchpointStatus;
+          content?: string | null;
+          notes?: string | null;
+          reminder_date?: string | null;
+          sent_at?: string | null;
+        };
+        Relationships: [];
+      };
+      lead_reports: {
+        Row: {
+          id: string;
+          lead_id: string;
+          content: ReportContent;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          content: ReportContent;
+          created_at?: string;
+        };
+        Update: {
+          content?: ReportContent;
+        };
         Relationships: [];
       };
     };

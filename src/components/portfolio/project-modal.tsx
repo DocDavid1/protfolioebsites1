@@ -172,16 +172,22 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
 
           {/* Actions */}
           <div className="flex items-center gap-3 pt-4 border-t border-white/[0.1]">
-            <a
-              href={project.website_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} — נפתח בחלון חדש`}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg btn-primary text-sm"
-            >
-              <ExternalLink className="w-4 h-4" />
-              צפה באתר
-            </a>
+            {project.website_url && project.website_url !== "https://example.com" ? (
+              <a
+                href={project.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} — נפתח בחלון חדש`}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-lg btn-primary text-sm"
+              >
+                <ExternalLink className="w-4 h-4" />
+                צפה באתר
+              </a>
+            ) : (
+              <span className="text-xs text-white/30 px-5 py-2.5">
+                הפרויקט לא זמין לצפייה ציבורית
+              </span>
+            )}
             <button
               onClick={onClose}
               className="px-5 py-2.5 rounded-lg btn-outline text-sm"

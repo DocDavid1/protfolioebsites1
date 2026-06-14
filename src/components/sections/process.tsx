@@ -1,4 +1,4 @@
-import { AnimateIn } from "@/components/ui/animate-in";
+import type { ComponentType } from "react";
 import {
   Search,
   Target,
@@ -7,7 +7,7 @@ import {
   Rocket,
   TrendingUp,
 } from "lucide-react";
-import type { ComponentType } from "react";
+import { AnimateIn } from "@/components/ui/animate-in";
 
 interface Step {
   number: string;
