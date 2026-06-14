@@ -60,3 +60,13 @@ export async function createAdminClient() {
     }
   );
 }
+
+/**
+ * Get the currently authenticated user from the session cookie.
+ * Returns null if not authenticated.
+ */
+export async function getCurrentUser() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  return user ?? null;
+}

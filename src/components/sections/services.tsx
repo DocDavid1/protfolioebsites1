@@ -1,11 +1,12 @@
 import type { ComponentType } from "react";
 import {
   Globe,
-  MessageCircle,
+  ShoppingCart,
   BarChart2,
+  Bot,
   Users,
-  Zap,
   TrendingUp,
+  Megaphone,
 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 
@@ -13,178 +14,189 @@ interface Service {
   icon: ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  highlight: string;
-  accent: "blue" | "amber" | "emerald" | "purple" | "orange" | "cyan";
+  features: string[];
+  color: string;
+  glowColor: string;
 }
 
 const SERVICES: Service[] = [
   {
     icon: Globe,
-    title: "אתרים מוכנים לקרב",
+    title: "בניית אתרים",
     description:
-      "אתרים בעלי ביצועים גבוהים הבנויים להמיר מבקרים ללקוחות. ללא תבניות — כל אתר מהונדס למהירות, SEO ותוצאות.",
-    highlight: "ביצועי Lighthouse 95+",
-    accent: "blue",
+      "אתרים מהירים, מרשימים ומותאמים לכל מכשיר. כל אתר מהונדס להמרה מקסימלית ולחוויית משתמש יוצאת דופן.",
+    features: ["עיצוב מותאם אישית", "Lighthouse 95+", "SEO מובנה"],
+    color: "#3b82f6",
+    glowColor: "rgba(59,130,246,0.12)",
   },
   {
-    icon: MessageCircle,
-    title: "מערכות וואטסאפ",
+    icon: ShoppingCart,
+    title: "חנויות אונליין",
     description:
-      "משפכי וואטסאפ אוטומטיים שמעסיקים, מסיקים ומסיקים לידים 24/7. איש המכירות הטוב ביותר שלך לא ישן.",
-    highlight: "500+ שיחות אוטומטיות ביום",
-    accent: "emerald",
+      "חנויות דיגיטליות שמוכרות. מערכת ניהול מוצרים, תשלומים מאובטחים וחוויית קנייה חלקה מהנייד.",
+    features: ["מערכת תשלומים", "ניהול מלאי", "Mobile-first"],
+    color: "#10b981",
+    glowColor: "rgba(16,185,129,0.12)",
   },
   {
     icon: BarChart2,
-    title: "מעקב לידים",
+    title: "משפכים שיווקיים",
     description:
-      "לעולם אל תאבד פוטנציאל לקוח שוב. מעקב מלא על כל המשפך מהקלקול הראשון ועד חתימת החוזה, עם דשבורדים בזמן אמת.",
-    highlight: "אפס לידים שאבדו",
-    accent: "amber",
+      "משפכים שמובילים את הלקוח מהרגע הראשון ועד לסגירה. כל שלב מתוכנן ומבוקר למקסם המרות.",
+    features: ["דפי נחיתה", "A/B Testing", "אופטימיזציה"],
+    color: "#f59e0b",
+    glowColor: "rgba(245,158,11,0.12)",
+  },
+  {
+    icon: Bot,
+    title: "אוטומציה עסקית",
+    description:
+      "מערכות אוטומטיות שעובדות בשבילך 24/7. מוואטסאפ ועד CRM — הכל רץ בלי לגעת.",
+    features: ["וואטסאפ בוטים", "תהליכים אוטומטיים", "חיסכון בזמן"],
+    color: "#8b5cf6",
+    glowColor: "rgba(139,92,246,0.12)",
   },
   {
     icon: Users,
-    title: "אינטגרציית CRM",
+    title: "ייצור לידים",
     description:
-      "שלוט על כל מערכת היחסים עם הלקוח ממרכז פעולות אחד. מסונכרן, מאורגן ומוכן לקרב.",
-    highlight: "נראות מלאה של הצינור",
-    accent: "purple",
+      "מכונת לידים שלא עוצרת. מקמפיינים ממומנים ועד לכידה אוטומטית — כל ליד נכנס למערכת ומטופל.",
+    features: ["לכידה אוטומטית", "סיווג לידים", "מעקב מלא"],
+    color: "#f43f5e",
+    glowColor: "rgba(244,63,94,0.12)",
   },
   {
-    icon: Zap,
-    title: "מערכות אוטומציה",
+    icon: Megaphone,
+    title: "שיווק דיגיטלי",
     description:
-      "פרוס מערכות, לא מאמץ. אנחנו מאטוטמים את התהליכים החוזרים שלך כדי שהצוות שלך יתמקד במה שחשוב.",
-    highlight: "80% מהמשימות החוזרות אוטומטיות",
-    accent: "orange",
+      "אסטרטגיית שיווק מלאה מותאמת לעסק שלך. Google Ads, Meta, SEO ותוכן — הכל תחת קורת גג אחת.",
+    features: ["Google Ads", "Meta Campaigns", "Content Strategy"],
+    color: "#22d3ee",
+    glowColor: "rgba(34,211,238,0.12)",
   },
   {
     icon: TrendingUp,
-    title: "נוכחות דיגיטלית",
+    title: "ניהול אתרים",
     description:
-      "שלוט בשוק שלך אונליין. SEO, נוכחות ברשתות חברתיות, זהות מותג וקמפיינים פרסומיים הבנויים בדיוק צבאי.",
-    highlight: "מיצוב מוביל בשוק",
-    accent: "cyan",
+      "אחזקה, עדכונים, גיבויים ואבטחה. אנחנו דואגים שהאתר שלך תמיד עובד, מהיר ומאובטח.",
+    features: ["עדכונים שוטפים", "גיבויים יומיים", "תמיכה טכנית"],
+    color: "#f59e0b",
+    glowColor: "rgba(245,158,11,0.12)",
   },
 ];
-
-const ACCENT_STYLES: Record<
-  Service["accent"],
-  { icon: string; badge: string; border: string }
-> = {
-  blue: {
-    icon: "text-blue-400 bg-blue-500/10",
-    badge: "text-blue-400 bg-blue-500/[0.07] border-blue-500/15",
-    border: "group-hover:border-blue-500/30",
-  },
-  amber: {
-    icon: "text-amber-400 bg-amber-500/10",
-    badge: "text-amber-400 bg-amber-500/[0.07] border-amber-500/15",
-    border: "group-hover:border-amber-500/30",
-  },
-  emerald: {
-    icon: "text-emerald-400 bg-emerald-500/10",
-    badge: "text-emerald-400 bg-emerald-500/[0.07] border-emerald-500/15",
-    border: "group-hover:border-emerald-500/30",
-  },
-  purple: {
-    icon: "text-purple-400 bg-purple-500/10",
-    badge: "text-purple-400 bg-purple-500/[0.07] border-purple-500/15",
-    border: "group-hover:border-purple-500/30",
-  },
-  orange: {
-    icon: "text-orange-400 bg-orange-500/10",
-    badge: "text-orange-400 bg-orange-500/[0.07] border-orange-500/15",
-    border: "group-hover:border-orange-500/30",
-  },
-  cyan: {
-    icon: "text-cyan-400 bg-cyan-500/10",
-    badge: "text-cyan-400 bg-cyan-500/[0.07] border-cyan-500/15",
-    border: "group-hover:border-cyan-500/30",
-  },
-};
 
 export function ServicesSection() {
   return (
     <section
       className="py-24 md:py-32 relative overflow-hidden"
       id="services"
-      aria-label="Our Services"
+      aria-label="השירותים שלנו"
     >
-      {/* Subtle top divider */}
-      <div className="divider-brand mb-0 absolute top-0 left-0 right-0" />
+      <div className="divider-glow absolute top-0 left-0 right-0" />
 
-      {/* Section atmosphere */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(99,102,241,0.05) 0%, transparent 70%)",
-        }}
+        className="absolute inset-0 pointer-events-none section-gradient-blue"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-dot-grid opacity-30" aria-hidden="true" />
+      <div className="absolute inset-0 bg-dot-grid opacity-20" aria-hidden="true" />
 
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section header */}
         <AnimateIn className="text-center mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
-            מה אנחנו מפרסים
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-400 mb-4 block">
+            מה אנחנו בונים
           </span>
           <h2
-            className="text-4xl md:text-5xl font-bold text-white/90 mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/90 mb-5"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            ארסנל הנשק
-            <span className="gradient-text-amber"> הדיגיטלי</span>
+            כל מה שהעסק שלך צריך{" "}
+            <span className="gradient-text-blue">כדי לצמוח</span>
           </h2>
           <p className="text-white/40 max-w-2xl mx-auto text-lg">
-            כל כלי בסטאק שלנו נבחר לביצועים ולROI. ללא שטויות, ללא נפיחות — רק מערכות שמבצעות.
+            מאתרים ועד אוטומציות מלאות — אנחנו בונים את התשתית הדיגיטלית שמייצרת לקוחות, לידים והכנסות.
           </p>
         </AnimateIn>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SERVICES.map((service, i) => {
-            const styles = ACCENT_STYLES[service.accent];
-            const Icon = service.icon;
-            return (
-              <AnimateIn key={service.title} delay={i * 80} from="bottom">
-                <div
-                  className={`group relative card-service rounded-xl p-6 transition-all duration-300 h-full ${styles.border}`}
-                >
-                  {/* Icon */}
-                  <div
-                    className={`inline-flex items-center justify-center w-11 h-11 rounded-lg mb-5 ${styles.icon}`}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-white/65 leading-relaxed mb-5">
-                    {service.description}
-                  </p>
-
-                  {/* Highlight badge */}
-                  <div className="mt-auto">
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${styles.badge}`}
-                    >
-                      <span className="w-1 h-1 rounded-full bg-current opacity-70" />
-                      {service.highlight}
-                    </span>
-                  </div>
-                </div>
-              </AnimateIn>
-            );
-          })}
+        {/* Services grid — first row of 3, second row of 4 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+          {SERVICES.slice(0, 3).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {SERVICES.slice(3).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i + 3} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceCard({ service, index }: { service: Service; index: number }) {
+  const Icon = service.icon;
+  return (
+    <AnimateIn delay={index * 70} from="bottom">
+      <div className="group relative card-service rounded-2xl p-6 md:p-7 h-full hover-lift overflow-hidden">
+        {/* Hover glow */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at 50% 0%, ${service.glowColor}, transparent 70%)`,
+          }}
+        />
+
+        <div className="relative">
+          {/* Icon */}
+          <div
+            className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 transition-transform duration-300 group-hover:scale-110"
+            style={{
+              background: `${service.color}12`,
+              border: `1px solid ${service.color}25`,
+              color: service.color,
+            }}
+          >
+            <Icon className="w-5 h-5" />
+          </div>
+
+          {/* Title */}
+          <h3
+            className="text-lg font-bold text-white/90 mb-3"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {service.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-sm text-white/55 leading-relaxed mb-5">
+            {service.description}
+          </p>
+
+          {/* Feature tags */}
+          <div className="flex flex-wrap gap-2">
+            {service.features.map((feature) => (
+              <span
+                key={feature}
+                className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                style={{
+                  color: `${service.color}cc`,
+                  background: `${service.color}0a`,
+                  border: `1px solid ${service.color}18`,
+                }}
+              >
+                {feature}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom accent line on hover */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right"
+          style={{ background: service.color }}
+        />
+      </div>
+    </AnimateIn>
   );
 }

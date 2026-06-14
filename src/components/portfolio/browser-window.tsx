@@ -74,7 +74,7 @@ export function BrowserWindow({
           src={imageUrl}
           alt={`Preview of ${title}`}
           fill
-          className="object-cover object-top"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={priority}
           onError={() => {
@@ -140,7 +140,7 @@ export function BrowserWindowPlaceholder({
             src={imageUrl}
             alt={`Preview of ${title}`}
             fill
-            className="object-cover object-top"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={priority}
           />

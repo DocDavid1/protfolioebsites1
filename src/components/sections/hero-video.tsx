@@ -43,17 +43,18 @@ export function HeroVideo() {
         // preload=metadata loads only the first frame on mobile (avoids 37MB download up front)
         preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ objectPosition: "center center" }}
+        style={{ objectPosition: "center center", filter: "brightness(0.45)" }}
       >
         <source src="/video/hero.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay — keeps text readable */}
+      <div className="absolute inset-0 bg-black/50" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(5,5,11,0.45) 0%, rgba(5,5,11,0.30) 50%, rgba(5,5,11,0.75) 100%)",
+            "linear-gradient(to bottom, rgba(5,5,11,0.65) 0%, rgba(5,5,11,0.45) 40%, rgba(5,5,11,0.90) 100%)",
         }}
       />
     </div>

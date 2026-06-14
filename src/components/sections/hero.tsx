@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Sword } from "lucide-react";
+import { ArrowRight, MessageCircle, ChevronDown, Sparkles } from "lucide-react";
 import { HeroVideo } from "./hero-video";
 
 const WHATSAPP_NUMBER = "972501234567";
@@ -12,199 +12,165 @@ export function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden"
       aria-label="Hero"
     >
-      {/* Video background (client — handles prefers-reduced-motion) */}
       <HeroVideo />
 
-      {/* Tactical grid background */}
-      <div className="absolute inset-0 bg-tactical-grid opacity-40" aria-hidden="true" />
-      <div className="absolute inset-0 bg-topo opacity-60" aria-hidden="true" />
+      {/* Layered atmosphere */}
+      <div className="absolute inset-0 bg-tactical-grid opacity-30" aria-hidden="true" />
 
-      {/* Radial glow gradients */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.12) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(245,158,11,0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse 90% 60% at 50% -10%, rgba(59,130,246,0.15) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 70%, rgba(245,158,11,0.08) 0%, transparent 50%), radial-gradient(ellipse 50% 40% at 15% 60%, rgba(139,92,246,0.06) 0%, transparent 50%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Diagonal light shafts */}
+      {/* Morphing blob decorations */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute top-1/3 right-[10%] w-[500px] h-[500px] pointer-events-none opacity-30 animate-morph-blob"
         style={{
-          background:
-            "conic-gradient(from 270deg at 50% -10%, rgba(59,130,246,0.06) 0deg, transparent 30deg, transparent 330deg, rgba(59,130,246,0.06) 360deg)",
+          background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 left-[5%] w-[400px] h-[400px] pointer-events-none opacity-25 animate-morph-blob"
+        style={{
+          background: "radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%)",
+          filter: "blur(50px)",
+          animationDelay: "4s",
         }}
         aria-hidden="true"
       />
 
-      {/* Animated glow orbs */}
-      <div
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)",
-          animation: "pulse-glow 6s ease-in-out infinite",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%)",
-          animation: "pulse-glow 8s ease-in-out infinite 2s",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-3/4 right-1/3 w-[300px] h-[300px] rounded-full blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(139,92,246,0.04) 0%, transparent 70%)",
-          animation: "pulse-glow 10s ease-in-out infinite 4s",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Scan line sweep */}
+      {/* Scan line */}
       <div className="hero-scan-line" aria-hidden="true" />
 
-      {/* HUD targeting corners */}
+      {/* HUD corners */}
       <div className="hud-corner hud-tl" aria-hidden="true" />
       <div className="hud-corner hud-tr" aria-hidden="true" />
       <div className="hud-corner hud-bl" aria-hidden="true" />
       <div className="hud-corner hud-br" aria-hidden="true" />
 
       <div className="relative container mx-auto px-4 sm:px-6 py-24 md:py-32">
-        <div className="max-w-4xl">
-          {/* Badge */}
-          <div className="animate-fade-up delay-100 flex items-center gap-2 mb-8">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-violet-500/25 bg-violet-500/[0.07]">
-              <Sword className="w-3 h-3 text-violet-400" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
-                לוחמי קרב — בוני עסקים
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Top badge */}
+          <div className="animate-fade-up delay-100 flex items-center justify-center gap-2 mb-10">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full glass">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                שלושה לוחמים. משימה אחת. העסק שלך.
               </span>
             </div>
           </div>
 
-          {/* Main headline */}
-          <h1 className="animate-fade-up delay-200">
+          {/* Main headline — dramatic reveal */}
+          <h1 className="animate-hero-reveal delay-300 mb-8">
             <span
-              className="block text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white/95 mb-2 leading-none"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-none mb-3"
+              style={{
+                fontFamily: "var(--font-display)",
+                color: "rgba(255,255,255,0.95)",
+                textShadow: "0 4px 40px rgba(0,0,0,0.8)",
+              }}
             >
-              FIGHTERS
+              אנחנו לא בונים אתרים.
             </span>
             <span
-              className="block text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight gradient-text-rainbow mb-6 leading-none"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight gradient-text-hero leading-none"
+              style={{
+                fontFamily: "var(--font-display)",
+              }}
             >
-              BUILDERS
+              אנחנו בונים מנועי צמיחה.
             </span>
           </h1>
 
+          {/* Animated divider line */}
+          <div
+            className="animate-line-expand delay-600 mx-auto mb-8 h-[2px] w-32"
+            style={{
+              background: "linear-gradient(to left, #3b82f6, #f59e0b)",
+            }}
+          />
+
           {/* Tagline */}
-          <p className="animate-fade-up delay-300 text-xl md:text-2xl text-white/55 font-light mb-4 max-w-2xl leading-relaxed">
-            אנחנו לא רק בונים אתרים.{" "}
-            <span className="text-white/80 font-medium">
-              אנחנו בונים נשק דיגיטלי.
-            </span>
+          <p className="animate-fade-up delay-700 text-lg md:text-xl lg:text-2xl text-white/70 font-light mb-4 max-w-3xl mx-auto leading-relaxed">
+            שלושה לוחמי קרב ישראלים שהפכו את המשמעת הצבאית{" "}
+            <span className="text-white font-medium">למערכות דיגיטליות שמייצרות תוצאות</span>
           </p>
 
-          <p className="animate-fade-up delay-400 text-base text-white/35 mb-10 max-w-xl leading-relaxed">
-            שלושה לוחמי קרב ישראלים, משימה אחת: ליישם דיוק צבאי ועוצמת ביצוע על התשתית הדיגיטלית שלך.
+          <p className="animate-fade-up delay-800 text-base text-white/45 mb-12 max-w-2xl mx-auto leading-relaxed">
+            אתרים. חנויות אונליין. משפכים שיווקיים. אוטומציות. הכל בדיוק, מחויבות ומחירים שכל עסק יכול להרשות לעצמו.
           </p>
 
           {/* CTAs */}
-          <div className="animate-fade-up delay-500 flex flex-col sm:flex-row gap-4">
+          <div className="animate-fade-up delay-900 flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-white transition-all duration-300 hover:brightness-110"
-              style={{
-                background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
-                boxShadow: "0 0 30px rgba(34,197,94,0.2)",
-              }}
+              className="btn-whatsapp inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-white text-base"
             >
               <MessageCircle className="w-5 h-5" />
-              התחל בוואטסאפ
+              דברו איתנו בוואטסאפ
             </a>
 
             <Link
-              href="/portfolio"
-              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-white/80 border border-white/10 hover:border-violet-500/40 hover:text-white hover:bg-violet-500/[0.07] transition-all duration-300"
+              href="/contact"
+              className="btn-outline group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-white/70 text-base"
             >
-              צפה בעבודות
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              קבעו שיחת ייעוץ חינם
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </Link>
           </div>
 
-          {/* Social proof */}
-          <div className="animate-fade-up delay-600 mt-14 flex flex-wrap items-center gap-6">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#05050b]"
+          {/* Trust signals row */}
+          <div className="animate-fade-up delay-1000 flex flex-wrap items-center justify-center gap-8">
+            {[
+              { label: "פרויקטים", value: "30+", color: "#60a5fa" },
+              { label: "שביעות רצון", value: "100%", color: "#fbbf24" },
+              { label: "זמן מענה", value: "3 דק׳", color: "#34d399" },
+            ].map((item, i) => (
+              <div key={item.label} className="flex items-center gap-3">
+                {i > 0 && <div className="w-px h-6 bg-white/10 hidden sm:block" />}
+                <div className="text-center">
+                  <p
+                    className="text-2xl font-bold"
                     style={{
-                      background: `linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)`,
-                      opacity: 0.7 + i * 0.075,
+                      fontFamily: "var(--font-display)",
+                      color: item.color,
                     }}
-                    aria-hidden="true"
-                  />
-                ))}
+                  >
+                    {item.value}
+                  </p>
+                  <p className="text-[11px] text-white/35 mt-0.5">{item.label}</p>
+                </div>
               </div>
-              <p className="text-sm text-white/40">
-                <span className="text-white/70 font-semibold">20+</span> לקוחות צומחים
-              </p>
-            </div>
+            ))}
 
             <div className="w-px h-6 bg-white/10 hidden sm:block" />
 
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-sm text-white/40">
-                זמין לפרויקטים חדשים
+              <span className="text-xs text-white/40">
+                זמינים לפרויקטים חדשים
               </span>
             </div>
           </div>
         </div>
-
-        {/* Floating stat cards */}
-        <div
-          className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 space-y-4 animate-fade-up delay-700"
-          aria-hidden="true"
-        >
-          {[
-            { label: "אתרים שנבנו", value: "30+", color: "#3b82f6" },
-            { label: "אוטומציות פעילות", value: "50+", color: "#f59e0b" },
-            { label: "ROI ממוצע ללקוח", value: "3x", color: "#10b981" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-xl px-5 py-3 min-w-[160px]"
-              style={{
-                background: "#0d0d18",
-                border: `1px solid rgba(255,255,255,0.07)`,
-                borderRight: `2px solid ${stat.color}`,
-              }}
-            >
-              <p
-                className="text-2xl font-bold font-mono"
-                style={{ color: stat.color }}
-              >
-                {stat.value}
-              </p>
-              <p className="text-xs text-white/40 mt-0.5">{stat.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Bottom fade */}
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-scroll-hint">
+        <ChevronDown className="w-5 h-5 text-white/30" />
+      </div>
+
+      {/* Bottom gradient fade */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
         style={{
           background: "linear-gradient(to bottom, transparent, #05050b)",
         }}

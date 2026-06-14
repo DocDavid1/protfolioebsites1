@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 
 const WHATSAPP_NUMBER = "972501234567";
@@ -9,86 +9,131 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 export function FinalCTA() {
   return (
     <section
-      className="py-24 md:py-36 relative overflow-hidden"
+      className="py-28 md:py-40 relative overflow-hidden"
       aria-label="קריאה לפעולה"
     >
-      {/* Top divider */}
       <div className="divider-brand absolute top-0 left-0 right-0" />
 
-      {/* Background gradient */}
+      {/* Dramatic gradient background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.06) 40%, transparent 70%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(245,158,11,0.06) 0%, transparent 60%)",
+            "radial-gradient(ellipse 100% 80% at 50% 30%, rgba(59,130,246,0.12) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 30% 70%, rgba(245,158,11,0.08) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 50%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-tactical-grid opacity-50" aria-hidden="true" />
+      <div className="absolute inset-0 bg-tactical-grid opacity-40" aria-hidden="true" />
 
-      <div className="relative container mx-auto px-4 sm:px-6 text-center">
-        <AnimateIn>
-          <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-6 block">
-            מוכן לביצוע
-          </span>
-          <h2
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            הפסק לתכנן.
-            <br />
-            <span className="gradient-text-blue">התחל לבנות.</span>
-          </h2>
-        </AnimateIn>
+      {/* Morphing background blobs */}
+      <div
+        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] pointer-events-none animate-morph-blob"
+        style={{
+          background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%)",
+          filter: "blur(80px)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] pointer-events-none animate-morph-blob"
+        style={{
+          background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 60%)",
+          filter: "blur(60px)",
+          animationDelay: "5s",
+        }}
+        aria-hidden="true"
+      />
 
-        <AnimateIn delay={100}>
-          <p className="text-lg text-white/65 max-w-xl mx-auto mb-10 leading-relaxed">
-            הודעת וואטסאפ אחת היא כל מה שצריך כדי להתחיל לבנות את התשתית הדיגיטלית שהעסק שלך ראוי לה.
-          </p>
-        </AnimateIn>
-
-        <AnimateIn delay={200} className="flex flex-col sm:flex-row gap-4 justify-center">
-          {/* Primary WhatsApp CTA */}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-white text-base transition-all duration-300"
-            style={{
-              background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
-              boxShadow: "0 0 40px rgba(34,197,94,0.25)",
-            }}
-          >
-            <MessageCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
-            שלח לנו הודעה בוואטסאפ
-          </a>
-
-          {/* Secondary CTA */}
-          <Link
-            href="/contact"
-            className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-white/60 border border-white/10 hover:border-white/20 hover:text-white transition-all duration-300 text-base"
-          >
-            שלח תדריך
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </AnimateIn>
-
-        {/* Trust signals */}
-        <AnimateIn delay={300} className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-white/45">
-          {[
-            "מענה מהיר מובטח",
-            "ייעוץ ראשוני חינם",
-            "ללא חוזים ארוכי טווח",
-          ].map((item, i) => (
-            <span key={item} className="flex items-center gap-1.5">
-              {i > 0 && <span className="w-1 h-1 rounded-full bg-white/15 hidden sm:block" />}
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-              {item}
+      <div className="relative container mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <AnimateIn>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 mb-6 block">
+              הצעד הבא שלך
             </span>
-          ))}
-        </AnimateIn>
+            <h2
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              העסק שלך{" "}
+              <span className="gradient-text-hero">ראוי ליותר.</span>
+            </h2>
+          </AnimateIn>
+
+          <AnimateIn delay={100}>
+            <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-6 leading-relaxed">
+              בזמן שאתה קורא את זה, המתחרים שלך כבר בונים נוכחות דיגיטלית.
+              אל תישאר מאחור.
+            </p>
+            <p className="text-base text-white/45 max-w-xl mx-auto mb-12">
+              הודעת וואטסאפ אחת, שיחת ייעוץ חינם, ותוכנית פעולה ברורה לעסק שלך. בלי התחייבות.
+            </p>
+          </AnimateIn>
+
+          {/* CTA buttons */}
+          <AnimateIn delay={200}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-bold text-white text-lg"
+              >
+                <MessageCircle className="w-6 h-6 transition-transform group-hover:scale-110" />
+                שלחו הודעה בוואטסאפ
+              </a>
+
+              <Link
+                href="/contact"
+                className="btn-outline group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-semibold text-white/65 text-lg"
+              >
+                שלחו בקשה לפגישה
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+              </Link>
+            </div>
+          </AnimateIn>
+
+          {/* Trust signals */}
+          <AnimateIn delay={300}>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-14">
+              {[
+                "מענה תוך דקות",
+                "ייעוץ ראשוני חינם",
+                "ללא חוזים ארוכי טווח",
+                "מחירים נגישים לכל עסק",
+              ].map((item) => (
+                <span key={item} className="flex items-center gap-2 text-sm text-white/40">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/70" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </AnimateIn>
+
+          {/* Alternative contact methods */}
+          <AnimateIn delay={400}>
+            <div className="glass-strong rounded-2xl p-6 md:p-8 max-w-xl mx-auto">
+              <p className="text-sm text-white/50 mb-4">או דברו איתנו ישירות:</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a
+                  href={`tel:+${WHATSAPP_NUMBER}`}
+                  className="flex items-center gap-2 text-sm text-white/60 hover:text-blue-400 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span dir="ltr">+972-50-123-4567</span>
+                </a>
+                <div className="w-px h-4 bg-white/10 hidden sm:block" />
+                <a
+                  href="mailto:hello@fightersbuilders.com"
+                  className="flex items-center gap-2 text-sm text-white/60 hover:text-blue-400 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  hello@fightersbuilders.com
+                </a>
+              </div>
+            </div>
+          </AnimateIn>
+        </div>
       </div>
     </section>
   );

@@ -233,7 +233,7 @@ export function AccessibilityToolbar() {
   if (!mounted) {
     return (
       <button
-        className="fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg"
+        className="fixed bottom-24 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg"
         aria-label="פתח סרגל נגישות"
         aria-expanded={false}
       >
@@ -248,7 +248,7 @@ export function AccessibilityToolbar() {
       <button
         ref={triggerRef}
         onClick={() => setOpen((prev) => !prev)}
-        className="fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+        className="fixed bottom-24 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
         aria-label={open ? "סגור סרגל נגישות" : "פתח סרגל נגישות"}
         aria-expanded={open}
         aria-controls="a11y-panel"
@@ -267,7 +267,7 @@ export function AccessibilityToolbar() {
           id="a11y-panel"
           role="dialog"
           aria-label="סרגל נגישות"
-          className="fixed bottom-20 left-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-xl bg-[#0d0d18] border border-white/10 shadow-2xl"
+          className="fixed bottom-[8.5rem] left-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-xl bg-[#0d0d18] border border-white/10 shadow-2xl"
           style={{
             animation: "fade-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) both",
           }}

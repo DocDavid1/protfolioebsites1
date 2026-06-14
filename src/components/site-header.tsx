@@ -2,25 +2,20 @@
 
 import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, MessageCircle, Settings, LogOut, LogIn } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X, MessageCircle, Settings } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
-import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import type { User } from "@supabase/supabase-js";
 
 const WHATSAPP_NUMBER = "972501234567";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום פייטרס בילדרס!")}`;
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [navLinks, setNavLinks] = useState(DEFAULT_NAV_LINKS);
-  const [user, setUser] = useState<User | null>(null);
-  const [signingOut, setSigningOut] = useState(false);
 
-  // Close mobile menu on Escape key
   useEffect(() => {
     if (!mobileOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -39,33 +34,19 @@ export function SiteHeader() {
         startTransition(() => setNavLinks(parsed));
       }
     } catch (_e) {
-      // ignore parse errors
+      // ignore
     }
   }, []);
 
-  // Track auth state
   useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-    return () => subscription.unsubscribe();
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleSignOut = async () => {
-    setSigningOut(true);
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    setUser(null);
-    setSigningOut(false);
-    router.push("/");
-    router.refresh();
-  };
 
   return (
     <>
-      {/* Skip to content */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#0d0d18] focus:text-white focus:border focus:border-blue-500/30 focus:rounded-md text-sm"
@@ -74,11 +55,17 @@ export function SiteHeader() {
       </a>
 
       <header
-        className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#05050b]/90 backdrop-blur-md"
+        className={cn(
+          "sticky top-0 z-40 transition-all duration-300",
+          scrolled
+            ? "bg-[#05050b]/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            : "bg-transparent border-b border-transparent"
+        )}
         role="banner"
       >
         <nav
-          className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4"
+          className="container mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4"
+          style={{ height: scrolled ? "64px" : "72px", transition: "height 0.3s ease" }}
           aria-label="ניווט ראשי"
         >
           {/* Logo */}
@@ -167,17 +154,16 @@ export function SiteHeader() {
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-1" role="list">
             {navLinks.map((link) => {
-              const isActive =
-                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
-                      "px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                      "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "text-white bg-white/[0.06]"
+                        ? "text-white bg-white/[0.07]"
                         : "text-white/45 hover:text-white/80 hover:bg-white/[0.04]"
                     )}
                   >
@@ -189,58 +175,30 @@ export function SiteHeader() {
           </ul>
 
           {/* Right side */}
-          <div className="flex items-center gap-2">
-            {/* WhatsApp CTA */}
+          <div className="flex items-center gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="וואטסאפ — נפתח בחלון חדש"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-200"
-              style={{
-                background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
-                boxShadow: "0 0 16px rgba(34,197,94,0.15)",
-              }}
+              className="hidden sm:inline-flex items-center gap-2 btn-whatsapp px-4 py-2 rounded-xl text-sm font-semibold text-white"
             >
               <MessageCircle className="w-4 h-4" />
               <span className="hidden lg:inline">וואטסאפ</span>
             </a>
 
-            {/* Auth / Admin controls */}
-            {user ? (
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/admin/projects"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
-                  aria-label="פאנל ניהול"
-                >
-                  <Settings className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Admin</span>
-                </Link>
-                <button
-                  onClick={handleSignOut}
-                  disabled={signingOut}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white/40 bg-white/[0.04] border border-white/[0.08] hover:text-white/70 hover:border-white/[0.15] transition-all disabled:opacity-50"
-                  aria-label="התנתק"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">יציאה</span>
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/auth/login?redirect=/admin/projects"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
-                aria-label="כניסה לפאנל ניהול"
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Admin</span>
-              </Link>
-            )}
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/35 transition-all"
+              aria-label="פאנל ניהול"
+              title="Admin"
+            >
+              <Settings className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Admin</span>
+            </Link>
 
-            {/* Mobile menu toggle */}
             <button
-              className="md:hidden p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.05] transition-all"
+              className="md:hidden p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/[0.05] transition-all"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
               aria-expanded={mobileOpen}
@@ -252,10 +210,9 @@ export function SiteHeader() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-white/[0.06] bg-[#05050b] px-4 py-3 space-y-1">
+          <div className="md:hidden border-t border-white/[0.06] bg-[#05050b]/98 backdrop-blur-xl px-4 py-4 space-y-1">
             {navLinks.map((link) => {
-              const isActive =
-                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
                 <Link
                   key={link.href}
@@ -263,7 +220,7 @@ export function SiteHeader() {
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "block px-4 py-2.5 rounded-lg text-sm font-medium transition-all",
+                    "block px-4 py-3 rounded-xl text-sm font-medium transition-all",
                     isActive
                       ? "text-white bg-white/[0.06]"
                       : "text-white/50 hover:text-white hover:bg-white/[0.04]"
@@ -273,46 +230,18 @@ export function SiteHeader() {
                 </Link>
               );
             })}
-            <div className="pt-2 space-y-2 pb-1">
+            <div className="pt-3 pb-1">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white"
-                style={{ background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)" }}
+                aria-label="התחל בוואטסאפ — נפתח בחלון חדש"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white btn-whatsapp"
                 onClick={() => setMobileOpen(false)}
               >
                 <MessageCircle className="w-4 h-4" />
-                התחל בוואטסאפ
+                דברו איתנו בוואטסאפ
               </a>
-              {user ? (
-                <>
-                  <Link
-                    href="/admin/projects"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/10"
-                  >
-                    <Settings className="w-4 h-4" />
-                    Admin Panel
-                  </Link>
-                  <button
-                    onClick={() => { setMobileOpen(false); void handleSignOut(); }}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white/50 border border-white/[0.08] bg-white/[0.03]"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    יציאה מהמערכת
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/auth/login?redirect=/admin/projects"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/10"
-                >
-                  <LogIn className="w-4 h-4" />
-                  כניסה לאדמין
-                </Link>
-              )}
             </div>
           </div>
         )}

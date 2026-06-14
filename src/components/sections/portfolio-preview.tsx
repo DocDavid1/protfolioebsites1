@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { PortfolioSlider } from "@/components/portfolio/portfolio-slider";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { dbProjectToProject, projects as mockProjects } from "@/lib/portfolio";
@@ -33,12 +33,10 @@ export async function PortfolioPreview() {
     <section
       className="py-24 md:py-32 relative overflow-hidden"
       id="portfolio"
-      aria-label="Portfolio Preview"
+      aria-label="עבודות נבחרות"
     >
-      {/* Section divider */}
-      <div className="divider-brand absolute top-0 left-0 right-0" />
+      <div className="divider-glow absolute top-0 left-0 right-0" />
 
-      {/* Section background — makes cards pop */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -51,24 +49,27 @@ export async function PortfolioPreview() {
         {/* Section header */}
         <AnimateIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-400 mb-4 block">
               עבודות נבחרות
             </span>
             <h2
-              className="text-4xl md:text-5xl font-bold text-white"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              מבצעים
-              <br />
-              <span className="gradient-text-blue">שבוצעו</span>
+              פרויקטים{" "}
+              <span className="gradient-text-blue">שהשלמנו</span>
             </h2>
+            <p className="text-white/40 mt-3 max-w-xl">
+              כל פרויקט הוא משימה. כל לקוח הוא שותף. הנה חלק מהעבודות האחרונות שלנו.
+            </p>
           </div>
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-white transition-colors whitespace-nowrap"
+            className="btn-outline group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white/60 whitespace-nowrap"
           >
-            צפה בכל הפרויקטים
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ExternalLink className="w-3.5 h-3.5" />
+            כל הפרויקטים
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
           </Link>
         </AnimateIn>
 
@@ -77,16 +78,29 @@ export async function PortfolioPreview() {
           <PortfolioSlider projects={featured} />
         </AnimateIn>
 
-        {/* CTA row */}
-        <AnimateIn delay={200} className="mt-10 text-center">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm text-white/80 border border-white/15 hover:border-blue-500/45 hover:text-white hover:bg-blue-500/[0.09] transition-all duration-300"
-            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}
-          >
-            ראה את כל הפרויקטים
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        {/* Bottom stats row */}
+        <AnimateIn delay={200} className="mt-14">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: "אתרים", value: "15+", color: "#3b82f6" },
+              { label: "חנויות אונליין", value: "8+", color: "#10b981" },
+              { label: "מערכות אוטומציה", value: "12+", color: "#f59e0b" },
+              { label: "לקוחות מרוצים", value: "100%", color: "#a78bfa" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="glass-light rounded-xl p-4 text-center hover-lift"
+              >
+                <p
+                  className="text-2xl font-bold mb-1"
+                  style={{ fontFamily: "var(--font-display)", color: stat.color }}
+                >
+                  {stat.value}
+                </p>
+                <p className="text-xs text-white/35">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </AnimateIn>
       </div>
     </section>
