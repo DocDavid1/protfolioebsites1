@@ -113,7 +113,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                 </span>
                 {project.featured && (
                   <span className="text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">
-                    Featured
+                    מומלץ
                   </span>
                 )}
               </div>
@@ -121,7 +121,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                 {project.title}
               </h2>
               <p className="text-sm text-white/40">
-                Client:{" "}
+                לקוח:{" "}
                 <span className="text-white/60">{project.client}</span>
               </p>
             </div>
@@ -136,7 +136,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           {project.results && project.results.length > 0 && (
             <div className="mb-6">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
-                Results
+                תוצאות
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {project.results.map((result, i) => (
@@ -156,7 +156,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           <div className="mb-6">
             <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3 flex items-center gap-1.5">
               <Tag className="w-3 h-3" />
-              Technologies
+              טכנולוגיות
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
@@ -177,16 +177,16 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} — נפתח בחלון חדש`}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg btn-primary text-sm"
             >
               <ExternalLink className="w-4 h-4" />
-              Visit Website
+              צפה באתר
             </a>
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-lg border border-white/10 hover:bg-white/[0.05] text-white/60 hover:text-white text-sm font-medium transition-all"
+              className="px-5 py-2.5 rounded-lg btn-outline text-sm"
             >
-              Close
+              סגור
             </button>
           </div>
         </div>

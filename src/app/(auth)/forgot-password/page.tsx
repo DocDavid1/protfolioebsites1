@@ -74,7 +74,7 @@ export default function ForgotPasswordPage() {
             )}
 
             <button type="submit" disabled={loading}
-              className={cn("w-full py-2.5 rounded-lg text-sm font-semibold text-white transition-all bg-blue-600 hover:bg-blue-500 focus:outline-none", loading && "opacity-60 cursor-not-allowed")}>
+              className={cn("btn-primary w-full", loading && "opacity-60 cursor-not-allowed")}>
               {loading ? "שולח..." : "שלח קישור לאיפוס"}
             </button>
           </form>

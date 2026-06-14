@@ -61,8 +61,16 @@ export default async function PortfolioPage({
   const allProjects = await getProjects(activeCategory);
 
   return (
-    <div className="min-h-screen py-24 md:py-32">
-      <div className="container mx-auto px-4 sm:px-6">
+    <div className="min-h-screen py-24 md:py-32 relative overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 15%, rgba(59,130,246,0.05) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative container mx-auto px-4 sm:px-6">
         {/* Page header */}
         <AnimateIn className="text-center mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
@@ -90,7 +98,7 @@ export default async function PortfolioPage({
           ].map((stat) => (
             <div
               key={stat.label}
-              className="text-center p-5 rounded-xl border border-white/7 bg-[#0d0d18]"
+              className="text-center p-5 rounded-xl border border-white/7 bg-[#0d0d18] hover-lift"
             >
               <p
                 className="text-3xl font-bold gradient-text-blue mb-1"
@@ -112,7 +120,7 @@ export default async function PortfolioPage({
             className={cn(
               "px-4 py-2 rounded-lg text-xs font-medium border transition-all",
               !activeCategory
-                ? "text-white bg-white/[0.08] border-white/[0.15]"
+                ? "text-white bg-blue-500/15 border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.15)]"
                 : "text-white/40 border-white/[0.07] hover:border-white/[0.12] hover:text-white/60"
             )}
           >
@@ -125,7 +133,7 @@ export default async function PortfolioPage({
               className={cn(
                 "px-4 py-2 rounded-lg text-xs font-medium border transition-all",
                 activeCategory === cat
-                  ? "text-white bg-white/[0.08] border-white/[0.15]"
+                  ? "text-white bg-blue-500/15 border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.15)]"
                   : "text-white/40 border-white/[0.07] hover:border-white/[0.12] hover:text-white/60"
               )}
             >

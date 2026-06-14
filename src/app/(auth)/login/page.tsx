@@ -93,8 +93,7 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
               className={cn(
-                "w-full py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200",
-                "bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50",
+                "btn-primary w-full",
                 loading && "opacity-60 cursor-not-allowed"
               )}
             >

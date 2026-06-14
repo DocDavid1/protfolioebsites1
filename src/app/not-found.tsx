@@ -1,27 +1,62 @@
 import Link from "next/link";
-import { FileQuestion } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Home, ArrowRight } from "lucide-react";
+import { AnimateIn } from "@/components/ui/animate-in";
 
 export default function NotFound() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-md mx-auto text-center">
-        <div className="flex justify-center mb-6">
-          <FileQuestion className="h-16 w-16 text-muted-foreground" />
-        </div>
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <h2 className="text-xl font-semibold mb-4">Page Not Found</h2>
-        <p className="text-muted-foreground mb-6">
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Button asChild>
-            <Link href="/">Go home</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/dashboard">Dashboard</Link>
-          </Button>
-        </div>
+    <div dir="rtl" className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      {/* Background layers */}
+      <div className="absolute inset-0 bg-tactical-grid opacity-30" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(59,130,246,0.12) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-2xl px-6 py-24 text-center">
+        {/* 404 number */}
+        <AnimateIn from="scale" duration={900}>
+          <p
+            className="gradient-text-blue text-[8rem] font-extrabold leading-none tracking-tighter sm:text-[10rem]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            404
+          </p>
+        </AnimateIn>
+
+        {/* Headline */}
+        <AnimateIn from="bottom" delay={150}>
+          <h1
+            className="mt-4 text-3xl font-bold text-white/90 sm:text-4xl"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            הדף לא נמצא
+          </h1>
+        </AnimateIn>
+
+        {/* Subtitle */}
+        <AnimateIn from="bottom" delay={300}>
+          <p className="mt-4 text-lg leading-relaxed text-white/45">
+            נראה שהגעת למקום לא קיים. אבל אל דאגה — יש לנו הרבה מקומות טובים
+            יותר.
+          </p>
+        </AnimateIn>
+
+        {/* CTA buttons */}
+        <AnimateIn from="bottom" delay={450}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link href="/" className="btn-primary inline-flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              חזור לדף הבית
+            </Link>
+            <Link href="/contact" className="btn-outline inline-flex items-center gap-2">
+              צור קשר
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </AnimateIn>
       </div>
     </div>
   );

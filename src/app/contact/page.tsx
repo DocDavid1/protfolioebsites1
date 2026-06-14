@@ -104,8 +104,16 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen py-24 md:py-32">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+    <div className="min-h-screen py-24 md:py-32 relative overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 40% at 50% 20%, rgba(59,130,246,0.05) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative container mx-auto px-4 sm:px-6 max-w-5xl">
         {/* Header */}
         <AnimateIn className="mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
@@ -360,11 +368,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={loading}
                     aria-busy={loading}
-                    className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-300 disabled:opacity-60"
-                    style={{
-                      background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-                      boxShadow: "0 0 20px rgba(59,130,246,0.2)",
-                    }}
+                    className="btn-primary w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm disabled:opacity-60"
                   >
                     <Send className="w-4 h-4" />
                     {loading ? "שולח..." : "שלח תדריך"}

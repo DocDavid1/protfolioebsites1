@@ -45,7 +45,7 @@ const Blockquote: React.FC<React.BlockquoteHTMLAttributes<HTMLElement>> = (
   props
 ) => (
   <blockquote
-    className="mb-3 border-l-2 border-border pl-3 text-muted-foreground"
+    className="mb-3 border-l-2 border-white/[0.08] pl-3 text-white/50"
     {...props}
   />
 );
@@ -55,13 +55,13 @@ const Code: Components["code"] = ({ children, className, ...props }) => {
 
   if (isInline) {
     return (
-      <code className="rounded bg-muted px-1 py-0.5 text-xs" {...props}>
+      <code className="rounded bg-white/[0.04] px-1 py-0.5 text-xs" {...props}>
         {children}
       </code>
     );
   }
   return (
-    <pre className="mb-3 w-full overflow-x-auto rounded-md bg-muted p-3">
+    <pre className="mb-3 w-full overflow-x-auto rounded-md bg-white/[0.04] p-3">
       <code className="text-xs leading-5" {...props}>
         {children}
       </code>
@@ -69,7 +69,7 @@ const Code: Components["code"] = ({ children, className, ...props }) => {
   );
 };
 const HR: React.FC<React.HTMLAttributes<HTMLHRElement>> = (props) => (
-  <hr className="my-4 border-border" {...props} />
+  <hr className="my-4 border-white/[0.08]" {...props} />
 );
 const Table: React.FC<React.TableHTMLAttributes<HTMLTableElement>> = (
   props
@@ -80,12 +80,12 @@ const Table: React.FC<React.TableHTMLAttributes<HTMLTableElement>> = (
 );
 const TH: React.FC<React.ThHTMLAttributes<HTMLTableCellElement>> = (props) => (
   <th
-    className="border border-border bg-muted px-2 py-1 text-left"
+    className="border border-white/[0.08] bg-white/[0.04] px-2 py-1 text-left"
     {...props}
   />
 );
 const TD: React.FC<React.TdHTMLAttributes<HTMLTableCellElement>> = (props) => (
-  <td className="border border-border px-2 py-1" {...props} />
+  <td className="border border-white/[0.08] px-2 py-1" {...props} />
 );
 
 const markdownComponents: Components = {
@@ -144,7 +144,7 @@ function formatTimestamp(date: Date): string {
   return new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit",
-    hour12: true,
+    hour12: false,
   }).format(date);
 }
 
@@ -155,23 +155,23 @@ function CopyButton({ text }: { text: string }) {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      toast.success("Copied to clipboard");
+      toast.success("הועתק ללוח");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Failed to copy");
+      toast.error("ההעתקה נכשלה");
     }
   };
 
   return (
     <button
       onClick={handleCopy}
-      className="p-1 hover:bg-muted rounded transition-colors"
-      title="Copy to clipboard"
+      className="p-1 hover:bg-white/[0.06] rounded transition-colors"
+      title="העתק ללוח"
     >
       {copied ? (
         <Check className="h-3.5 w-3.5 text-green-500" />
       ) : (
-        <Copy className="h-3.5 w-3.5 text-muted-foreground" />
+        <Copy className="h-3.5 w-3.5 text-white/50" />
       )}
     </button>
   );
@@ -179,9 +179,9 @@ function CopyButton({ text }: { text: string }) {
 
 function ThinkingIndicator() {
   return (
-    <div className="flex items-center gap-2 p-3 rounded-lg bg-muted max-w-[80%]">
+    <div className="flex items-center gap-2 p-3 rounded-lg bg-white/[0.04] max-w-[80%]">
       <Loader2 className="h-4 w-4 animate-spin" />
-      <span className="text-sm text-muted-foreground">AI is thinking...</span>
+      <span className="text-sm text-white/50">AI חושב...</span>
     </div>
   );
 }
@@ -192,7 +192,7 @@ export default function ChatPage() {
   const { data: session, isPending } = useSession();
   const { messages, sendMessage, status, error, setMessages } = useChat({
     onError: (err) => {
-      toast.error(err.message || "Failed to send message");
+      toast.error(err.message || "שליחת ההודעה נכשלה");
     },
   });
   const [input, setInput] = useState("");
@@ -224,11 +224,11 @@ export default function ChatPage() {
   const clearMessages = () => {
     setMessages([]);
     localStorage.removeItem(STORAGE_KEY);
-    toast.success("Chat cleared");
+    toast.success("הצ'אט נוקה");
   };
 
   if (isPending) {
-    return <div className="container mx-auto px-4 py-12">Loading...</div>;
+    return <div className="container mx-auto px-4 py-12">טוען...</div>;
   }
 
   if (!session) {
@@ -244,34 +244,35 @@ export default function ChatPage() {
   const isStreaming = status === "streaming";
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6 pb-4 border-b">
-          <h1 className="text-2xl font-bold">AI Chat</h1>
+    <div className="relative overflow-hidden container mx-auto px-4 py-8">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.08),transparent_60%)]" />
+      <div className="relative max-w-4xl mx-auto">
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/[0.08] backdrop-blur-md bg-white/[0.02] rounded-xl px-4 py-3">
+          <h1 className="text-2xl font-bold font-display">צ&apos;אט AI</h1>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">
-              Welcome, {session.user.name}!
+            <span className="text-sm text-white/50">
+              שלום, {session.user.name}!
             </span>
             {messages.length > 0 && (
               <Button variant="ghost" size="sm" onClick={clearMessages}>
-                Clear chat
+                נקה צ&apos;אט
               </Button>
             )}
           </div>
         </div>
 
         {error && (
-          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-            <p className="text-sm text-destructive">
-              Error: {error.message || "Something went wrong"}
+          <div className="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+            <p className="text-sm text-red-400">
+              Error: {error.message || "משהו השתבש"}
             </p>
           </div>
         )}
 
-        <div className="min-h-[50vh] overflow-y-auto space-y-4 mb-4">
+        <div className="min-h-[60vh] overflow-y-auto space-y-4 mb-4">
           {messages.length === 0 && (
-            <div className="text-center text-muted-foreground py-12">
-              Start a conversation with AI
+            <div className="text-center text-white/50 py-12">
+              התחל שיחה עם AI
             </div>
           )}
           {messages.map((message) => {
@@ -286,14 +287,14 @@ export default function ChatPage() {
                 key={message.id}
                 className={`group p-3 rounded-lg ${
                   message.role === "user"
-                    ? "bg-primary text-primary-foreground ml-auto max-w-[80%]"
-                    : "bg-muted max-w-[80%]"
+                    ? "bg-blue-600 text-white ml-auto max-w-[80%]"
+                    : "bg-white/[0.04] max-w-[80%]"
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium">
-                      {message.role === "user" ? "You" : "AI"}
+                      {message.role === "user" ? "אתה" : "AI"}
                     </span>
                     {timestamp && (
                       <span className="text-xs opacity-60">{timestamp}</span>
@@ -327,18 +328,18 @@ export default function ChatPage() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-1 p-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder="כתוב הודעה..."
+            className="flex-1 p-2 border border-white/[0.08] rounded-md bg-white/[0.04] text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50"
             disabled={isStreaming}
           />
-          <Button type="submit" disabled={!input.trim() || isStreaming}>
+          <Button type="submit" disabled={!input.trim() || isStreaming} className="bg-gradient-to-r from-blue-600 to-blue-500 text-white">
             {isStreaming ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Sending
+                שולח...
               </>
             ) : (
-              "Send"
+              "שלח"
             )}
           </Button>
         </form>
