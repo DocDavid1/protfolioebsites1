@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["next", "start", "--port", "3001"],
+      "port": 3001
+    }
+  ]
+}
