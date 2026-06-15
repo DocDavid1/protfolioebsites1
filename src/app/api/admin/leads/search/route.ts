@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
       const errText = await resp.text();
       console.error("[places] API error:", errText);
       return NextResponse.json(
-        { error: "Google Places API error. Check your API key and quota." },
+        { error: `Google Places API error (${resp.status}): ${errText}` },
         { status: 502 }
       );
     }
