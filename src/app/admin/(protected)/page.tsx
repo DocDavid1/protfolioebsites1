@@ -55,7 +55,7 @@ const COLOR_MAP: Record<ModuleColor, { card: string; icon: string }> = {
   emerald: { card: "border-emerald-500/15 hover:border-emerald-500/30 hover:bg-emerald-500/[0.03]", icon: "text-emerald-400 bg-emerald-500/10" },
   purple: { card: "border-purple-500/15 hover:border-purple-500/30 hover:bg-purple-500/[0.03]", icon: "text-purple-400 bg-purple-500/10" },
   amber: { card: "border-amber-500/15 hover:border-amber-500/30 hover:bg-amber-500/[0.03]", icon: "text-amber-400 bg-amber-500/10" },
-  slate: { card: "border-white/10 hover:border-white/20 hover:bg-white/[0.02]", icon: "text-white/50 bg-white/[0.06]" },
+  slate: { card: "border-border hover:bg-foreground/[0.02]", icon: "text-foreground/50 bg-foreground/[0.06]" },
 };
 
 export default async function AdminPage() {
@@ -87,7 +87,7 @@ export default async function AdminPage() {
             <span className="text-xs font-semibold uppercase tracking-widest text-amber-400">מרכז פעולות</span>
           </div>
           <h1
-            className="text-3xl font-bold text-white/90"
+            className="text-3xl font-bold text-foreground/90"
             style={{ fontFamily: "var(--font-display)" }}
           >
             לוח בקרה
@@ -95,7 +95,7 @@ export default async function AdminPage() {
         </div>
         <Link
           href="/"
-          className="text-xs text-white/30 hover:text-white/60 transition-colors flex items-center gap-1"
+          className="text-xs text-foreground/30 hover:text-foreground/60 transition-colors flex items-center gap-1"
         >
           <ArrowLeft className="w-3 h-3" />
           חזור לאתר
@@ -105,10 +105,10 @@ export default async function AdminPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-10">
         {stats.map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="p-5 rounded-xl border border-white/[0.07] bg-[#0d0d18]">
+          <div key={label} className="p-5 rounded-xl border border-border bg-card">
             <Icon className={`w-5 h-5 mb-3 ${color}`} />
-            <p className="text-2xl font-bold text-white/90 mb-1">{value}</p>
-            <p className="text-xs text-white/35">{label}</p>
+            <p className="text-2xl font-bold text-foreground/90 mb-1">{value}</p>
+            <p className="text-xs text-foreground/35">{label}</p>
           </div>
         ))}
       </div>
@@ -121,15 +121,15 @@ export default async function AdminPage() {
             <Link
               key={href}
               href={href}
-              className={`group p-5 rounded-xl border bg-[#0d0d18] transition-all ${colors.card}`}
+              className={`group p-5 rounded-xl border bg-card transition-all ${colors.card}`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 ${colors.icon}`}>
                 <Icon className="w-4.5 h-4.5" />
               </div>
-              <h3 className="text-sm font-semibold text-white/80 group-hover:text-white/95 mb-1.5 transition-colors">
+              <h3 className="text-sm font-semibold text-foreground/80 group-hover:text-foreground/95 mb-1.5 transition-colors">
                 {title}
               </h3>
-              <p className="text-xs text-white/35 leading-relaxed">
+              <p className="text-xs text-foreground/35 leading-relaxed">
                 {description}
               </p>
             </Link>

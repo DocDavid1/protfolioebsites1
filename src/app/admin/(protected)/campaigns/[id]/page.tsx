@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: "text-white/40 bg-white/[0.05] border-white/[0.08]",
+  draft: "text-foreground/40 bg-foreground/[0.05] border-border",
   active: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   paused: "text-amber-400 bg-amber-500/10 border-amber-500/20",
   completed: "text-blue-400 bg-blue-500/10 border-blue-500/20",
@@ -75,14 +75,14 @@ export default async function CampaignDetailPage({
       <div className="flex items-start gap-4">
         <Link
           href="/admin/campaigns"
-          className="mt-1 text-white/30 hover:text-white/60 transition-colors"
+          className="mt-1 text-foreground/30 hover:text-foreground/60 transition-colors"
         >
           <ArrowRight className="w-4 h-4 rotate-180" />
         </Link>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
             <h1
-              className="text-xl font-bold text-white/90 truncate"
+              className="text-xl font-bold text-foreground/90 truncate"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {metrics.name}
@@ -95,12 +95,12 @@ export default async function CampaignDetailPage({
             >
               {STATUS_LABELS[statusKey] ?? statusKey}
             </span>
-            <span className="text-xs text-white/25">
+            <span className="text-xs text-foreground/25">
               {TYPE_LABELS[typeKey] ?? typeKey}
             </span>
           </div>
           {metrics.target_audience && (
-            <p className="text-xs text-white/30 mt-1">
+            <p className="text-xs text-foreground/30 mt-1">
               קהל יעד: {metrics.target_audience}
             </p>
           )}
@@ -112,15 +112,15 @@ export default async function CampaignDetailPage({
         {kpis.map(({ label, value }) => (
           <div
             key={label}
-            className="p-4 rounded-xl border border-white/[0.07] bg-[#0d0d18] text-center"
+            className="p-4 rounded-xl border border-border bg-card text-center"
           >
             <p
-              className="text-2xl font-bold text-white/90"
+              className="text-2xl font-bold text-foreground/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {value.toLocaleString()}
             </p>
-            <p className="text-xs text-white/30 mt-1">{label}</p>
+            <p className="text-xs text-foreground/30 mt-1">{label}</p>
           </div>
         ))}
       </div>
@@ -130,7 +130,7 @@ export default async function CampaignDetailPage({
         {rates.map(({ label, value }) => (
           <div
             key={label}
-            className="p-4 rounded-xl border border-white/[0.07] bg-[#0d0d18] text-center"
+            className="p-4 rounded-xl border border-border bg-card text-center"
           >
             <p
               className="text-xl font-bold gradient-text-blue"
@@ -138,7 +138,7 @@ export default async function CampaignDetailPage({
             >
               {value}
             </p>
-            <p className="text-xs text-white/30 mt-1">{label}</p>
+            <p className="text-xs text-foreground/30 mt-1">{label}</p>
           </div>
         ))}
       </div>

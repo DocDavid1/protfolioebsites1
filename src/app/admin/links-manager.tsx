@@ -97,26 +97,26 @@ export function LinksManager() {
   };
 
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#0d0d18] overflow-hidden">
+    <div className="rounded-xl border border-border bg-card overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-white/[0.05] flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/15 flex items-center justify-center">
             <Link2 className="w-4 h-4 text-blue-400" />
           </div>
           <div>
             <h2
-              className="text-sm font-semibold text-white/80"
+              className="text-sm font-semibold text-foreground/80"
               style={{ fontFamily: "var(--font-display)" }}
             >
               ניהול קישורי ניווט
             </h2>
-            <p className="text-xs text-white/25">
+            <p className="text-xs text-foreground/25">
               הקישורים שיוצגו בסרגל הניווט כלשוניות
             </p>
           </div>
         </div>
-        <span className="text-xs font-mono text-white/20 bg-white/[0.03] px-2 py-1 rounded border border-white/[0.05]">
+        <span className="text-xs font-mono text-foreground/20 bg-foreground/[0.03] px-2 py-1 rounded border border-border">
           {links.length} קישורים
         </span>
       </div>
@@ -126,10 +126,10 @@ export function LinksManager() {
         {links.map((link, i) => (
           <div
             key={`${link.href}-${i}`}
-            className="group flex items-center gap-3 px-4 py-3 rounded-lg border border-white/[0.05] bg-white/[0.02] hover:border-white/[0.09] hover:bg-white/[0.03] transition-all"
+            className="group flex items-center gap-3 px-4 py-3 rounded-lg border border-border bg-foreground/[0.02] hover:border-border hover:bg-foreground/[0.03] transition-all"
           >
             {/* Index */}
-            <span className="text-[10px] font-mono text-white/20 w-5 shrink-0 text-center">
+            <span className="text-[10px] font-mono text-foreground/20 w-5 shrink-0 text-center">
               {String(i + 1).padStart(2, "0")}
             </span>
 
@@ -138,7 +138,7 @@ export function LinksManager() {
               <button
                 onClick={() => moveLink(i, "up")}
                 disabled={i === 0}
-                className="p-0.5 rounded hover:bg-white/[0.08] text-white/20 hover:text-white/50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                className="p-0.5 rounded hover:bg-foreground/[0.08] text-foreground/20 hover:text-foreground/50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
                 aria-label="הזז למעלה"
               >
                 <ChevronUp className="w-3 h-3" />
@@ -146,7 +146,7 @@ export function LinksManager() {
               <button
                 onClick={() => moveLink(i, "down")}
                 disabled={i === links.length - 1}
-                className="p-0.5 rounded hover:bg-white/[0.08] text-white/20 hover:text-white/50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                className="p-0.5 rounded hover:bg-foreground/[0.08] text-foreground/20 hover:text-foreground/50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
                 aria-label="הזז למטה"
               >
                 <ChevronDown className="w-3 h-3" />
@@ -154,7 +154,7 @@ export function LinksManager() {
             </div>
 
             {/* Label */}
-            <span className="flex-1 text-sm font-medium text-white/70">
+            <span className="flex-1 text-sm font-medium text-foreground/70">
               {link.label}
             </span>
 
@@ -168,7 +168,7 @@ export function LinksManager() {
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="opacity-0 group-hover:opacity-100 p-1.5 rounded hover:bg-white/[0.06] text-white/20 hover:text-white/50 transition-all"
+              className="opacity-0 group-hover:opacity-100 p-1.5 rounded hover:bg-foreground/[0.06] text-foreground/20 hover:text-foreground/50 transition-all"
               aria-label="פתח קישור"
             >
               <ExternalLink className="w-3 h-3" />
@@ -177,7 +177,7 @@ export function LinksManager() {
             {/* Delete */}
             <button
               onClick={() => removeLink(i)}
-              className="opacity-0 group-hover:opacity-100 p-1.5 rounded hover:bg-red-500/10 text-white/20 hover:text-red-400 transition-all"
+              className="opacity-0 group-hover:opacity-100 p-1.5 rounded hover:bg-red-500/10 text-foreground/20 hover:text-red-400 transition-all"
               aria-label="הסר קישור"
             >
               <Trash2 className="w-3 h-3" />
@@ -186,7 +186,7 @@ export function LinksManager() {
         ))}
 
         {links.length === 0 && (
-          <div className="text-center py-10 text-xs text-white/20">
+          <div className="text-center py-10 text-xs text-foreground/20">
             אין קישורים. הוסף קישורים למטה.
           </div>
         )}
@@ -194,8 +194,8 @@ export function LinksManager() {
 
       {/* Add new link form */}
       <div className="px-4 pb-4">
-        <div className="p-4 rounded-lg border border-dashed border-white/[0.07] bg-white/[0.01]">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-white/20 mb-3">
+        <div className="p-4 rounded-lg border border-dashed border-border bg-foreground/[0.01]">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-foreground/20 mb-3">
             הוסף קישור חדש
           </p>
           <div className="flex gap-2">
@@ -210,7 +210,7 @@ export function LinksManager() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") addLink();
               }}
-              className="flex-1 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-sm text-white/80 placeholder:text-white/20 outline-none focus:border-blue-500/40 focus:bg-white/[0.06] transition-all"
+              className="flex-1 px-3 py-2 rounded-lg bg-foreground/[0.04] border border-border text-sm text-foreground/80 placeholder:text-foreground/20 outline-none focus:border-blue-500/40 focus:bg-foreground/[0.06] transition-all"
               dir="rtl"
             />
             <input
@@ -224,7 +224,7 @@ export function LinksManager() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") addLink();
               }}
-              className="flex-1 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-sm text-white/80 placeholder:text-white/20 outline-none focus:border-blue-500/40 focus:bg-white/[0.06] transition-all font-mono"
+              className="flex-1 px-3 py-2 rounded-lg bg-foreground/[0.04] border border-border text-sm text-foreground/80 placeholder:text-foreground/20 outline-none focus:border-blue-500/40 focus:bg-foreground/[0.06] transition-all font-mono"
               dir="ltr"
             />
             <button
@@ -242,10 +242,10 @@ export function LinksManager() {
       </div>
 
       {/* Actions footer */}
-      <div className="px-6 py-4 border-t border-white/[0.05] flex items-center justify-between">
+      <div className="px-6 py-4 border-t border-border flex items-center justify-between">
         <button
           onClick={reset}
-          className="flex items-center gap-1.5 text-xs text-white/25 hover:text-white/45 transition-colors"
+          className="flex items-center gap-1.5 text-xs text-foreground/25 hover:text-foreground/45 transition-colors"
         >
           <RotateCcw className="w-3 h-3" />
           אפס לברירת מחדל

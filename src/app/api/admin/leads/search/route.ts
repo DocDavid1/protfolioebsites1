@@ -3,6 +3,7 @@ import { z } from "zod";
 import { scoreBusinessLead } from "@/lib/lead-scoring";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/server";
+import { classifyWebPresence } from "@/lib/web-presence";
 
 export const dynamic = "force-dynamic";
 
@@ -104,13 +105,22 @@ export async function POST(req: NextRequest) {
 
   // Map to our lead shape + score
   const results = places.map((p) => {
-    const hasWebsite = Boolean(p.websiteUri);
+    const presence = classifyWebPresence(p.websiteUri);
+    const hasWebsite = presence.type === "website";
     const scoring = scoreBusinessLead({
       has_website: hasWebsite,
       website_url: p.websiteUri ?? null,
       google_rating: p.rating ?? null,
       review_count: p.userRatingCount ?? null,
     });
+
+    if (presence.type === "facebook" || presence.type === "instagram") {
+      scoring.reasons.unshift(
+        presence.type === "facebook"
+          ? "יש להם רק עמוד פייסבוק — אין אתר משלהם"
+          : "יש להם רק עמוד אינסטגרם — אין אתר משלהם"
+      );
+    }
 
     return {
       place_id: p.id,

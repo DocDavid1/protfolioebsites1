@@ -3,11 +3,12 @@
 import { useState, useTransition } from "react";
 import {
   Search, Download, Globe, Star, Phone, MapPin, TrendingUp,
-  RefreshCw, Eye, X, CheckCircle, AlertCircle,
+  RefreshCw, Eye, X, CheckCircle, AlertCircle, Facebook, Instagram,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { BusinessLead, BusinessLeadStatus } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
+import { classifyWebPresence } from "@/lib/web-presence";
 
 const STATUS_LABELS: Record<BusinessLeadStatus, string> = {
   new: "חדש",
@@ -38,6 +39,47 @@ function ScoreBadge({ score }: { score: number }) {
     <span className={cn("text-xs font-bold px-2 py-0.5 rounded border", color)}>
       {score}
     </span>
+  );
+}
+
+function WebPresenceBadge({ website }: { website: string | null }) {
+  const presence = classifyWebPresence(website);
+
+  if (presence.type === "none") {
+    return (
+      <span className="flex items-center gap-1.5 text-xs text-red-400/80 font-medium">
+        <AlertCircle className="w-3 h-3" />
+        ללא נוכחות מקוונת
+      </span>
+    );
+  }
+
+  if (presence.type === "facebook" || presence.type === "instagram") {
+    const Icon = presence.type === "facebook" ? Facebook : Instagram;
+    return (
+      <a
+        href={presence.url ?? undefined}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 text-xs text-amber-400/90 hover:text-amber-400 transition-colors"
+        title="יש להם רק עמוד ברשת חברתית — אין אתר משלהם"
+      >
+        <Icon className="w-3 h-3" />
+        {presence.label} בלבד
+      </a>
+    );
+  }
+
+  return (
+    <a
+      href={presence.url ?? undefined}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-1.5 text-xs text-emerald-400/80 hover:text-emerald-400 transition-colors"
+    >
+      <Globe className="w-3 h-3" />
+      {presence.label}
+    </a>
   );
 }
 
@@ -214,14 +256,14 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white/90 mb-1" style={{ fontFamily: "var(--font-display)" }}>
+          <h1 className="text-2xl font-bold text-foreground/90 mb-1" style={{ fontFamily: "var(--font-display)" }}>
             יצירת לידים
           </h1>
-          <p className="text-xs text-white/30">{leads.length} לידים שמורים</p>
+          <p className="text-xs text-foreground/30">{leads.length} לידים שמורים</p>
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium text-white/60 border border-white/[0.08] hover:border-white/20 hover:text-white/80 transition-all"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium text-foreground/60 border border-border hover:text-foreground/80 transition-all"
         >
           <Download className="w-3.5 h-3.5" />
           ייצוא CSV
@@ -230,27 +272,27 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
 
       {/* Search */}
       <div className="surface-card rounded-xl p-5 mb-6">
-        <h2 className="text-sm font-semibold text-white/70 mb-4">חפש עסקים בגוגל</h2>
+        <h2 className="text-sm font-semibold text-foreground/70 mb-4">חפש עסקים בגוגל</h2>
         <div className="flex flex-col sm:flex-row gap-3 mb-3">
           <div className="flex-1 relative">
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/25" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch(false)}
               placeholder='סוג עסק (למשל: "מסעדה", "מכון יופי")'
-              className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg pr-10 pl-4 py-2.5 text-sm text-white/80 placeholder-white/25 focus:outline-none focus:border-blue-500/40 transition-all"
+              className="w-full bg-foreground/[0.04] border border-border rounded-lg pr-10 pl-4 py-2.5 text-sm text-foreground/80 placeholder-foreground/25 focus:outline-none focus:border-blue-500/40 transition-all"
             />
           </div>
           <div className="relative">
-            <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
+            <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/25" />
             <input
               type="text"
               value={searchCity}
               onChange={(e) => setSearchCity(e.target.value)}
               placeholder="עיר (לא חובה)"
-              className="w-full sm:w-40 bg-white/[0.04] border border-white/[0.08] rounded-lg pr-10 pl-4 py-2.5 text-sm text-white/80 placeholder-white/25 focus:outline-none focus:border-blue-500/40 transition-all"
+              className="w-full sm:w-40 bg-foreground/[0.04] border border-border rounded-lg pr-10 pl-4 py-2.5 text-sm text-foreground/80 placeholder-foreground/25 focus:outline-none focus:border-blue-500/40 transition-all"
             />
           </div>
         </div>
@@ -258,7 +300,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
           <button
             onClick={() => handleSearch(false)}
             disabled={isSearching || !searchQuery.trim()}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white/70 border border-white/[0.08] hover:border-white/20 disabled:opacity-40 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 border border-border disabled:opacity-40 transition-all"
           >
             {isSearching ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
             תצוגה מקדימה
@@ -266,7 +308,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
           <button
             onClick={() => handleSearch(true)}
             disabled={isSearching || !searchQuery.trim()}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 disabled:opacity-40 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-foreground bg-blue-600 hover:bg-blue-500 disabled:opacity-40 transition-all"
           >
             חפש ושמור
           </button>
@@ -282,19 +324,24 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
         {/* Search results preview */}
         {searchResults && (
           <div className="mt-5 space-y-2">
-            <p className="text-xs text-white/40 mb-3">{searchResults.length} תוצאות</p>
+            <p className="text-xs text-foreground/40 mb-3">{searchResults.length} תוצאות</p>
             {searchResults.map((r, i) => (
-              <div key={r.place_id ?? i} className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div key={r.place_id ?? i} className="flex items-center justify-between p-3 rounded-lg bg-foreground/[0.02] border border-border">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white/75 truncate">{r.name}</p>
-                  <div className="flex items-center gap-3 mt-0.5">
+                  <p className="text-sm font-medium text-foreground/75 truncate">{r.name}</p>
+                  <div className="flex items-center gap-3 mt-1 flex-wrap">
                     {r.google_rating && (
                       <span className="text-xs text-amber-400 flex items-center gap-1">
                         <Star className="w-3 h-3" />{r.google_rating}
                       </span>
                     )}
-                    {r.city && <span className="text-xs text-white/30">{r.city}</span>}
-                    {r.website && <Globe className="w-3 h-3 text-emerald-400" />}
+                    {r.city && <span className="text-xs text-foreground/30">{r.city}</span>}
+                    {r.phone && (
+                      <span className="text-xs text-foreground/40 font-mono flex items-center gap-1">
+                        <Phone className="w-3 h-3 text-foreground/20" />{r.phone}
+                      </span>
+                    )}
+                    <WebPresenceBadge website={r.website} />
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -317,7 +364,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
         <button
           onClick={() => setFilterStatus("all")}
           className={cn("px-3 py-1.5 rounded-lg text-xs font-medium border transition-all",
-            filterStatus === "all" ? "text-white bg-white/[0.08] border-white/[0.12]" : "text-white/35 border-white/[0.06] hover:border-white/[0.1]"
+            filterStatus === "all" ? "text-foreground bg-foreground/[0.08] border-border" : "text-foreground/35 border-border"
           )}
         >
           הכל ({leads.length})
@@ -325,7 +372,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
         {ALL_STATUSES.map((s) => (
           <button key={s} onClick={() => setFilterStatus(s)}
             className={cn("px-3 py-1.5 rounded-lg text-xs font-medium border transition-all",
-              filterStatus === s ? STATUS_COLORS[s] : "text-white/35 border-white/[0.06] hover:border-white/[0.1]"
+              filterStatus === s ? STATUS_COLORS[s] : "text-foreground/35 border-border"
             )}
           >
             {STATUS_LABELS[s]} ({leads.filter((l) => l.status === s).length})
@@ -334,25 +381,26 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
       </div>
 
       {/* Leads table */}
-      <div className="rounded-xl border border-white/[0.07] overflow-hidden">
+      <div className="rounded-xl border border-border overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="border-b border-white/[0.06] bg-white/[0.02]">
+          <thead className="border-b border-border bg-foreground/[0.02]">
             <tr>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">עסק</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30 hidden md:table-cell">קשר</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30 hidden lg:table-cell">ציון</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">סטטוס</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">עסק</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">טלפון</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30 hidden sm:table-cell">נוכחות ברשת</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30 hidden lg:table-cell">ציון</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">סטטוס</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
           <tbody>
             {filteredLeads.map((lead) => (
-              <tr key={lead.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+              <tr key={lead.id} className="border-b border-border hover:bg-foreground/[0.02] transition-colors">
                 <td className="px-4 py-3">
-                  <p className="text-sm font-medium text-white/75">{lead.name}</p>
+                  <p className="text-sm font-medium text-foreground/75">{lead.name}</p>
                   <div className="flex items-center gap-2 mt-0.5">
-                    {lead.category && <span className="text-xs text-white/30">{lead.category}</span>}
-                    {lead.city && <span className="text-xs text-white/25">· {lead.city}</span>}
+                    {lead.category && <span className="text-xs text-foreground/30">{lead.category}</span>}
+                    {lead.city && <span className="text-xs text-foreground/25">· {lead.city}</span>}
                     {lead.google_rating && (
                       <span className="text-xs text-amber-400 flex items-center gap-0.5">
                         <Star className="w-2.5 h-2.5" />{lead.google_rating}
@@ -360,26 +408,27 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                     )}
                   </div>
                 </td>
-                <td className="px-4 py-3 hidden md:table-cell">
-                  <div className="space-y-0.5">
-                    {lead.phone && (
-                      <div className="flex items-center gap-1.5 text-xs text-white/40 font-mono">
-                        <Phone className="w-3 h-3 text-white/20" />{lead.phone}
-                      </div>
-                    )}
-                    {lead.website && (
-                      <a href={lead.website} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-blue-400/70 hover:text-blue-400 transition-colors"
-                      >
-                        <Globe className="w-3 h-3" />{new URL(lead.website).hostname}
-                      </a>
-                    )}
-                  </div>
+                <td className="px-4 py-3">
+                  {lead.phone ? (
+                    <a
+                      href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs text-foreground/60 hover:text-emerald-400 font-mono transition-colors"
+                    >
+                      <Phone className="w-3 h-3 text-foreground/20" />{lead.phone}
+                    </a>
+                  ) : (
+                    <span className="text-xs text-foreground/20">—</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 hidden sm:table-cell">
+                  <WebPresenceBadge website={lead.website} />
                 </td>
                 <td className="px-4 py-3 hidden lg:table-cell">
                   <div className="flex items-center gap-2">
                     <ScoreBadge score={lead.score} />
-                    <div className="w-20 bg-white/[0.05] rounded-full h-1.5">
+                    <div className="w-20 bg-foreground/[0.05] rounded-full h-1.5">
                       <div
                         className="h-1.5 rounded-full"
                         style={{
@@ -398,14 +447,14 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                     className={cn("text-xs px-2 py-1 rounded-md border appearance-none bg-transparent cursor-pointer", STATUS_COLORS[lead.status as BusinessLeadStatus])}
                   >
                     {ALL_STATUSES.map((s) => (
-                      <option key={s} value={s} className="bg-[#0d0d18] text-white">{STATUS_LABELS[s]}</option>
+                      <option key={s} value={s} className="bg-card text-foreground">{STATUS_LABELS[s]}</option>
                     ))}
                   </select>
                 </td>
                 <td className="px-4 py-3">
                   <button
                     onClick={() => { setSelectedLead(lead); setTouchContent({}); setReportContent(null); }}
-                    className="p-1.5 rounded hover:bg-white/[0.06] text-white/30 hover:text-white/60 transition-colors"
+                    className="p-1.5 rounded hover:bg-foreground/[0.06] text-foreground/30 hover:text-foreground/60 transition-colors"
                   >
                     <Eye className="w-4 h-4" />
                   </button>
@@ -413,7 +462,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
               </tr>
             ))}
             {filteredLeads.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-10 text-center text-xs text-white/25">אין לידים.</td></tr>
+              <tr><td colSpan={6} className="px-4 py-10 text-center text-xs text-foreground/25">אין לידים.</td></tr>
             )}
           </tbody>
         </table>
@@ -423,19 +472,19 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
       {selectedLead && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setSelectedLead(null)} />
-          <div className="relative z-10 w-full max-w-2xl rounded-xl border border-white/[0.09] bg-[#0d0d18] shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="relative z-10 w-full max-w-2xl rounded-xl border border-border bg-card shadow-2xl max-h-[90vh] overflow-y-auto">
             {/* Header */}
-            <div className="sticky top-0 bg-[#0d0d18] flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
+            <div className="sticky top-0 bg-card flex items-center justify-between px-6 py-4 border-b border-border">
               <div>
-                <h2 className="text-base font-bold text-white/80" style={{ fontFamily: "var(--font-display)" }}>
+                <h2 className="text-base font-bold text-foreground/80" style={{ fontFamily: "var(--font-display)" }}>
                   {selectedLead.name}
                 </h2>
                 <div className="flex items-center gap-2 mt-0.5">
                   <ScoreBadge score={selectedLead.score} />
-                  {selectedLead.city && <span className="text-xs text-white/30">{selectedLead.city}</span>}
+                  {selectedLead.city && <span className="text-xs text-foreground/30">{selectedLead.city}</span>}
                 </div>
               </div>
-              <button onClick={() => setSelectedLead(null)} className="p-1.5 rounded hover:bg-white/[0.06] text-white/30 hover:text-white/60 transition-colors">
+              <button onClick={() => setSelectedLead(null)} className="p-1.5 rounded hover:bg-foreground/[0.06] text-foreground/30 hover:text-foreground/60 transition-colors">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -444,22 +493,18 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
               {/* Business info */}
               <div className="grid grid-cols-2 gap-3 text-xs">
                 {selectedLead.phone && (
-                  <div><p className="text-white/30 mb-1">טלפון</p><p className="text-white/70 font-mono">{selectedLead.phone}</p></div>
+                  <div><p className="text-foreground/30 mb-1">טלפון</p><p className="text-foreground/70 font-mono">{selectedLead.phone}</p></div>
                 )}
-                {selectedLead.website && (
-                  <div><p className="text-white/30 mb-1">אתר</p>
-                    <a href={selectedLead.website} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline truncate block">
-                      {selectedLead.website}
-                    </a>
-                  </div>
-                )}
+                <div><p className="text-foreground/30 mb-1">נוכחות ברשת</p>
+                  <WebPresenceBadge website={selectedLead.website} />
+                </div>
                 {selectedLead.google_rating && (
-                  <div><p className="text-white/30 mb-1">דירוג גוגל</p>
+                  <div><p className="text-foreground/30 mb-1">דירוג גוגל</p>
                     <p className="text-amber-400">{selectedLead.google_rating}★ ({selectedLead.review_count ?? 0} ביקורות)</p>
                   </div>
                 )}
                 {selectedLead.google_maps_url && (
-                  <div><p className="text-white/30 mb-1">גוגל מפות</p>
+                  <div><p className="text-foreground/30 mb-1">גוגל מפות</p>
                     <a href={selectedLead.google_maps_url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">פתח במפות</a>
                   </div>
                 )}
@@ -468,7 +513,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
               {/* Score reasons */}
               {selectedLead.score_reasons && selectedLead.score_reasons.length > 0 && (
                 <div>
-                  <p className="text-xs text-white/30 uppercase tracking-wider mb-2">בעיות שזוהו</p>
+                  <p className="text-xs text-foreground/30 uppercase tracking-wider mb-2">בעיות שזוהו</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedLead.score_reasons.map((r) => (
                       <span key={r} className="text-xs px-2 py-1 rounded-md bg-red-500/[0.07] border border-red-500/15 text-red-400/80">{r}</span>
@@ -503,7 +548,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
               {reportContent && (
                 <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.03] p-4">
                   <p className="text-xs text-amber-400 font-semibold mb-3">דוח מותאם אישית</p>
-                  <div className="text-xs text-white/60 whitespace-pre-line leading-relaxed">{reportContent}</div>
+                  <div className="text-xs text-foreground/60 whitespace-pre-line leading-relaxed">{reportContent}</div>
                   <button
                     onClick={() => {
                       const win = window.open("", "_blank");
@@ -521,7 +566,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
 
               {/* 7-Touch system */}
               <div>
-                <p className="text-xs text-white/30 uppercase tracking-wider mb-3">מגע 1–7 (ייצור תוכן AI)</p>
+                <p className="text-xs text-foreground/30 uppercase tracking-wider mb-3">מגע 1–7 (ייצור תוכן AI)</p>
                 <div className="space-y-3">
                   {[1, 2, 3, 4, 5, 6, 7].map((n) => {
                     const titles: Record<number, string> = {
@@ -529,9 +574,9 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                       4: "SEO", 5: "בניית מוניטין", 6: "מיצוב תחרותי", 7: "הצעה רכה",
                     };
                     return (
-                      <div key={n} className="rounded-lg bg-white/[0.02] border border-white/[0.05] p-3">
+                      <div key={n} className="rounded-lg bg-foreground/[0.02] border border-border p-3">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-medium text-white/60">
+                          <span className="text-xs font-medium text-foreground/60">
                             מגע #{n} — {titles[n]}
                           </span>
                           <button
@@ -544,7 +589,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                           </button>
                         </div>
                         {touchContent[n] && (
-                          <p className="text-xs text-white/50 leading-relaxed whitespace-pre-line">{touchContent[n]}</p>
+                          <p className="text-xs text-foreground/50 leading-relaxed whitespace-pre-line">{touchContent[n]}</p>
                         )}
                       </div>
                     );
@@ -558,7 +603,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                   <a
                     href={`https://wa.me/${selectedLead.phone.replace(/[^0-9]/g, "")}`}
                     target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium text-white bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium text-foreground bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
                   >
                     <Phone className="w-4 h-4 text-emerald-400" />
                     WhatsApp
@@ -568,7 +613,7 @@ export function LeadGenClient({ initialLeads }: { initialLeads: BusinessLead[] }
                   <a
                     href={selectedLead.google_maps_url}
                     target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium text-white/60 border border-white/10 hover:border-blue-500/30 transition-all"
+                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium text-foreground/60 border border-border hover:border-blue-500/30 transition-all"
                   >
                     <MapPin className="w-4 h-4" />
                     מפות

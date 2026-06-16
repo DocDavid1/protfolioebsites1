@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FolderOpen, Users, Settings, LogOut, Shield, Megaphone, Target } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +26,7 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#05050b]/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         {/* Logo */}
         <div className="flex items-center gap-3">
@@ -33,7 +34,7 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
             <Shield className="w-3.5 h-3.5 text-amber-400" />
           </div>
           <span
-            className="text-sm font-bold text-white/70 tracking-wide"
+            className="text-sm font-bold text-foreground/70 tracking-wide"
             style={{ fontFamily: "var(--font-display)" }}
           >
             ADMIN
@@ -49,8 +50,8 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
               className={cn(
                 "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all",
                 pathname.startsWith(href)
-                  ? "text-white bg-white/[0.07]"
-                  : "text-white/40 hover:text-white/70 hover:bg-white/[0.04]"
+                  ? "text-foreground bg-foreground/[0.07]"
+                  : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/[0.04]"
               )}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -61,12 +62,13 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
 
         {/* User + sign out */}
         <div className="flex items-center gap-3">
-          <span className="text-xs text-white/25 hidden sm:block">
+          <span className="text-xs text-foreground/25 hidden sm:block">
             {userEmail}
           </span>
+          <ThemeToggle />
           <button
             onClick={signOut}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-white/30 hover:text-red-400 hover:bg-red-500/[0.06] transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-foreground/30 hover:text-red-400 hover:bg-red-500/[0.06] transition-all"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">יציאה</span>

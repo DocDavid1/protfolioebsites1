@@ -168,16 +168,16 @@ export function ProjectsClient({
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1
-            className="text-2xl font-bold text-white/90 mb-1"
+            className="text-2xl font-bold text-foreground/90 mb-1"
             style={{ fontFamily: "var(--font-display)" }}
           >
             פרויקטים
           </h1>
-          <p className="text-xs text-white/30">{projects.length} פרויקטים סה&quot;כ</p>
+          <p className="text-xs text-foreground/30">{projects.length} פרויקטים סה&quot;כ</p>
         </div>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 transition-all"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-foreground bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 transition-all"
         >
           <Plus className="w-4 h-4" />
           פרויקט חדש
@@ -185,26 +185,26 @@ export function ProjectsClient({
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-white/[0.07] overflow-hidden">
+      <div className="rounded-xl border border-border overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="border-b border-white/[0.06] bg-white/[0.02]">
+          <thead className="border-b border-border bg-foreground/[0.02]">
             <tr>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">תמונה</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">שם</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30 hidden md:table-cell">קטגוריה</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30 hidden lg:table-cell">תגיות</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">מוצג</th>
-              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white/30">פעולות</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">תמונה</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">שם</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30 hidden md:table-cell">קטגוריה</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30 hidden lg:table-cell">תגיות</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">מוצג</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold uppercase tracking-widest text-foreground/30">פעולות</th>
             </tr>
           </thead>
           <tbody>
             {projects.map((project) => {
               const imgUrl = getPreviewUrl(project.preview_image_path);
               return (
-                <tr key={project.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                <tr key={project.id} className="border-b border-border hover:bg-foreground/[0.02] transition-colors">
                   <td className="px-4 py-3">
                     {imgUrl ? (
-                      <div className="w-12 h-9 rounded overflow-hidden relative bg-white/[0.05]">
+                      <div className="w-12 h-9 rounded overflow-hidden relative bg-foreground/[0.05]">
                         <Image
                           src={imgUrl}
                           alt={project.title}
@@ -214,34 +214,34 @@ export function ProjectsClient({
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-9 rounded bg-white/[0.04] border border-white/[0.06]" />
+                      <div className="w-12 h-9 rounded bg-foreground/[0.04] border border-border" />
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <p className="text-sm font-medium text-white/80">{project.title}</p>
+                    <p className="text-sm font-medium text-foreground/80">{project.title}</p>
                     {project.client && (
-                      <p className="text-xs text-white/30">{project.client}</p>
+                      <p className="text-xs text-foreground/30">{project.client}</p>
                     )}
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
-                    <span className="text-xs text-white/40 bg-white/[0.04] px-2 py-0.5 rounded">
+                    <span className="text-xs text-foreground/40 bg-foreground/[0.04] px-2 py-0.5 rounded">
                       {project.category ?? "—"}
                     </span>
                   </td>
                   <td className="px-4 py-3 hidden lg:table-cell">
-                    <span className="text-xs text-white/30">
+                    <span className="text-xs text-foreground/30">
                       {(project.tags ?? []).join(", ") || "—"}
                     </span>
                   </td>
                   <td className="px-4 py-3">
                     <button
                       onClick={() => toggleFeatured(project)}
-                      className="p-1.5 rounded hover:bg-white/[0.05] transition-colors"
+                      className="p-1.5 rounded hover:bg-foreground/[0.05] transition-colors"
                     >
                       {project.is_featured ? (
                         <Star className="w-4 h-4 text-amber-400" />
                       ) : (
-                        <StarOff className="w-4 h-4 text-white/20" />
+                        <StarOff className="w-4 h-4 text-foreground/20" />
                       )}
                     </button>
                   </td>
@@ -252,20 +252,20 @@ export function ProjectsClient({
                           href={project.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded hover:bg-white/[0.05] text-white/25 hover:text-white/60 transition-colors"
+                          className="p-1.5 rounded hover:bg-foreground/[0.05] text-foreground/25 hover:text-foreground/60 transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       )}
                       <button
                         onClick={() => openEdit(project)}
-                        className="p-1.5 rounded hover:bg-white/[0.05] text-white/25 hover:text-blue-400 transition-colors"
+                        className="p-1.5 rounded hover:bg-foreground/[0.05] text-foreground/25 hover:text-blue-400 transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete(project.id)}
-                        className="p-1.5 rounded hover:bg-red-500/[0.08] text-white/25 hover:text-red-400 transition-colors"
+                        className="p-1.5 rounded hover:bg-red-500/[0.08] text-foreground/25 hover:text-red-400 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -276,7 +276,7 @@ export function ProjectsClient({
             })}
             {projects.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-10 text-center text-xs text-white/25">
+                <td colSpan={6} className="px-4 py-10 text-center text-xs text-foreground/25">
                   אין פרויקטים עדיין. לחץ &ldquo;פרויקט חדש&rdquo; להוספה.
                 </td>
               </tr>
@@ -293,18 +293,18 @@ export function ProjectsClient({
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setDialogOpen(false)}
           />
-          <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border border-white/[0.09] bg-[#0d0d18] shadow-2xl">
+          <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border border-border bg-card shadow-2xl">
             {/* Dialog header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <h2
-                className="text-base font-bold text-white/80"
+                className="text-base font-bold text-foreground/80"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {editTarget ? "עריכת פרויקט" : "פרויקט חדש"}
               </h2>
               <button
                 onClick={() => setDialogOpen(false)}
-                className="p-1.5 rounded hover:bg-white/[0.06] text-white/30 hover:text-white/60 transition-colors"
+                className="p-1.5 rounded hover:bg-foreground/[0.06] text-foreground/30 hover:text-foreground/60 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -352,7 +352,7 @@ export function ProjectsClient({
                     className={cn(inputCls, "appearance-none")}
                   >
                     {CATEGORIES.map((c) => (
-                      <option key={c.value} value={c.value} className="bg-[#0d0d18]">
+                      <option key={c.value} value={c.value} className="bg-card">
                         {c.label}
                       </option>
                     ))}
@@ -414,7 +414,7 @@ export function ProjectsClient({
               {/* Image upload */}
               <FormField label="תמונת תצוגה מקדימה">
                 <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs text-white/50 hover:text-white/70 hover:border-white/[0.12] cursor-pointer transition-all">
+                  <label className="flex items-center gap-2 px-3 py-2 rounded-lg bg-foreground/[0.04] border border-border text-xs text-foreground/50 hover:text-foreground/70 hover:border-border cursor-pointer transition-all">
                     <Upload className="w-3.5 h-3.5" />
                     {uploading ? "מעלה..." : "בחר קובץ"}
                     <input
@@ -443,9 +443,9 @@ export function ProjectsClient({
                   id="is_featured"
                   checked={form.is_featured ?? false}
                   onChange={(e) => setForm((f) => ({ ...f, is_featured: e.target.checked }))}
-                  className="w-4 h-4 rounded border border-white/20 bg-white/[0.04] accent-blue-500"
+                  className="w-4 h-4 rounded border border-border bg-foreground/[0.04] accent-blue-500"
                 />
-                <label htmlFor="is_featured" className="text-xs text-white/50 cursor-pointer">
+                <label htmlFor="is_featured" className="text-xs text-foreground/50 cursor-pointer">
                   הצג בעמוד הראשי (Featured)
                 </label>
               </div>
@@ -456,17 +456,17 @@ export function ProjectsClient({
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-white/[0.06] flex justify-end gap-3">
+            <div className="px-6 py-4 border-t border-border flex justify-end gap-3">
               <button
                 onClick={() => setDialogOpen(false)}
-                className="px-4 py-2 rounded-lg text-sm text-white/40 hover:text-white/60 transition-colors"
+                className="px-4 py-2 rounded-lg text-sm text-foreground/40 hover:text-foreground/60 transition-colors"
               >
                 ביטול
               </button>
               <button
                 onClick={handleSave}
                 disabled={isPending}
-                className="px-5 py-2 rounded-lg text-sm font-semibold text-white bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 disabled:opacity-50 transition-all"
+                className="px-5 py-2 rounded-lg text-sm font-semibold text-foreground bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 disabled:opacity-50 transition-all"
               >
                 {isPending ? "שומר..." : editTarget ? "שמור שינויים" : "צור פרויקט"}
               </button>
@@ -487,7 +487,7 @@ function FormField({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-white/35 uppercase tracking-wider mb-1.5">
+      <label className="block text-xs font-medium text-foreground/35 uppercase tracking-wider mb-1.5">
         {label}
       </label>
       {children}
@@ -496,4 +496,4 @@ function FormField({
 }
 
 const inputCls =
-  "w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all";
+  "w-full bg-foreground/[0.04] border border-border rounded-lg px-3 py-2 text-sm text-foreground/80 placeholder-foreground/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all";

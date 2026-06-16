@@ -71,20 +71,20 @@ export function SettingsClient({
         </div>
         <div>
           <h1
-            className="text-2xl font-bold text-white/90"
+            className="text-2xl font-bold text-foreground/90"
             style={{ fontFamily: "var(--font-display)" }}
           >
             הגדרות
           </h1>
-          <p className="text-xs text-white/30">תוכן דינמי ופרטי קשר</p>
+          <p className="text-xs text-foreground/30">תוכן דינמי ופרטי קשר</p>
         </div>
       </div>
 
-      <div className="max-w-xl rounded-xl border border-white/[0.07] bg-[#0d0d18] overflow-hidden">
+      <div className="max-w-xl rounded-xl border border-border bg-card overflow-hidden">
         <div className="p-6 space-y-5">
           {FIELDS.map(({ key, label, placeholder, type }) => (
             <div key={key}>
-              <label className="block text-xs font-medium text-white/35 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-foreground/35 uppercase tracking-wider mb-2">
                 {label}
               </label>
               <input
@@ -94,7 +94,7 @@ export function SettingsClient({
                   setSettings((prev) => ({ ...prev, [key]: e.target.value }))
                 }
                 placeholder={placeholder}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white/80 placeholder-white/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                className="w-full bg-foreground/[0.04] border border-border rounded-lg px-4 py-2.5 text-sm text-foreground/80 placeholder-foreground/20 outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all"
                 dir={key.includes("number") ? "ltr" : "rtl"}
               />
             </div>
@@ -105,7 +105,7 @@ export function SettingsClient({
           )}
         </div>
 
-        <div className="px-6 py-4 border-t border-white/[0.06] flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-border flex items-center justify-between">
           {saved && (
             <span className="text-xs text-emerald-400/70">✓ הגדרות נשמרו</span>
           )}
@@ -113,7 +113,7 @@ export function SettingsClient({
             <button
               onClick={handleSave}
               disabled={isPending}
-              className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold text-white bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 disabled:opacity-50 transition-all"
+              className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold text-foreground bg-blue-500/15 border border-blue-500/25 hover:bg-blue-500/25 disabled:opacity-50 transition-all"
             >
               <Save className="w-3.5 h-3.5" />
               {isPending ? "שומר..." : "שמור הגדרות"}
