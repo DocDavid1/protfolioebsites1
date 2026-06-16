@@ -1,15 +1,49 @@
 import {
-  Shield,
-  Target,
-  Zap,
   Sword,
   Heart,
   Users,
   Clock,
   Award,
   MessageCircle,
+  Target,
+  Shield,
 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
+
+/* Military-style rank insignia SVGs for each founder */
+function RankInsigniaAlpha({ color }: { color: string }) {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Captain bars — three horizontal bars */}
+      <rect x="6" y="6" width="16" height="2.5" rx="0.5" fill={color} opacity="0.9" />
+      <rect x="6" y="12" width="16" height="2.5" rx="0.5" fill={color} opacity="0.7" />
+      <rect x="6" y="18" width="16" height="2.5" rx="0.5" fill={color} opacity="0.5" />
+      {/* Star */}
+      <path d="M14 22l1.5 3 1.5-3-3 0z" fill={color} opacity="0.8" />
+    </svg>
+  );
+}
+
+function RankInsigniaBravo({ color }: { color: string }) {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Chevron / arrow-up ranks */}
+      <path d="M4 20L14 8L24 20" stroke={color} strokeWidth="2.5" fill="none" opacity="0.9" />
+      <path d="M7 24L14 15L21 24" stroke={color} strokeWidth="2" fill="none" opacity="0.6" />
+    </svg>
+  );
+}
+
+function RankInsigniaCharlie({ color }: { color: string }) {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Shield with cross (medic insignia) */}
+      <path d="M14 3L24 8V16C24 21 19.5 25 14 27C8.5 25 4 21 4 16V8L14 3Z" stroke={color} strokeWidth="1.8" fill="none" opacity="0.8" />
+      <rect x="12.5" y="9" width="3" height="12" rx="0.5" fill={color} opacity="0.6" />
+      <rect x="8" y="13.5" width="12" height="3" rx="0.5" fill={color} opacity="0.6" />
+    </svg>
+  );
+}
 
 const WHATSAPP_NUMBER = "972501234567";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("שלום, אני רוצה לשמוע עוד על הסיפור שלכם")}`;
@@ -46,22 +80,28 @@ const FOUNDERS = [
     name: "ALPHA",
     role: "אסטרטגיה ומערכות",
     bio: "10 שנים ביחידות מבצעיות. היום מתכנן תשתיות עסקיות באותה הדיוק שנדרשה לתכנון משימות בסיכון גבוה. רואה את התמונה הגדולה ויודע לתרגם חזון לפעולה.",
+    insignia: RankInsigniaAlpha,
     icon: Shield,
     color: "#3b82f6",
+    gradient: "linear-gradient(to right, #3b82f6, #60a5fa, #3b82f6)",
   },
   {
     name: "BRAVO",
     role: "טכנולוגיה ואוטומציה",
     bio: "ותיק יחידת מודיעין ואיסוף. בונה מערכות אוטומטיות שאוספות נתונים, מטפלות בלידים ומבצעות 24/7 ללא התערבות אנושית.",
+    insignia: RankInsigniaBravo,
     icon: Target,
     color: "#f59e0b",
+    gradient: "linear-gradient(to right, #f59e0b, #fbbf24, #f59e0b)",
   },
   {
     name: "CHARLIE",
     role: "צמיחה וביצוע",
     bio: "פרמדיק קרב שהפך למומחה צמיחה דיגיטלית. מזהה את נקודות הדימום בעסק שלך ועוצר אותן. מהר. בלי פשרות.",
-    icon: Zap,
+    insignia: RankInsigniaCharlie,
+    icon: Shield,
     color: "#10b981",
+    gradient: "linear-gradient(to right, #10b981, #34d399, #10b981)",
   },
 ];
 
@@ -197,21 +237,26 @@ export function StorySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
           {FOUNDERS.map((founder, i) => {
-            const Icon = founder.icon;
+            const Insignia = founder.insignia;
             return (
               <AnimateIn key={founder.name} delay={i * 100} from="bottom">
-                <div className="group card-founder rounded-2xl p-7 h-full border hover-lift"
-                  style={{ borderColor: `${founder.color}20` }}
+                <div
+                  className="group card-founder founder-gradient-border founder-bg-pattern rounded-2xl p-7 h-full border hover-lift"
+                  style={{
+                    borderColor: `${founder.color}20`,
+                    "--founder-gradient": founder.gradient,
+                    "--founder-color": `${founder.color}08`,
+                  } as React.CSSProperties}
                 >
-                  {/* Avatar placeholder */}
+                  {/* Insignia + icon */}
                   <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105"
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105 relative"
                     style={{
                       background: `linear-gradient(135deg, ${founder.color}20, ${founder.color}08)`,
                       border: `1px solid ${founder.color}30`,
                     }}
                   >
-                    <Icon className="w-7 h-7" style={{ color: founder.color }} />
+                    <Insignia color={founder.color} />
                   </div>
 
                   {/* Name */}

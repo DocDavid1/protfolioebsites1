@@ -39,7 +39,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "#05050b" }}>
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
@@ -189,7 +189,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center" style={{ background: "#05050b" }}>
+        <div className="min-h-screen flex items-center justify-center bg-background">
           <Loader2 className="w-6 h-6 text-blue-400 animate-spin" />
         </div>
       }

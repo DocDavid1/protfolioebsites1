@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MessageCircle, ArrowRight, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { AvailabilityIndicator } from "@/components/ui/availability-indicator";
 import { BUSINESS, whatsappUrl } from "@/lib/config";
 
 const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.");
@@ -46,7 +47,12 @@ export function FinalCTA() {
 
       <div className="relative container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Availability indicator */}
           <AnimateIn>
+            <AvailabilityIndicator />
+          </AnimateIn>
+
+          <AnimateIn delay={50}>
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 mb-6 block">
               הצעד הבא שלך
             </span>
@@ -59,7 +65,7 @@ export function FinalCTA() {
             </h2>
           </AnimateIn>
 
-          <AnimateIn delay={100}>
+          <AnimateIn delay={150}>
             <p className="text-lg md:text-xl text-gray-600 dark:text-white/60 max-w-2xl mx-auto mb-6 leading-relaxed">
               בזמן שאתה קורא את זה, המתחרים שלך כבר בונים נוכחות דיגיטלית.
               אל תישאר מאחור.
@@ -70,13 +76,13 @@ export function FinalCTA() {
           </AnimateIn>
 
           {/* CTA buttons */}
-          <AnimateIn delay={200}>
+          <AnimateIn delay={250}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-bold text-white text-lg"
+                className="btn-gradient-border group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-bold text-white text-lg"
               >
                 <MessageCircle className="w-6 h-6 transition-transform group-hover:scale-110" />
                 שלחו הודעה בוואטסאפ
@@ -93,7 +99,7 @@ export function FinalCTA() {
           </AnimateIn>
 
           {/* Trust signals */}
-          <AnimateIn delay={300}>
+          <AnimateIn delay={350}>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-14">
               {[
                 "מענה תוך דקות",
@@ -110,7 +116,7 @@ export function FinalCTA() {
           </AnimateIn>
 
           {/* Alternative contact methods */}
-          <AnimateIn delay={400}>
+          <AnimateIn delay={450}>
             <div className="glass-strong rounded-2xl p-6 md:p-8 max-w-xl mx-auto">
               <p className="text-sm text-gray-500 dark:text-white/50 mb-4">או דברו איתנו ישירות:</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-5">

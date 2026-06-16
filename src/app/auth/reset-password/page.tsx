@@ -63,8 +63,7 @@ function ResetPasswordForm() {
   if (validToken === null) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ background: "#05050b" }}
+        className="min-h-screen flex items-center justify-center bg-background"
       >
         <Loader2 className="w-6 h-6 text-blue-400 animate-spin" />
       </div>
@@ -74,8 +73,7 @@ function ResetPasswordForm() {
   if (validToken === false) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center px-4"
-        style={{ background: "#05050b" }}
+        className="min-h-screen flex items-center justify-center px-4 bg-background"
       >
         <div className="w-full max-w-sm text-center">
           <div className="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-6">
@@ -107,8 +105,7 @@ function ResetPasswordForm() {
   if (success) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center px-4"
-        style={{ background: "#05050b" }}
+        className="min-h-screen flex items-center justify-center px-4 bg-background"
       >
         <div className="w-full max-w-sm text-center">
           <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-6">
@@ -130,8 +127,7 @@ function ResetPasswordForm() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4"
-      style={{ background: "#05050b" }}
+      className="min-h-screen flex items-center justify-center px-4 bg-background"
     >
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
@@ -231,8 +227,7 @@ export default function ResetPasswordPage() {
     <Suspense
       fallback={
         <div
-          className="min-h-screen flex items-center justify-center"
-          style={{ background: "#05050b" }}
+          className="min-h-screen flex items-center justify-center bg-background"
         >
           <Loader2 className="w-6 h-6 text-blue-400 animate-spin" />
         </div>

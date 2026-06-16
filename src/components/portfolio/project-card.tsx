@@ -107,7 +107,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             </div>
 
             {/* Action row */}
-            <div className="flex items-center justify-between pt-3 border-t border-white/[0.09]">
+            <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-white/[0.09]">
               <span className="text-xs text-blue-400 group-hover:text-blue-300 transition-colors font-bold tracking-wide">
                 ראה פרויקט ←
               </span>

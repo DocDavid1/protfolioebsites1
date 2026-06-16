@@ -150,12 +150,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <div className="relative">
           {/* Icon */}
           <div
-            className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 transition-transform duration-300 group-hover:scale-110"
+            className="service-icon-pulse inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5"
             style={{
               background: `${service.color}12`,
               border: `1px solid ${service.color}25`,
               color: service.color,
-            }}
+              "--pulse-color": `${service.color}30`,
+            } as React.CSSProperties}
           >
             <Icon className="w-5 h-5" />
           </div>
@@ -178,7 +179,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             {service.features.map((feature) => (
               <span
                 key={feature}
-                className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                className="service-tag text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
                 style={{
                   color: `${service.color}cc`,
                   background: `${service.color}0a`,

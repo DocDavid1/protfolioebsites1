@@ -10,6 +10,7 @@ const TESTIMONIALS = [
     metricDetail: "תגובה ב-3 דקות",
     stars: 5,
     accent: "#3b82f6",
+    avatarGradient: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
   },
   {
     name: "מיכל לוי",
@@ -19,6 +20,7 @@ const TESTIMONIALS = [
     metricDetail: "תוך 60 יום",
     stars: 5,
     accent: "#f59e0b",
+    avatarGradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
   },
   {
     name: "דוד אברהם",
@@ -28,6 +30,7 @@ const TESTIMONIALS = [
     metricDetail: "ROI תוך 45 יום",
     stars: 5,
     accent: "#10b981",
+    avatarGradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
   },
   {
     name: "ד״ר שרה גולד",
@@ -37,6 +40,7 @@ const TESTIMONIALS = [
     metricDetail: "יעילות +45%",
     stars: 5,
     accent: "#a78bfa",
+    avatarGradient: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)",
   },
 ];
 
@@ -123,11 +127,10 @@ export function TestimonialsSection() {
                 {/* Author */}
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold text-white shadow-lg"
                     style={{
-                      background: `${t.accent}15`,
-                      color: t.accent,
-                      border: `1px solid ${t.accent}25`,
+                      background: t.avatarGradient,
+                      boxShadow: `0 4px 14px ${t.accent}30`,
                     }}
                   >
                     {t.name.charAt(0)}

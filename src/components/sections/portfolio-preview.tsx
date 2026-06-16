@@ -40,7 +40,7 @@ export async function PortfolioPreview() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 90% 60% at 50% 50%, rgba(6,6,20,0.7) 0%, transparent 80%)",
+          background: "radial-gradient(ellipse 90% 60% at 50% 50%, color-mix(in srgb, var(--background) 70%, transparent) 0%, transparent 80%)",
         }}
         aria-hidden="true"
       />

@@ -98,7 +98,7 @@ export default async function PortfolioPage({
           ].map((stat) => (
             <div
               key={stat.label}
-              className="text-center p-5 rounded-xl border border-gray-200 dark:border-white/7 bg-white dark:bg-[#0d0d18] hover-lift"
+              className="text-center p-5 rounded-xl border border-border bg-card hover-lift"
             >
               <p
                 className="text-3xl font-bold gradient-text-blue mb-1"

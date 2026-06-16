@@ -8,6 +8,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { ProcessConnectors } from "@/components/ui/process-connectors";
 
 interface Step {
   number: string;
@@ -104,47 +105,66 @@ export function ProcessSection() {
           </p>
         </AnimateIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {STEPS.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <AnimateIn key={step.number} delay={i * 80} from="bottom">
-                <div className="step-card group relative rounded-2xl p-7 card-service h-full">
-                  {/* Step number */}
-                  <div className="flex items-start justify-between mb-5">
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: `${step.color}12`,
-                        border: `1px solid ${step.color}25`,
-                        color: step.color,
-                      }}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="step-number">{step.number}</span>
-                  </div>
+        <div className="relative">
+          {/* Connecting lines between cards — client component */}
+          <ProcessConnectors stepCount={STEPS.length} />
 
-                  {/* Content */}
-                  <h3
-                    className="text-lg font-bold text-gray-900 dark:text-white/90 mb-3"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
-                    {step.description}
-                  </p>
-
-                  {/* Bottom accent line */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <AnimateIn key={step.number} delay={i * 80} from="bottom">
                   <div
-                    className="absolute bottom-0 left-6 right-6 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: step.color }}
-                  />
-                </div>
-              </AnimateIn>
-            );
-          })}
+                    className="step-card group relative rounded-2xl p-7 card-service h-full"
+                    data-step={i}
+                  >
+                    {/* Step number */}
+                    <div className="flex items-start justify-between mb-5">
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center"
+                        style={{
+                          background: `${step.color}12`,
+                          border: `1px solid ${step.color}25`,
+                          color: step.color,
+                        }}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="step-number">{step.number}</span>
+                    </div>
+
+                    {/* Content */}
+                    <h3
+                      className="text-lg font-bold text-gray-900 dark:text-white/90 mb-3"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
+                      {step.description}
+                    </p>
+
+                    {/* Bottom accent line */}
+                    <div
+                      className="absolute bottom-0 left-6 right-6 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: step.color }}
+                    />
+
+                    {/* Step indicator dot for connector */}
+                    <div
+                      className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full border-2 opacity-0 lg:opacity-100 z-10"
+                      style={{
+                        borderColor: step.color,
+                        background: "#0d0d18",
+                        boxShadow: `0 0 8px ${step.color}40`,
+                      }}
+                      aria-hidden="true"
+                    />
+                  </div>
+                </AnimateIn>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

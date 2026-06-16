@@ -1,8 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { MessageCircle, Mail, Send, CheckCircle } from "lucide-react";
+import {
+  MessageCircle,
+  Mail,
+  Send,
+  CheckCircle,
+  ChevronDown,
+  Clock,
+  Shield,
+  Zap,
+  Award,
+} from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { BUSINESS, whatsappUrl } from "@/lib/config";
 
@@ -36,6 +46,43 @@ const SERVICES_OPTIONS = [
   "ייעוץ בלבד",
 ];
 
+const TRUST_BADGES = [
+  { icon: Award, label: "5+ שנות ניסיון", color: "#3b82f6" },
+  { icon: Shield, label: "30+ פרויקטים", color: "#22c55e" },
+  { icon: Clock, label: "מענה תוך שעתיים", color: "#f59e0b" },
+  { icon: Zap, label: "תוצאות מוכחות", color: "#8b5cf6" },
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "כמה זה עולה?",
+    answer:
+      "המחיר תלוי בהיקף הפרויקט. אנחנו מציעים מגוון חבילות שמתחילות ממחיר נגיש לכל עסק. שיחת הייעוץ הראשונית חינמית ובה נתאים לך את ההצעה המדויקת.",
+  },
+  {
+    question: "כמה זמן לוקח לבנות אתר?",
+    answer:
+      "אתר עסקי סטנדרטי מוכן תוך 2-4 שבועות. פרויקטים מורכבים יותר עם מערכות CRM ואוטומציות יכולים לקחת 4-8 שבועות. אנחנו תמיד עומדים בלוח הזמנים.",
+  },
+  {
+    question: "מה התהליך?",
+    answer:
+      "התהליך מתחיל בשיחת תדריך חינמית, ממשיך לאסטרטגיה ועיצוב, דרך פיתוח ובדיקות, ועד להשקה מלאה ותמיכה שוטפת. כל שלב מתועד ושקוף לחלוטין.",
+  },
+  {
+    question: "יש אחריות?",
+    answer:
+      "בהחלט. כל פרויקט מגיע עם תקופת אחריות מלאה, תמיכה טכנית שוטפת, ותיקון באגים ללא עלות נוספת. לא משאירים אתכם לבד אחרי ההשקה.",
+  },
+];
+
+const TYPING_PHRASES = [
+  "ספר לנו על העסק שלך. אנחנו נגיד לך בדיוק איך לבנות אותו נכון.",
+  "כל פרויקט מתחיל בשיחה. בוא נתחיל את שלך.",
+  "אנחנו בונים עסקים דיגיטליים. מה אתה בונה?",
+  "התדריך הבא שלך מתחיל כאן.",
+];
+
 interface FormState {
   name: string;
   business: string;
@@ -43,6 +90,168 @@ interface FormState {
   phone: string;
   service: string;
   message: string;
+}
+
+// Confetti particles for the success state
+const CONFETTI_COLORS = [
+  "#3b82f6",
+  "#22c55e",
+  "#f59e0b",
+  "#8b5cf6",
+  "#f43f5e",
+  "#06b6d4",
+];
+
+// Pre-computed confetti pieces — avoids Math.random() during render
+const CONFETTI_PIECES = Array.from({ length: 30 }, (_, i) => {
+  // Deterministic pseudo-random based on index
+  const seed1 = ((i * 7 + 13) % 100);
+  const seed2 = ((i * 11 + 3) % 40);
+  const seed3 = ((i * 17 + 5) % 150) / 100;
+  const seed4 = ((i * 23 + 7) % 100) / 100;
+  const seed5 = ((i * 31 + 11) % 360);
+  return {
+    id: i,
+    left: `${seed1}%`,
+    top: `${seed2}%`,
+    color: CONFETTI_COLORS[i % CONFETTI_COLORS.length] ?? "#3b82f6",
+    delay: `${seed3}s`,
+    size: `${6 + seed4 * 6}px`,
+    rotation: `${seed5}deg`,
+  };
+});
+
+function ConfettiEffect() {
+  return (
+    <div className="confetti-container">
+      {CONFETTI_PIECES.map((p) => (
+        <div
+          key={p.id}
+          className="confetti-piece"
+          style={{
+            left: p.left,
+            top: p.top,
+            background: p.color,
+            animationDelay: p.delay,
+            width: p.size,
+            height: p.size,
+            transform: `rotate(${p.rotation})`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function TypingEffect({ phrases }: { phrases: string[] }) {
+  const [text, setText] = useState("");
+  const stateRef = useRef({
+    phraseIndex: 0,
+    charIndex: 0,
+    isDeleting: false,
+  });
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    let cancelled = false;
+
+    function tick() {
+      if (cancelled) return;
+      const s = stateRef.current;
+      const currentPhrase = phrases[s.phraseIndex] ?? phrases[0] ?? "";
+
+      if (!s.isDeleting && s.charIndex === currentPhrase.length) {
+        // Pause before deleting
+        timeout = setTimeout(() => {
+          s.isDeleting = true;
+          tick();
+        }, 2500);
+        return;
+      }
+
+      if (s.isDeleting && s.charIndex === 0) {
+        // Move to next phrase
+        s.isDeleting = false;
+        s.phraseIndex = (s.phraseIndex + 1) % phrases.length;
+        tick();
+        return;
+      }
+
+      if (s.isDeleting) {
+        s.charIndex -= 1;
+      } else {
+        s.charIndex += 1;
+      }
+
+      const newPhrase = phrases[s.phraseIndex] ?? phrases[0] ?? "";
+      setText(newPhrase.slice(0, s.charIndex));
+
+      const speed = s.isDeleting ? 30 : 50;
+      timeout = setTimeout(tick, speed);
+    }
+
+    tick();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [phrases]);
+
+  return (
+    <span>
+      {text}
+      <span className="typing-cursor" />
+    </span>
+  );
+}
+
+function FAQAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="space-y-3">
+      <h3
+        className="text-lg font-bold text-gray-900 dark:text-white/90 mb-4"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        שאלות נפוצות
+      </h3>
+      {FAQ_ITEMS.map((item, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-gray-200 dark:border-white/7 overflow-hidden transition-all duration-300"
+        >
+          <button
+            onClick={() => setOpenIndex(openIndex === i ? null : i)}
+            className="w-full flex items-center justify-between p-4 text-right hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors"
+            aria-expanded={openIndex === i}
+          >
+            <span className="text-sm font-semibold text-gray-800 dark:text-white/80">
+              {item.question}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 text-gray-400 dark:text-white/40 transition-transform duration-300 flex-shrink-0 ${
+                openIndex === i ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          <div
+            className="grid transition-all duration-300"
+            style={{
+              gridTemplateRows: openIndex === i ? "1fr" : "0fr",
+            }}
+          >
+            <div className="overflow-hidden">
+              <p className="px-4 pb-4 text-sm text-gray-500 dark:text-white/45 leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function ContactPage() {
@@ -114,7 +323,7 @@ export default function ContactPage() {
       />
       <div className="relative container mx-auto px-4 sm:px-6 max-w-5xl">
         {/* Header */}
-        <AnimateIn className="mb-16">
+        <AnimateIn className="mb-10">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">
             צור קשר
           </span>
@@ -126,9 +335,37 @@ export default function ContactPage() {
             <br />
             <span className="gradient-text-blue">המשימה שלך</span>
           </h1>
-          <p className="text-gray-400 dark:text-white/40 max-w-lg text-lg leading-relaxed">
-            ספר לנו על העסק שלך. אנחנו נגיד לך בדיוק איך לבנות אותו נכון.
+          <p className="text-gray-400 dark:text-white/40 max-w-lg text-lg leading-relaxed min-h-[3.5rem]">
+            <TypingEffect phrases={TYPING_PHRASES} />
           </p>
+        </AnimateIn>
+
+        {/* Trust Badges */}
+        <AnimateIn className="mb-12" delay={50}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {TRUST_BADGES.map((badge) => {
+              const Icon = badge.icon;
+              return (
+                <div
+                  key={badge.label}
+                  className="flex items-center gap-3 p-3 rounded-xl border border-gray-200/60 dark:border-white/[0.05] bg-gray-50 dark:bg-white/[0.02]"
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: `${badge.color}15`,
+                      color: badge.color,
+                    }}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold text-gray-700 dark:text-white/60">
+                    {badge.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </AnimateIn>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
@@ -201,22 +438,71 @@ export default function ContactPage() {
                 </p>
               </div>
             </AnimateIn>
+
+            {/* FAQ Accordion */}
+            <AnimateIn delay={300} from="right">
+              <div className="mt-6">
+                <FAQAccordion />
+              </div>
+            </AnimateIn>
           </div>
 
           {/* Contact form */}
           <AnimateIn delay={100} from="left" className="lg:col-span-3">
             <div className="surface-card rounded-xl border border-gray-200 dark:border-white/7 p-6 md:p-8">
               {submitted ? (
-                <div className="text-center py-12" aria-live="polite">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-7 h-7 text-emerald-400" />
+                <div className="text-center py-12 relative" aria-live="polite">
+                  <ConfettiEffect />
+                  <div
+                    className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 animate-scale-in"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 100%)",
+                      border: "2px solid rgba(34,197,94,0.3)",
+                      boxShadow: "0 0 40px rgba(34,197,94,0.2), 0 0 80px rgba(34,197,94,0.1)",
+                    }}
+                  >
+                    <CheckCircle className="w-9 h-9 text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white/90 mb-2">
-                    התדריך התקבל
+                  <h3
+                    className="text-2xl font-bold text-gray-900 dark:text-white/90 mb-3 animate-fade-up"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    התדריך התקבל בהצלחה!
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-white/45">
+                  <p className="text-sm text-gray-500 dark:text-white/45 mb-6 animate-fade-up delay-200">
                     נסקור את פרטי הפרויקט שלך ונצור קשר תוך 2 שעות דרך וואטסאפ או אימייל.
                   </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center animate-fade-up delay-400">
+                    <a
+                      href={whatsappUrl("שלום! שלחתי תדריך דרך האתר.")}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-semibold hover:bg-emerald-500/15 transition-colors"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      שלח גם בוואטסאפ
+                    </a>
+                    <button
+                      onClick={() => {
+                        setSubmitted(false);
+                        setLoading(false);
+                        setForm({
+                          name: "",
+                          business: "",
+                          email: "",
+                          phone: "",
+                          service: "",
+                          message: "",
+                        });
+                        setPrivacyConsent(false);
+                        setMarketingConsent(false);
+                      }}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white/60 text-sm font-semibold hover:bg-white/[0.06] transition-colors"
+                    >
+                      שלח תדריך נוסף
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>

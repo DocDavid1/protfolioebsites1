@@ -65,18 +65,26 @@ export function StatsCounter() {
           {STATS.map((stat, i) => (
             <AnimateIn key={stat.label} delay={i * 100} from="bottom">
               <div
-                className="card-stat rounded-2xl p-6 md:p-8 text-center group"
+                className="card-stat rounded-2xl p-6 md:p-8 text-center group relative"
                 style={{ "--stat-color": stat.color } as React.CSSProperties}
               >
-                <div
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    color: stat.color,
-                    textShadow: `0 0 30px ${stat.color}30`,
-                  }}
-                >
-                  <Counter end={stat.value} suffix={stat.suffix} />
+                {/* Pulsing glow behind the number */}
+                <div className="relative">
+                  <div
+                    className="stat-glow-ring"
+                    style={{ background: stat.color }}
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="relative text-4xl md:text-5xl lg:text-6xl font-bold mb-3"
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      color: stat.color,
+                      textShadow: `0 0 30px ${stat.color}30`,
+                    }}
+                  >
+                    <Counter end={stat.value} suffix={stat.suffix} />
+                  </div>
                 </div>
                 <p className="text-sm md:text-base font-bold text-gray-800 dark:text-white/80 mb-1">
                   {stat.label}

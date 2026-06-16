@@ -5,6 +5,27 @@ import { HeroVideo } from "./hero-video";
 
 const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס! אני מתעניין בשירותים שלכם.");
 
+/* Floating decorative icons — pure SVG, no JS animation */
+function FloatingIcon({
+  children,
+  className,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div
+      className={`absolute pointer-events-none hero-floating-icon ${className ?? ""}`}
+      style={style}
+      aria-hidden="true"
+    >
+      {children}
+    </div>
+  );
+}
+
 export function HeroSection() {
   return (
     <section
@@ -24,6 +45,44 @@ export function HeroSection() {
         }}
         aria-hidden="true"
       />
+
+      {/* Floating decorative icons */}
+      <FloatingIcon
+        className="animate-float-drift hidden md:block"
+        style={{ top: "18%", left: "8%", opacity: 0.5, animationDelay: "0s" }}
+      >
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="4" y="26" fontSize="24" fontFamily="monospace" fill="rgba(96,165,250,0.4)">&lt;/&gt;</text>
+        </svg>
+      </FloatingIcon>
+
+      <FloatingIcon
+        className="animate-float-drift-reverse hidden md:block"
+        style={{ top: "25%", right: "10%", opacity: 0.45, animationDelay: "2s" }}
+      >
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4l3 6 6 1-4.5 4 1 6.5L16 18.5 10.5 21.5l1-6.5L7 11l6-1z" stroke="rgba(245,158,11,0.4)" strokeWidth="1.5" fill="none"/>
+        </svg>
+      </FloatingIcon>
+
+      <FloatingIcon
+        className="animate-float-orbit hidden lg:block"
+        style={{ bottom: "30%", left: "5%", opacity: 0.4, animationDelay: "4s" }}
+      >
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="20" height="14" rx="2" stroke="rgba(139,92,246,0.35)" strokeWidth="1.5"/>
+          <path d="M4 12h20M10 12v10M4 16h6" stroke="rgba(139,92,246,0.25)" strokeWidth="1"/>
+        </svg>
+      </FloatingIcon>
+
+      <FloatingIcon
+        className="animate-float-drift hidden lg:block"
+        style={{ bottom: "22%", right: "7%", opacity: 0.4, animationDelay: "6s" }}
+      >
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 3l2 5h5l-4 3 1.5 5L15 13.5 10.5 16 12 11 8 8h5z" fill="rgba(59,130,246,0.25)" stroke="rgba(59,130,246,0.35)" strokeWidth="1"/>
+        </svg>
+      </FloatingIcon>
 
       {/* Morphing blob decorations */}
       <div
@@ -169,7 +228,7 @@ export function HeroSection() {
       <div
         className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, transparent, #05050b)",
+          background: "linear-gradient(to bottom, transparent, var(--background))",
         }}
         aria-hidden="true"
       />

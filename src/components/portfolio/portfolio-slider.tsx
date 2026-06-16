@@ -16,13 +16,13 @@ export function PortfolioSlider({ projects }: PortfolioSliderProps) {
       {/* Left fade */}
       <div
         className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #05050b 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to right, var(--background) 0%, transparent 100%)" }}
         aria-hidden="true"
       />
       {/* Right fade */}
       <div
         className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #05050b 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to left, var(--background) 0%, transparent 100%)" }}
         aria-hidden="true"
       />
 
