@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MessageCircle, ArrowRight, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { AvailabilityIndicator } from "@/components/ui/availability-indicator";
+import { Spotlight } from "@/components/ui/spotlight";
 import { BUSINESS, whatsappUrl } from "@/lib/config";
 
 const WHATSAPP_URL = whatsappUrl("שלום פייטרס בילדרס! אני רוצה לדון על פרויקט.");
@@ -14,7 +15,7 @@ export function FinalCTA() {
     >
       <div className="divider-brand absolute top-0 left-0 right-0" />
 
-      {/* Dramatic gradient background */}
+      {/* Background atmosphere */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -23,121 +24,111 @@ export function FinalCTA() {
         }}
         aria-hidden="true"
       />
-
       <div className="absolute inset-0 bg-tactical-grid opacity-40" aria-hidden="true" />
 
-      {/* Morphing background blobs */}
-      <div
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] pointer-events-none animate-morph-blob"
-        style={{
-          background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%)",
-          filter: "blur(80px)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] pointer-events-none animate-morph-blob"
-        style={{
-          background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 60%)",
-          filter: "blur(60px)",
-          animationDelay: "5s",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Availability indicator */}
-          <AnimateIn>
-            <AvailabilityIndicator />
-          </AnimateIn>
+        {/* Dark card with Spotlight */}
+        <div className="max-w-4xl mx-auto relative rounded-3xl overflow-hidden border border-white/8 py-16 md:py-20 px-6 md:px-12"
+          style={{ background: "rgba(5,5,11,0.80)" }}>
 
-          <AnimateIn delay={50}>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 mb-6 block">
-              הצעד הבא שלך
-            </span>
-            <h2
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight mb-6"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              העסק שלך{" "}
-              <span className="gradient-text-hero">ראוי ליותר.</span>
-            </h2>
-          </AnimateIn>
+          <Spotlight
+            className="-top-40 left-0 md:left-60 md:-top-20"
+            fill="rgba(59,130,246,0.8)"
+            filterUniqueId="cta"
+          />
 
-          <AnimateIn delay={150}>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-white/60 max-w-2xl mx-auto mb-6 leading-relaxed">
-              בזמן שאתה קורא את זה, המתחרים שלך כבר בונים נוכחות דיגיטלית.
-              אל תישאר מאחור.
-            </p>
-            <p className="text-base text-gray-500 dark:text-white/45 max-w-xl mx-auto mb-12">
-              הודעת וואטסאפ אחת, שיחת ייעוץ חינם, ותוכנית פעולה ברורה לעסק שלך. בלי התחייבות.
-            </p>
-          </AnimateIn>
+          <div className="relative z-10 text-center">
+            {/* Availability indicator */}
+            <AnimateIn>
+              <AvailabilityIndicator />
+            </AnimateIn>
 
-          {/* CTA buttons */}
-          <AnimateIn delay={250}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gradient-border group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-bold text-white text-lg"
+            <AnimateIn delay={50}>
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 mb-6 block">
+                הצעד הבא שלך
+              </span>
+              <h2
+                className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                <MessageCircle className="w-6 h-6 transition-transform group-hover:scale-110" />
-                שלחו הודעה בוואטסאפ
-              </a>
+                העסק שלך{" "}
+                <span className="gradient-text-hero">ראוי ליותר.</span>
+              </h2>
+            </AnimateIn>
 
-              <Link
-                href="/contact"
-                className="btn-outline group inline-flex items-center justify-center gap-2.5 px-9 py-4.5 rounded-2xl font-semibold text-gray-600 dark:text-white/65 text-lg"
-              >
-                שלחו בקשה לפגישה
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-              </Link>
-            </div>
-          </AnimateIn>
+            <AnimateIn delay={150}>
+              <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-6 leading-relaxed">
+                בזמן שאתה קורא את זה, המתחרים שלך כבר בונים נוכחות דיגיטלית.
+                אל תישאר מאחור.
+              </p>
+              <p className="text-base text-white/45 max-w-xl mx-auto mb-12">
+                הודעת וואטסאפ אחת, שיחת ייעוץ חינם, ותוכנית פעולה ברורה לעסק שלך. בלי התחייבות.
+              </p>
+            </AnimateIn>
 
-          {/* Trust signals */}
-          <AnimateIn delay={350}>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-14">
-              {[
-                "מענה תוך דקות",
-                "ייעוץ ראשוני חינם",
-                "ללא חוזים ארוכי טווח",
-                "מחירים נגישים לכל עסק",
-              ].map((item) => (
-                <span key={item} className="flex items-center gap-2 text-sm text-gray-400 dark:text-white/40">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/70" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </AnimateIn>
-
-          {/* Alternative contact methods */}
-          <AnimateIn delay={450}>
-            <div className="glass-strong rounded-2xl p-6 md:p-8 max-w-xl mx-auto">
-              <p className="text-sm text-gray-500 dark:text-white/50 mb-4">או דברו איתנו ישירות:</p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+            {/* CTA buttons */}
+            <AnimateIn delay={250}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                 <a
-                  href={`tel:${BUSINESS.phone}`}
-                  className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60 hover:text-blue-400 transition-colors"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gradient-border group inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-2xl font-bold text-white text-lg"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span dir="ltr">{BUSINESS.phone}</span>
+                  <MessageCircle className="w-6 h-6 transition-transform group-hover:scale-110" />
+                  שלחו הודעה בוואטסאפ
                 </a>
-                <div className="w-px h-4 bg-white/10 hidden sm:block" />
-                <a
-                  href={`mailto:${BUSINESS.email}`}
-                  className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/60 hover:text-blue-400 transition-colors"
+                <Link
+                  href="/contact"
+                  className="btn-outline group inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-2xl font-semibold text-white/65 text-lg"
                 >
-                  <Mail className="w-4 h-4" />
-                  {BUSINESS.email}
-                </a>
+                  שלחו בקשה לפגישה
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+                </Link>
               </div>
-            </div>
-          </AnimateIn>
+            </AnimateIn>
+
+            {/* Trust signals */}
+            <AnimateIn delay={350}>
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-14">
+                {[
+                  "מענה תוך דקות",
+                  "ייעוץ ראשוני חינם",
+                  "ללא חוזים ארוכי טווח",
+                  "מחירים נגישים לכל עסק",
+                ].map((item) => (
+                  <span key={item} className="flex items-center gap-2 text-sm text-white/40">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/70" />
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </AnimateIn>
+
+            {/* Alternative contact methods */}
+            <AnimateIn delay={450}>
+              <div className="glass-strong rounded-2xl p-6 md:p-8 max-w-xl mx-auto">
+                <p className="text-sm text-white/50 mb-4">או דברו איתנו ישירות:</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                  <a
+                    href={`tel:${BUSINESS.phone}`}
+                    className="flex items-center gap-2 text-sm text-white/60 hover:text-blue-400 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span dir="ltr">{BUSINESS.phone}</span>
+                  </a>
+                  <div className="w-px h-4 bg-white/10 hidden sm:block" />
+                  <a
+                    href={`mailto:${BUSINESS.email}`}
+                    className="flex items-center gap-2 text-sm text-white/60 hover:text-blue-400 transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    {BUSINESS.email}
+                  </a>
+                </div>
+              </div>
+            </AnimateIn>
+          </div>
         </div>
       </div>
     </section>

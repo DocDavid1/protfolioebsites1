@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, LayoutDashboard } from "lucide-react";
 import { DEFAULT_NAV_LINKS, NAV_STORAGE_KEY } from "@/app/admin/links-manager";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { whatsappUrl } from "@/lib/config";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
@@ -196,6 +197,7 @@ export function SiteHeader() {
                 לוח בקרה
               </Link>
             )}
+            <ModeToggle />
             <a
               href={WHATSAPP_URL}
               target="_blank"

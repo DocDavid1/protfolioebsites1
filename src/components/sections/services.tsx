@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef } from "react";
 import type { ComponentType } from "react";
 import {
   Globe,
@@ -136,10 +139,30 @@ export function ServicesSection() {
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const Icon = service.icon;
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+  }
+
   return (
     <AnimateIn delay={index * 70} from="bottom">
-      <div className="group relative card-service rounded-2xl p-6 md:p-7 h-full hover-lift overflow-hidden">
-        {/* Hover glow */}
+      <div
+        ref={cardRef}
+        className="group relative card-service rounded-2xl p-6 md:p-7 h-full hover-lift overflow-hidden cursor-default"
+        onMouseMove={handleMouseMove}
+      >
+        {/* Mouse-tracking spotlight overlay */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+          style={{
+            background: `radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%), ${service.color}1a, transparent 80%)`,
+          }}
+        />
+
+        {/* Static top glow on hover */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
